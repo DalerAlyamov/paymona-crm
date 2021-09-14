@@ -1,0 +1,70 @@
+@mixin header-1 {
+  font-family: $ff-inter;
+  font-weight: $fw-bold;
+  font-size: $fs-xxxl;
+  letter-spacing: $ls-xl;
+}
+
+@mixin header-2 {
+  font-family: $ff-inter;
+  font-weight: $fw-bold;
+  font-size: $fs-xxl;
+  letter-spacing: $ls-xl;
+}
+
+@mixin header-3 {
+  font-family: $ff-inter;
+  font-weight: $fw-bold;
+  font-size: $fs-md;
+  letter-spacing: $ls-xl;
+}
+
+@mixin header-4 {
+  font-family: $ff-inter;
+  font-weight: $fw-medium;
+  font-size: $fs-md;
+  letter-spacing: $ls-lg;
+}
+
+@mixin header-5 {
+  font-family: $ff-inter;
+  font-weight: $fw-medium;
+  font-size: $fs-sm;
+  letter-spacing: $ls-md;
+}
+
+@mixin header-6 {
+  font-family: $ff-inter;
+  font-weight: $fw-medium;
+  font-size: $fs-xs;
+  letter-spacing: $ls-sm;
+}
+
+@mixin button-1 {
+  font-family: $ff-inter;
+  font-weight: $fw-bold;
+  font-size: $fs-xs;
+  letter-spacing: $ls-xl;
+}
+
+@mixin text-1 {
+  font-family: $ff-inter;
+  font-weight: $fw-medium;
+  font-size: $fs-sm;
+  letter-spacing: $ls-md;
+}
+
+@mixin text-2 {
+  font-family: $ff-inter;
+  font-weight: $fw-medium;
+  font-size: $fs-xxs;
+  letter-spacing: $ls-sm;
+}
+
+@mixin shadow-1 {
+  box-shadow: 0 1px 8px 0 $shadow-color-1;
+}
+
+@mixin shadow-1 {
+  box-shadow: 0 3px 8px 0 $shadow-color-2;
+}
