@@ -1,0 +1,35 @@
+/* Font weight */
+
+$fw-thin: 100;
+$fw-extralight: 200;
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semibold: 600;
+$fw-bold: 700;
+$fw-extrabold: 800;
+$fw-black: 900;
+
+/* Font family */
+
+$montserrat: 'Montserrat', sans-serif;
+$inter: 'Inter', sans-serif;
+
+/* letter-spacing */
+  
+$ls-sm: 0.02rem;
+$ls-md: 0.04rem;
+$ls-lg: 0.06rem;
+$ls-xl: 0.08rem;
+
+/* Font size */
+
+$fs-xxxs: 0.5rem; // 8px
+$fs-xxs: 0.625rem; // 10px
+$fs-xs: 0.75rem; // 12px
+$fs-sm: 0.875rem; // 14px
+$fs-md: 1rem; // 16px
+$fs-lg: 1.125rem; // 18px
+$fs-xl: 1.25rem; // 20px
+$fs-xxl: 1.5rem; // 24px
+$fs-xxxl: 1.75rem; // 28px
