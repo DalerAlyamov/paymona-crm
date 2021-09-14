@@ -4,6 +4,7 @@ const Component = () => {
   return (
     <div>
       Hello world
+      Bye world
     </div>
   )
 }
