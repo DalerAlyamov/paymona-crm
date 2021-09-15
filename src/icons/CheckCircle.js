@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-const СheckСircle = ({ 
+const CheckCircle = ({ 
   className,
   size=24
 }) => ( 
@@ -19,4 +19,4 @@ const СheckСircle = ({
   </Svg>
 )
 
-export default СheckСircle
+export default CheckCircle

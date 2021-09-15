@@ -11,7 +11,13 @@ const LoginRightPan = ({
   return (
     <div className={classNames(className, styles.root)}>
 
-      <ColoredLogo hasWhiteBackground isCircle />
+      <ColoredLogo 
+        hasWhiteBackground 
+        isCircle 
+        size={150}
+        padding={50}
+        className={styles.logo}
+      />
 
     </div>
   )

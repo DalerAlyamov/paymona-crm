@@ -15,7 +15,8 @@ const ColoredLogo = ({
       className={classNames(
         className, 
         styles.root, 
-        hasWhiteBackground && styles['root--with_background']
+        hasWhiteBackground && styles['root--with_background'],
+        isCircle && styles['root--circle_background']
       )}
       style={{ padding }}
     >

@@ -19,4 +19,4 @@ const Headset = ({
   </Svg>
 )
 
-export default 
+export default Headset
