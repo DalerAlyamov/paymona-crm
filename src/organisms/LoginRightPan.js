@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
-import styles from '../scss/molecules/LoginRightPan.module.scss'
+import styles from '../scss/organisms/LoginRightPan.module.scss'
+import ColoredLogo from '../atoms/ColoredLogo'
 
 const LoginRightPan = ({
   className,
@@ -9,7 +10,9 @@ const LoginRightPan = ({
 
   return (
     <div className={classNames(className, styles.root)}>
-      
+
+      <ColoredLogo hasWhiteBackground isCircle />
+
     </div>
   )
 }

@@ -1,7 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
 import styles from '../scss/organisms/LoginPage.module.scss'
-import { LoginLeftPan, LoginRightPan } from '../molecules'
+import { LoginLeftPan } from '../atoms'
+import { LoginRightPan } from './'
 
 const LoginPage = ({
   className,

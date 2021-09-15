@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../scss/molecules/LoginLeftPan.module.scss'
+import styles from '../scss/atoms/LoginLeftPan.module.scss'
 
 const LoginLeftPan = ({
   className,
