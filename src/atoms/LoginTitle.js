@@ -3,8 +3,8 @@ import classNames from 'classnames'
 import styles from '../scss/atoms/LoginTitle.module.scss'
 
 const LoginTitle = ({
-  className,
-  children
+  className='',
+  children=<></>
 }) => {
   return (
     <span className={classNames(className, styles.root)}>

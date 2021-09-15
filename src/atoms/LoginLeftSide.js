@@ -2,8 +2,8 @@ import React from 'react'
 import styles from '../scss/atoms/LoginLeftSide.module.scss'
 
 const LoginLeftSide = ({
-  className,
-  status
+  className='',
+  status='close'
 }) => {
 
   return (

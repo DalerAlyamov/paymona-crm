@@ -5,8 +5,8 @@ import { LoginLeftSide } from '../atoms'
 import { LoginRightSide } from './'
 
 const LoginPage = ({
-  className,
-  isLogged
+  className='',
+  isLogged=false
 }) => {
 
   return (

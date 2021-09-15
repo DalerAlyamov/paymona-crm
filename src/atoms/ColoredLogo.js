@@ -4,11 +4,11 @@ import { LogoColored } from '../icons'
 import classNames from 'classnames'
 
 const ColoredLogo = ({
-  className,
-  hasWhiteBackground,
-  size,
-  padding,
-  isCircle
+  className='',
+  hasWhiteBackground=false,
+  size=24,
+  padding=0,
+  isCircle=false
 }) => {
   return (
     <div 

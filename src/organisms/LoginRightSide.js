@@ -5,8 +5,8 @@ import { ColoredLogo } from '../atoms'
 import { LoginPanel } from './'
 
 const LoginRightSide = ({
-  className,
-  status
+  className='',
+  status='close'
 }) => {
 
   const [logoSize, setLogoSize] = useState(window.innerWidth / 12.8)

@@ -4,12 +4,12 @@ import styles from '../scss/organisms/LoginPanel.module.scss'
 import { LoginTitle } from '../atoms'
 
 const LoginPanel = ({
-  className,
-  title
+  className='',
+  title=''
 }) => {
   return (
     <div className={classNames(className, styles.root)}>
-      <LoginTitle>{title}</LoginTitle>
+      <LoginTitle className={styles.title}>{title}</LoginTitle>
     </div>
   )
 }
