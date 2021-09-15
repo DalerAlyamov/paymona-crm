@@ -7,14 +7,14 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const Add = ({ 
+export const Edit = ({ 
   className,
   size=24
 }) => ( 
   <Svg viewBox='0 0 24 24' className={className} size={size} fill='currentColor'>   
     <path 
       fill='currentColor'
-      d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" 
+      d='M5 16.0837V19H7.91626L16.5173 10.399L13.601 7.48271L5 16.0837ZM18.7725 8.14373C19.0758 7.84044 19.0758 7.35051 18.7725 7.04722L16.9528 5.22747C16.6495 4.92418 16.1596 4.92418 15.8563 5.22747L14.4331 6.6506L17.3494 9.56687L18.7725 8.14373Z' 
     />
   </Svg>
 )

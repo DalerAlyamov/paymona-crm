@@ -7,14 +7,14 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const Add = ({ 
+export const SettingTune = ({ 
   className,
   size=24
 }) => ( 
   <Svg viewBox='0 0 24 24' className={className} size={size} fill='currentColor'>   
     <path 
       fill='currentColor'
-      d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" 
+      d="M3 17V19H9V17H3ZM3 5V7H13V5H3ZM13 21V19H21V17H13V15H11V21H13ZM7 9V11H3V13H7V15H9V9H7ZM21 13V11H11V13H21ZM15 9H17V7H21V5H17V3H15V9Z"
     />
   </Svg>
 )

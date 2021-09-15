@@ -7,14 +7,14 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const Add = ({ 
+export const CallMade = ({ 
   className,
   size=24
 }) => ( 
   <Svg viewBox='0 0 24 24' className={className} size={size} fill='currentColor'>   
     <path 
       fill='currentColor'
-      d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" 
+      d="M9 5V7H15.59L4 18.59L5.41 20L17 8.41V15H19V5H9Z" 
     />
   </Svg>
 )

@@ -7,14 +7,14 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const CheckCircleOutline = ({ 
+export const Attachment = ({ 
   className,
   size=24
 }) => ( 
   <Svg viewBox='0 0 24 24' className={className} size={size} fill='currentColor'>   
     <path 
       fill='currentColor'
-      d="M11 15H13V17H11V15ZM11 7H13V13H11V7ZM11.99 2C6.47 2 2 6.48 2 12C2 17.52 6.47 22 11.99 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 11.99 2ZM12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20Z" 
+      d="M4 12.5C4 9.46 6.46 7 9.5 7H20C22.21 7 24 8.79 24 11C24 13.21 22.21 15 20 15H11.5C10.12 15 9 13.88 9 12.5C9 11.12 10.12 10 11.5 10H19V12H11.41C10.86 12 10.86 13 11.41 13H20C21.1 13 22 12.1 22 11C22 9.9 21.1 9 20 9H9.5C7.57 9 6 10.57 6 12.5C6 14.43 7.57 16 9.5 16H19V18H9.5C6.46 18 4 15.54 4 12.5Z" 
     />
   </Svg>
 )
