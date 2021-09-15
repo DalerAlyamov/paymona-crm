@@ -1,0 +1,14 @@
+@import '../foundation/all';
+
+
+.rotate{
+  transform: rotate(140deg);
+  transition: 100ms;
+}
+
+.dis{
+  pointer-events: none;
+  path{
+    color: $dark-3
+  };
+}
