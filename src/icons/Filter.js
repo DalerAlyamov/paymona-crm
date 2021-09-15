@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const Filter = ({ 
+const Filter = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const Filter = ({
     />
   </Svg>
 )
+
+export default Filter

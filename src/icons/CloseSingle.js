@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const CloseSingle = ({ 
+const CloseSingle = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const CloseSingle = ({
     />
   </Svg>
 )
+
+export default CloseSingle

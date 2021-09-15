@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const Notifications = ({ 
+const Notifications = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const Notifications = ({
     />
   </Svg>
 )
+
+export default Notifications

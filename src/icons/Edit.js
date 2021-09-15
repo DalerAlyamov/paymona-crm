@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const Edit = ({ 
+const Edit = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const Edit = ({
     />
   </Svg>
 )
+
+export default Edit

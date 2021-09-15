@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const LogoColored = ({ 
+const LogoColored = ({ 
   className,
   size=24
 }) => ( 
@@ -22,3 +22,5 @@ export const LogoColored = ({
     />
   </Svg>
 )
+
+export default LogoColored
