@@ -1,8 +1,8 @@
-import { TEST } from '../types'
+import { TEST_TYPE } from '../types'
 
 const test = (state = null, action) => {
   switch(action.type) {
-    case TEST: 
+    case TEST_TYPE: 
       return action.payload.test
     default: 
       return state

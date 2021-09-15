@@ -14,3 +14,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.App--close, .App--close * {
+  pointer-events: none;
+}
