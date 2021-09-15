@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/organisms/LoginRightSide.module.scss'
-import ColoredLogo from '../atoms/ColoredLogo'
+import { ColoredLogo } from '../atoms'
+import { LoginPanel } from './'
 
 const LoginRightSide = ({
   className,
@@ -34,6 +35,8 @@ const LoginRightSide = ({
         padding={logoPadding}
         className={styles.logo}
       />
+
+      <LoginPanel title='Вход' />
 
     </div>
   )
