@@ -1,9 +1,9 @@
 import React from 'react'
-import SideBar from '../src/orgamisms/SideBar'
+import {  }
 const App = () => {
   return (
     <div className='App'>
-      <SideBar/>
+      
     </div>
   )
 }
