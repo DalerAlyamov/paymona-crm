@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from '../scss/atoms/LoginLeftPan.module.scss'
+import styles from '../scss/atoms/LoginLeftSide.module.scss'
 
-const LoginLeftPan = ({
+const LoginLeftSide = ({
   className,
   status
 }) => {
@@ -20,4 +20,4 @@ const LoginLeftPan = ({
   )
 }
 
-export default LoginLeftPan
+export default LoginLeftSide

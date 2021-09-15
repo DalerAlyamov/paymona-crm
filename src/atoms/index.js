@@ -1,7 +1,7 @@
-import LoginLeftPan from './LoginLeftPan' 
+import LoginLeftSide from './LoginLeftSide' 
 import ColoredLogo from './ColoredLogo' 
 
 export {
-  LoginLeftPan,
+  LoginLeftSide,
   ColoredLogo
 }

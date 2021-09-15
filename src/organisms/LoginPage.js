@@ -1,8 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
 import styles from '../scss/organisms/LoginPage.module.scss'
-import { LoginLeftPan } from '../atoms'
-import { LoginRightPan } from './'
+import { LoginLeftSide } from '../atoms'
+import { LoginRightSide } from './'
 
 const LoginPage = ({
   className,
@@ -12,9 +12,9 @@ const LoginPage = ({
   return (
     <div className={classNames(className, styles.root)}>
 
-      <LoginLeftPan status={isLogged ? 'open' : 'close' } />
+      <LoginLeftSide status={isLogged ? 'open' : 'close' } />
 
-      <LoginRightPan status={isLogged ? 'open' : 'close' } />
+      <LoginRightSide status={isLogged ? 'open' : 'close' } />
       
     </div>
   )

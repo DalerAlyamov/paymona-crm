@@ -1,7 +1,9 @@
 import LoginPage from './LoginPage' 
-import LoginRightPan from './LoginRightPan' 
+import LoginRightSide from './LoginRightSide' 
+import LoginPanel from './LoginPanel' 
 
 export {
   LoginPage,
-  LoginRightPan
+  LoginRightSide,
+  LoginPanel
 }

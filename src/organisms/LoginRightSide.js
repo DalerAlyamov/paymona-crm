@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
-import styles from '../scss/organisms/LoginRightPan.module.scss'
+import styles from '../scss/organisms/LoginRightSide.module.scss'
 import ColoredLogo from '../atoms/ColoredLogo'
 
-const LoginRightPan = ({
+const LoginRightSide = ({
   className,
   status
 }) => {
@@ -39,4 +39,4 @@ const LoginRightPan = ({
   )
 }
 
-export default LoginRightPan
+export default LoginRightSide
