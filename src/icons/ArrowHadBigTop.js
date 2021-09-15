@@ -7,14 +7,14 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const Add = ({ 
+export const ArrowHadBigTop = ({ 
   className,
   size=24
 }) => ( 
   <Svg viewBox='0 0 24 24' className={className} size={size} fill='currentColor'>   
     <path 
       fill='currentColor'
-      d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" 
+      d='M4.05994 18.0601L11.9399 10.1801L19.8199 18.0601L21.9399 15.9401L11.9399 5.94006L1.93994 15.9401L4.05994 18.0601Z' 
     />
   </Svg>
 )

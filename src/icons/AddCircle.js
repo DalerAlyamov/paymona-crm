@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const CheckCircleOutline = ({ 
+export const AddCircle = ({ 
   className,
   size=24
 }) => ( 
