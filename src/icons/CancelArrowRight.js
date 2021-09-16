@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const CancelArrowRight = ({ 
+const CancelArrowRight = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const CancelArrowRight = ({
     />
   </Svg>
 )
+
+export default CancelArrowRight

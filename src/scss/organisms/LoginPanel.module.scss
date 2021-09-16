@@ -1,0 +1,14 @@
+@import '../root.scss';
+
+.root {
+  padding: 32px;
+  background: $light-5;
+  border-radius: 16px;
+  margin: 0 auto;
+  @include shadow-1
+}
+
+.title {
+  margin-bottom: 32px;
+  display: inline-block;
+}

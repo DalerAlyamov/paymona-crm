@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const Attachment = ({ 
+const Attachment = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const Attachment = ({
     />
   </Svg>
 )
+
+export default Attachment

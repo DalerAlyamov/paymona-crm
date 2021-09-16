@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const StarBorder = ({ 
+const StarBorder = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const StarBorder = ({
     />
   </Svg>
 )
+
+export default StarBorder

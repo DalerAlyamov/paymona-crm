@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const CheckBox = ({ 
+const CheckBox = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const CheckBox = ({
     />
   </Svg>
 )
+
+export default CheckBox

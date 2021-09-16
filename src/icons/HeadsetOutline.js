@@ -7,14 +7,16 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const CheckCircleOutline = ({ 
+const HeadsetOutline = ({ 
   className,
   size=24
 }) => ( 
   <Svg viewBox='0 0 24 24' className={className} size={size} fill='currentColor'>   
     <path 
       fill='currentColor'
-      d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z"
+      d="M4.5 12V12.5H5H8.5V19.5H6C4.61614 19.5 3.5 18.3839 3.5 17V10C3.5 5.30614 7.30614 1.5 12 1.5C16.6939 1.5 20.5 5.30614 20.5 10V20C20.5 21.3839 19.3839 22.5 18 22.5H12.5V21.5H19H19.5V21V20V19.5H19H15.5V12.5H19H19.5V12V10C19.5 5.85386 16.1461 2.5 12 2.5C7.85386 2.5 4.5 5.85386 4.5 10V12Z"
     />
   </Svg>
 )
+
+export default HeadsetOutline

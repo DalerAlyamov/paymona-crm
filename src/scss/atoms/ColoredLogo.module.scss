@@ -1,0 +1,9 @@
+@import '../root.scss';
+
+.root--with_background {
+  background: $light-5;
+}
+
+.root--circle_background {
+  border-radius: 50%;
+}

@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const Launch = ({ 
+const Launch = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const Launch = ({
     />
   </Svg>
 )
+
+export default Launch

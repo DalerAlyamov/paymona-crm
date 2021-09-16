@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const DeleteOutline = ({ 
+const DeleteOutline = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const DeleteOutline = ({
     />
   </Svg>
 )
+
+export default DeleteOutline

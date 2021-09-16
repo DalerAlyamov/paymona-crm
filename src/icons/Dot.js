@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const Dot = ({ 
+const Dot = ({ 
   className,
   size=24
 }) => ( 
@@ -15,3 +15,5 @@ export const Dot = ({
     <circle cx={size/2} cy={size/2} r={size/4} fill="currentColor"/>
   </Svg>
 )
+
+export default Dot

@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const RadioButtonBlank = ({ 
+const RadioButtonBlank = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const RadioButtonBlank = ({
     />
   </Svg>
 )
+
+export default RadioButtonBlank

@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
-import testReducer from './testReducer'
+import userReducer from './userReducer'
 
 const middleware = [thunk]
 
@@ -28,7 +28,7 @@ const loadFromLocalStorage = () => {
 }
 
 const allReducers = combineReducers({
-  test: testReducer
+  user: userReducer
 })
 
 const presistedState = loadFromLocalStorage()
@@ -42,7 +42,7 @@ const store = createStore(
 )
 
 store.subscribe(() => saveToLocalStorage({
-  test: store.getState().test
+  user: store.getState().user
 }))
 
 export default store
