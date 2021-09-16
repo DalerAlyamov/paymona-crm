@@ -5,7 +5,7 @@ const userReducer = (state = {status: 'logouted'}, action) => {
     case LOGIN: 
       return action.data.user
     case LOGOUT: 
-      return null
+      return {status: 'logouted'}
     default: 
       return state
   }
