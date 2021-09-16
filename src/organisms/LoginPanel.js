@@ -46,6 +46,8 @@ const LoginPanel = ({
     setTimeout(() => {
       dispatch(login({...user, status: 'logined'}))
       setLoginChecking(false)
+      setLogin__inputValue('')
+      setPassword__inputValue('')
     }, 1200)
   }
 

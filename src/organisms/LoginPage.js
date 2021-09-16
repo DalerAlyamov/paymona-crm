@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/organisms/LoginPage.module.scss'
 import { LoginLeftSide } from '../atoms'
-import { LoginRightSide } from './'
+import { LoginRightSide } from '../molecules'
 import { useSelector } from 'react-redux'
 
 const LoginPage = ({

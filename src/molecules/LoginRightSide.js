@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
-import styles from '../scss/organisms/LoginRightSide.module.scss'
+import styles from '../scss/molecules/LoginRightSide.module.scss'
 import { ColoredLogo } from '../atoms'
-import { LoginPanel } from './'
+import { LoginPanel } from '../organisms'
 
 const LoginRightSide = ({
   className='',
