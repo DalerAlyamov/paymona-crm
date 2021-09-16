@@ -6,7 +6,7 @@ import { LoginPanel } from './'
 
 const LoginRightSide = ({
   className='',
-  status='close'
+  status='default'
 }) => {
 
   const [logoSize, setLogoSize] = useState(window.innerHeight / 6.46)
@@ -26,7 +26,13 @@ const LoginRightSide = ({
   }, [])
 
   return (
-    <div className={classNames(className, styles.root)}>
+    <div 
+      className={classNames(
+        className, 
+        styles.root,
+        styles[status] 
+      )}
+    >
 
       <ColoredLogo 
         hasWhiteBackground 

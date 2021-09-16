@@ -15,3 +15,29 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+.open {
+  animation: open 1100ms cubic-bezier(1,.02,.44,.99) forwards;
+}
+
+.close {
+  animation: close 1100ms cubic-bezier(1,.02,.44,.99) forwards;
+}
+
+@keyframes open {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(100% + 150px));
+  }
+}
+
+@keyframes close {
+  0% {
+    transform: translateX(calc(100% + 150px));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

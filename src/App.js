@@ -9,7 +9,7 @@ const App = () => {
 
   return (
     <>
-      <LoginPage isLogged={!user} />
+      <LoginPage />
       <div className={classNames('App', !user && 'App--close')}>
         
       </div>

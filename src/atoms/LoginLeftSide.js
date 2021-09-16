@@ -1,13 +1,19 @@
+import classNames from 'classnames'
 import React from 'react'
 import styles from '../scss/atoms/LoginLeftSide.module.scss'
 
 const LoginLeftSide = ({
   className='',
-  status='close'
+  status='default'
 }) => {
-
   return (
-    <div className={styles.root}>
+    <div 
+      className={classNames(
+        className, 
+        styles.root,
+        styles[status] 
+      )}
+    >
       <div className={styles.blue_space} />
       <svg viewBox="0 0 128 1024" fill="#486BE4" xmlns="http://www.w3.org/2000/svg" className={styles.svg}>
         <path 
