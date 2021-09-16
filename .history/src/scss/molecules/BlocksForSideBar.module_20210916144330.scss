@@ -1,0 +1,29 @@
+@import '../root.scss';
+
+.root{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 12px 0 12px 18px;
+  border-bottom: 1px solid $dark-3;
+}
+
+.wrap{
+  
+}
+
+.titleSideBar{
+  
+  margin-right: 12px;
+  path{
+    color: $light-5;
+  }
+}
+
+.text{
+  font-family: $inter;
+  letter-spacing: $ls-xl;
+  font-weight: $fw-bold;
+  color: $light-5;
+  font-size: $fs-xxl;
+}
