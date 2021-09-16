@@ -24,7 +24,16 @@ const App = () => {
   return (
     <>
       <LoginPage />
-      <div className={classNames('App', user.status === 'logouted' && 'App--close')} >
+      <div 
+        className={classNames('App', user.status === 'logouted' && 'App--close')} 
+        onClick={() => {
+          console.log('jj')
+          dispatch(login({...user, status: 'logouting'}))
+          setTimeout(() => {
+            dispatch(logout())
+          }, 1200)
+        }}
+      >
         ff
       </div>
     </>

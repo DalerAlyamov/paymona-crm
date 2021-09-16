@@ -15,7 +15,7 @@ const LoginPanel = ({
   /* States */
 
   const [login__inputValue, setLogin__inputValue] = useState('')
-  
+
   const [password__inputValue, setPassword__inputValue] = useState('')
   const [password__inputFocusing, setPassword__inputFocusing] = useState(false)
   
@@ -45,6 +45,7 @@ const LoginPanel = ({
     
     setTimeout(() => {
       dispatch(login({...user, status: 'logined'}))
+      setLoginChecking(false)
     }, 1200)
   }
 
