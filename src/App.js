@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { LoginPage } from './organisms'
 import classNames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from './redux/actions/userActions'
+import { login, logout } from './redux/actions/userActions'
 
 const App = () => {
 
@@ -12,9 +12,8 @@ const App = () => {
   useEffect(() => {
 
     const handleWindowBeforeunload = () => {
-      alert('hi')
-      if(user.status === 'logining') 
-        dispatch(logout())  
+      if(user.status === 'logining' || user.status === 'logouting') 
+        dispatch(logout())
     }
 
     window.addEventListener('beforeunload', handleWindowBeforeunload)
@@ -25,8 +24,8 @@ const App = () => {
   return (
     <>
       <LoginPage />
-      <div className={classNames('App', user.status === 'logouted' && 'App--close')}>
-        
+      <div className={classNames('App', user.status === 'logouted' && 'App--close')} >
+        ff
       </div>
     </>
   )

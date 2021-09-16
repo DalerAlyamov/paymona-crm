@@ -18,14 +18,14 @@ const LoginPage = ({
       return setStatus('closing')
     if (user.status === 'logining')
       return setStatus('opening')
-    if (user.status === 'logined')
-      return setStatus('open')
     if (user.status === 'logouted')
       return setStatus('close')
+    if (user.status === 'logined')
+      return setStatus('open')
   }, [user])
 
   return (
-    <div className={classNames(className, styles.root)}>
+    <div className={classNames(className, styles.root, user.status === 'logined' && styles.unclickable)}>
 
       <LoginLeftSide status={status} />
 

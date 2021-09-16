@@ -9,3 +9,7 @@
   display: flex;
   z-index: 100000;
 }
+
+.unclickable {
+  pointer-events: none;
+}
