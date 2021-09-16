@@ -24,8 +24,8 @@ const AnimatedInput = ({
   const input = useRef(null)
 
   const handleFocus = e => {
-    onFocus(e)
     setIsFocus(true)
+    onFocus(e)
   }
 
   const handleBlur = e => {
@@ -34,13 +34,16 @@ const AnimatedInput = ({
   }
 
   const handleKeyPress = e => {
-    onKeyPress(e)
     if (e.code === 'Enter')
       input.current.blur()
+    onKeyPress(e)
   }
 
   useEffect(() => {
-    input.current.focus()
+    if (initialFocusing)
+      input.current.focus()
+    else
+      input.current.blur()
   }, [initialFocusing])
 
   return (

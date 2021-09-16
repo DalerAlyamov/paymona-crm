@@ -6,7 +6,7 @@ import { LoginPanel } from './'
 
 const LoginRightSide = ({
   className='',
-  status='default'
+  status='close'
 }) => {
 
   const [logoSize, setLogoSize] = useState(window.innerHeight / 6.46)

@@ -4,7 +4,7 @@ import styles from '../scss/atoms/LoginLeftSide.module.scss'
 
 const LoginLeftSide = ({
   className='',
-  status='default'
+  status='close'
 }) => {
   return (
     <div 

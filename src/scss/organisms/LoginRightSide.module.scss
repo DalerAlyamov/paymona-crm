@@ -5,7 +5,6 @@
   width: 50%;
   height: 100%;
   background: $light-5;
-  transition: 1000ms ease-in-out;
   display: flex;
   align-items: center;
 }
@@ -17,10 +16,14 @@
 }
 
 .open {
+  transform: translateX(calc(100% + 150px));
+}
+
+.opening {
   animation: open 1100ms cubic-bezier(1,.02,.44,.99) forwards;
 }
 
-.close {
+.closing {
   animation: close 1100ms cubic-bezier(1,.02,.44,.99) forwards;
 }
 

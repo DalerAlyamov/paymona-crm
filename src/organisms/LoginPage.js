@@ -14,12 +14,14 @@ const LoginPage = ({
   const [status, setStatus] = useState('default')
 
   useEffect(() => {
-    if (user === 'unlogining')
-      return setStatus('close')
-    if (user)
+    if (user.status === 'logouting')
+      return setStatus('closing')
+    if (user.status === 'logining')
+      return setStatus('opening')
+    if (user.status === 'logined')
       return setStatus('open')
-    if (!user)
-      return setStatus('default')
+    if (user.status === 'logouted')
+      return setStatus('close')
   }, [user])
 
   return (

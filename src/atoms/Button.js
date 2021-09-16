@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import styles from '../scss/atoms/Button.module.scss'
 
-const Button = ({
+const Button = React.forwardRef(({
   className='',
   children='',
   disabled=false,
@@ -11,7 +11,7 @@ const Button = ({
   afterIcon=null,
   type='contained',
   onClick=()=>{}
-}) => {
+}, ref) => {
 
   const handleClick = () => {
     !disabled && onClick()
@@ -19,6 +19,7 @@ const Button = ({
 
   return (
     <button 
+      ref={ref}
       className={classNames(
         className, 
         styles.root,
@@ -37,6 +38,6 @@ const Button = ({
       </div>
     </button>
   )
-}
+})
 
 export default Button

@@ -18,10 +18,14 @@
 }
 
 .open {
+  transform: translateX(-100%);
+}
+
+.opening {
   animation: open 1100ms cubic-bezier(1,.02,.44,.99) forwards;
 }
 
-.close {
+.closing {
   animation: close 1100ms cubic-bezier(1,.02,.44,.99) forwards;
 }
 
