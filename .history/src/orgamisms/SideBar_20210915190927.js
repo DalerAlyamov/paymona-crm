@@ -6,7 +6,12 @@ const SideBar = () => {
 
   return (
     <div className={styles.root}>
-    
+      <Icon
+       icon={<Menu size={24} />}
+       clasName={styles.icon}
+       rotate
+       active  
+      />
     </div>
   )
 }
