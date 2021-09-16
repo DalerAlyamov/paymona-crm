@@ -1,0 +1,14 @@
+@import '../root.scss';
+
+.root {
+  position: absolute;
+  top: 50%; 
+  right: 16px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  path {
+    color: $light-1;
+  }
+}

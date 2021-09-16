@@ -9,14 +9,14 @@ const LoginRightSide = ({
   status='close'
 }) => {
 
-  const [logoSize, setLogoSize] = useState(window.innerWidth / 12.8)
-  const [logoPadding, setLogoPadding] = useState(window.innerWidth / 38.4)
+  const [logoSize, setLogoSize] = useState(window.innerHeight / 6.46)
+  const [logoPadding, setLogoPadding] = useState(window.innerHeight / 19.38)
 
   useEffect(() => {
 
     const handleWindowResize = () => {
-      setLogoSize(window.innerWidth / 12.8)
-      setLogoPadding(window.innerWidth / 38.4)
+      setLogoSize(window.innerHeight / 6.46)
+      setLogoPadding(window.innerHeight / 19.38)
     }
     
     window.addEventListener('resize', handleWindowResize)
