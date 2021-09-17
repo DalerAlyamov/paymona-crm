@@ -4,7 +4,7 @@ import styles from '../scss/atoms/Button.module.scss'
 
 const Button = React.forwardRef(({
   className='',
-  children='',
+  children=<></>,
   disabled=false,
   active=false,
   beforeIcon=null,
