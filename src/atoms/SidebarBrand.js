@@ -1,16 +1,15 @@
 import classNames from 'classnames'
 import React from 'react'
-import styles from '../scss/organisms/SideBar.module.scss'
-import { SidebarBrand } from '../atoms'
+import styles from '../scss/atoms/SidebarBrand.module.scss'
 
-const SideBar = ({
+const SidebarBrand = ({
   className
 }) => {
   return (
     <div className={classNames(className, styles.root)}>
-      <SidebarBrand />
+      
     </div>
   )
 }
 
-export default SideBar
+export default SidebarBrand

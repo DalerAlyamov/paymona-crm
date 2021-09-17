@@ -3,8 +3,7 @@ import classNames from 'classnames'
 import { LoginPage } from './organisms'
 import { useDispatch, useSelector } from 'react-redux'
 import { login, logout } from './redux/actions/userActions'
-import SideBar from '../src/organisms/SideBar'
-import Emplyee from './routes/Emplyee'
+import SideBar from './organisms/SideBar'
 
 const App = () => {
 
@@ -60,8 +59,7 @@ const App = () => {
     <>
       <LoginPage />
       <div className={classNames('App', user.status === 'logouted' && 'App--close')}>
-        <SideBar/>
-        <Emplyee/>
+        <SideBar />
       </div>
     </>
   )

@@ -4,6 +4,8 @@ import LoginTitle from './LoginTitle'
 import AnimatedInputPlaceholder from './AnimatedInputPlaceholder' 
 import AnimatedInputEye from './AnimatedInputEye' 
 import Button from './Button' 
+import SidebarButton from './SidebarButton' 
+import SidebarBrand from './SidebarBrand' 
 
 export {
   LoginLeftSide,
@@ -11,5 +13,7 @@ export {
   LoginTitle,
   AnimatedInputPlaceholder,
   AnimatedInputEye,
-  Button
+  Button,
+  SidebarButton,
+  SidebarBrand
 }

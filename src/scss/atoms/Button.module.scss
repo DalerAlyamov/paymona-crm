@@ -82,3 +82,17 @@
     }
   }
 }
+
+.before_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+.after_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
