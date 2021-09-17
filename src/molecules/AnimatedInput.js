@@ -7,6 +7,7 @@ const AnimatedInput = ({
   className='',
   placeholder='',
   width=380,
+  error=false,
   autoWidth=false,
   value='',
   initialFocusing=false,
@@ -50,12 +51,13 @@ const AnimatedInput = ({
     <div 
       className={classNames(
         className, 
-        styles.root
+        styles.root,
+        error && styles.error
       )}
       style={{ width: autoWidth ? '100%' : 'auto' }}
     >
 
-      <AnimatedInputPlaceholder active={isFocus || value.trim() !== ''}>
+      <AnimatedInputPlaceholder active={isFocus || value.trim() !== ''} error={error}>
         {placeholder}
       </AnimatedInputPlaceholder>
 

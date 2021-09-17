@@ -18,3 +18,9 @@
   top: -8px;
   left: 12px;
 }
+
+.error {
+  &.root_active {
+    color: $red;
+  }
+}

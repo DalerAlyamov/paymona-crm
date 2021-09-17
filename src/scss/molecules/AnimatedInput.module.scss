@@ -18,3 +18,9 @@
 .input_active {
   border-color: $primary-1;
 }
+
+.error {
+  .input_active {
+    border-color: $red;
+  }
+}

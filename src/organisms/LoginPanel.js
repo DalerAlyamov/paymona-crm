@@ -30,6 +30,9 @@ const LoginPanel = ({
 
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [confirmPassword__inputFocusing, setConfirmPassword__inputFocusing] = useState(false)
+
+  const [error, setError] = useState('')
 
 
   /* Redux hooks */
@@ -41,11 +44,13 @@ const LoginPanel = ({
 
   const buttonEmailRef = useRef(null)
   const buttonNextRef = useRef(null)
+  const buttonChangePasswordRef = useRef(null)
 
 
   /* Functions */
 
   const handleEmail = () => {
+    setError('')
     setEmailChecking(true)
 
     const config = {
@@ -77,12 +82,14 @@ const LoginPanel = ({
       .catch(error => {
         if(error.response.status === 404)
           setTimeout(() => {
+            setError('Неправильная почта или пароль')
             setEmailChecking(false)
-          }, 1500)
+          }, 1000)
       })
   }
 
   const sendEmailToResetPassword = (block=true) => {
+    setError('')
     if (block)
       setEmailChecking(true)
 
@@ -97,19 +104,19 @@ const LoginPanel = ({
     API(config)
       .then(() => {
         setPage('get_code')
-        setTimeout(() => {
-          setEmailChecking(false)
-        }, 1500)
+        setEmailChecking(false)
       })
       .catch(error => {
         if(error.response.status === 404)
           setTimeout(() => {
+            setError('Пользователь не найден')
             setEmailChecking(false)
           }, 1500)
       })
   }
 
   const handleCheckCode = () => {
+    setError('')
     setEmailChecking(true)
 
     const config = {
@@ -123,23 +130,26 @@ const LoginPanel = ({
 
     API(config)
       .then(() => {
-        setTimeout(() => {
-          setEmailChecking(false)
-        }, 1500)
+        setPage('change_password')
+        setEmailChecking(false)
       })
       .catch(error => {
         if(error.response.status === 404)
           setTimeout(() => {
+            setError('Введенный код недействителен')
             setEmailChecking(false)
           }, 1500)
       })
   }
 
   const changePassword = () => {
+    setError('')
     setEmailChecking(true)
 
-    if (confirmPassword !== newPassword)
+    if (confirmPassword !== newPassword) {
+      setError('Пароли не совпадают')
       return setEmailChecking(false)
+    }
 
     const config = {
       url: 'login/new_password/',
@@ -153,6 +163,10 @@ const LoginPanel = ({
 
     API(config)
       .then(() => {
+        setPage('login')
+        setResendCodeTimeout('')
+        setNewPassword('')
+        setConfirmPassword('')
         setTimeout(() => {
           setEmailChecking(false)
         }, 1500)
@@ -190,10 +204,8 @@ const LoginPanel = ({
       {page === 'login' &&
         <LoginTitle className={styles.title}>Вход</LoginTitle>
       }
-      {(page === 'get_code' || page === 'forget_password') &&
-        <LoginTitle className={styles.title}>Сброс пароля</LoginTitle>
-      }
-      {page === 'change_password' &&
+
+      {(page === 'get_code' || page === 'forget_password' || page === 'change_password') &&
         <LoginTitle className={styles.title}>Сброс пароля</LoginTitle>
       }
 
@@ -207,6 +219,7 @@ const LoginPanel = ({
         <AnimatedInput 
           className={classNames(styles.input, emailChecking && styles.input__acceptance)}
           placeholder='Email'
+          error={error !== ''}
           value={email__inputValue} 
           setValue={setEmail__inputValue}
           initialFocusing={true}
@@ -225,6 +238,7 @@ const LoginPanel = ({
           className={classNames(styles.input, emailChecking && styles.input__acceptance)}
           placeholder='Пароль'
           value={password__inputValue} 
+          error={error !== ''}
           setValue={setPassword__inputValue}
           initialFocusing={password__inputFocusing}
           onBlur={() => setPassword__inputFocusing(false)}
@@ -240,6 +254,7 @@ const LoginPanel = ({
         <AnimatedInput 
           className={classNames(styles.input, emailChecking && styles.input__acceptance)}
           placeholder='Код'
+          error={error !== ''}
           value={code__inputValue} 
           setValue={setCode__inputValue}
           initialFocusing={true}
@@ -247,16 +262,55 @@ const LoginPanel = ({
             if (e.code === 'Enter')
               buttonNextRef.current.click()
           }}
-          isPassword
         />
       }
+          
+      {page === 'change_password' &&
+        <>
+          <AnimatedInput 
+            className={classNames(styles.input, emailChecking && styles.input__acceptance)}
+            placeholder='Новый пароль'
+            value={newPassword} 
+            error={error !== ''}
+            setValue={setNewPassword}
+            initialFocusing={true}
+            onKeyPress={e => {
+              if (e.code === 'Enter')
+                setConfirmPassword__inputFocusing(true)
+            }}
+            isPassword
+          />
+          <AnimatedInput 
+            className={classNames(styles.input, emailChecking && styles.input__acceptance)}
+            placeholder='Подтвердите пароль'
+            value={confirmPassword} 
+            error={error !== ''}
+            setValue={setConfirmPassword}
+            initialFocusing={confirmPassword__inputFocusing}
+            onKeyPress={e => {
+              if (e.code === 'Enter')
+                buttonChangePasswordRef.current.click()
+            }}
+            isPassword
+          />
+        </>
+      }
 
-      <Wrap flex spaceBetween>
+      {error !== '' &&
+        <span className={styles.error_text}>
+          {error}
+        </span>
+      }
+
+      <Wrap flex spaceBetween className={styles.footer}>
 
         {page === 'login' &&
           <> 
             <Button 
-              onClick={() => setPage('forget_password')} 
+              onClick={() => {
+                setPage('forget_password')
+                setError('')
+              }} 
               type='text' 
               disabled={emailChecking}
             >
@@ -275,7 +329,10 @@ const LoginPanel = ({
 
         {page === 'forget_password' && 
           <Button 
-            onClick={() => setPage('login')} 
+            onClick={() => {
+              setPage('login')
+              setError('')
+            }} 
             type='text' 
             disabled={emailChecking}
           >
@@ -312,6 +369,18 @@ const LoginPanel = ({
             ref={buttonNextRef}
           >
             Далее
+          </Button>
+        }
+
+        {page === 'change_password' && 
+          <Button 
+            onClick={() => {
+              changePassword()
+            }} 
+            disabled={emailChecking}
+            ref={buttonChangePasswordRef}
+          >
+            Сменить пароль
           </Button>
         }
 
