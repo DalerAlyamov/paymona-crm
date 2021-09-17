@@ -8,6 +8,8 @@ import SidebarButton from './SidebarButton'
 import SidebarBrand from './SidebarBrand' 
 import SidebarFooter from './SidebarFooter' 
 import TableColumn from './TableColumn' 
+import TableFilter from './TableFilter' 
+import TableSearch from './TableSearch' 
 
 export {
   LoginLeftSide,
@@ -19,5 +21,7 @@ export {
   SidebarButton,
   SidebarBrand,
   SidebarFooter,
-  TableColumn
+  TableColumn,
+  TableFilter,
+  TableSearch
 }

@@ -3,7 +3,9 @@ import classNames from 'classnames'
 import styles from '../scss/molecules/TableTools.module.scss'
 
 const TableTools = ({
-  className
+  className='',
+  hasFilter=false,
+  children=<></>
 }) => {
   return (
     <div className={classNames(className, styles.root)}>

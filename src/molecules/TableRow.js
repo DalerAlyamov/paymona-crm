@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import styles from '../scss/molecules/TableRow.module.scss'
 
 const TableRow = ({
-  className
+  className=''
 }) => {
   return (
     <div className={classNames(className, styles.root)}>
