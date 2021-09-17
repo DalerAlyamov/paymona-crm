@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import { LoginPage } from './organisms'
 import { useDispatch, useSelector } from 'react-redux'
 import { login, logout } from './redux/actions/userActions'
-import { Route, Link } from 'react-router-dom'
 
 const App = () => {
 
@@ -59,14 +58,7 @@ const App = () => {
     <>
       <LoginPage />
       <div className={classNames('App', user.status === 'logouted' && 'App--close')}>
-        <Link to='/' replace>Home</Link>
-        <Link to='/about' replace>About</Link>
-        <Route path='/about' exact>
-          about
-        </Route>
-        <Route path='/' exact>
-          home
-        </Route>
+        
       </div>
     </>
   )
