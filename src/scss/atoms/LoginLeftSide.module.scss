@@ -1,0 +1,48 @@
+@import '../root.scss';
+
+.root {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.blue_space {
+  background: $primary-1;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.svg {
+  height: 100vh;
+}
+
+.open {
+  transform: translateX(-100%);
+}
+
+.opening {
+  animation: open 1100ms cubic-bezier(1,.02,.44,.99) forwards;
+}
+
+.closing {
+  animation: close 1100ms cubic-bezier(1,.02,.44,.99) forwards;
+}
+
+@keyframes open {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes close {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

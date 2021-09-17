@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const ArrowHadBigDown = ({ 
+const ArrowHadBigDown = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const ArrowHadBigDown = ({
     />
   </Svg>
 )
+
+export default ArrowHadBigDown

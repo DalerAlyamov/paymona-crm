@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import store from './redux/reducers' 
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
 import './scss/global.scss'
+import { MemoryRouter  } from 'react-router-dom'
 
 ReactDOM.render(
-  <Router basename='/'>
+  <MemoryRouter>
     <Provider store={store}>
       <App />
     </Provider>
-  </Router>,
+  </MemoryRouter>,
   document.getElementById('root')
 )

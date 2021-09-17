@@ -1,0 +1,20 @@
+@import '../root.scss';
+
+.root {
+  @include header-5;
+  color: $light-1;
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  transition: 100ms ease-in-out;
+  pointer-events: none;
+}
+
+.root_active {
+  @include header-6;
+  color: $primary-1;
+  background: $light-5;
+  padding: 0 2px;
+  top: -8px;
+  left: 12px;
+}

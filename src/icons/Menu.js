@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const Menu = ({ 
+const Menu = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const Menu = ({
     />
   </Svg>
 )
+
+export default Menu

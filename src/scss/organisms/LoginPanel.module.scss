@@ -1,0 +1,27 @@
+@import '../root.scss';
+
+.root {
+  padding: 32px;
+  background: $light-5;
+  border-radius: 16px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 100;
+  @include shadow-1
+}
+
+.title {
+  margin-bottom: 32px;
+  display: inline-block;
+}
+
+.input {
+  margin-bottom: 32px;
+}
+
+.input__acceptance {
+  pointer-events: none;
+  input {
+    color: $primary-1;
+  }
+}

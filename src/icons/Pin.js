@@ -7,7 +7,7 @@ const Svg = styled(SvgTemplate)`
   height: ${props => props.size}px;
 `
 
-export const Pin = ({ 
+const Pin = ({ 
   className,
   size=24
 }) => ( 
@@ -18,3 +18,5 @@ export const Pin = ({
     />
   </Svg>
 )
+
+export default Pin

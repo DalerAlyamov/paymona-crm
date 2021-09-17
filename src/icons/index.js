@@ -18,11 +18,10 @@ import CalendarOutline from './CalendarOutline'
 import CallMade from './CallMade'
 import CancelArrowLeft from './CancelArrowLeft'
 import CancelArrowRight from './CancelArrowRight'
-import СheckСircle from './СheckСircle'
-import СheckСircleOutline from './СheckСircleOutline'
+import CheckCircle from './CheckCircle'
+import CheckCircleOutline from './CheckCircleOutline'
 import CheckBox from './CheckBox'
 import CheckBoxOutlineBlank from './CheckBoxOutlineBlank'
-import CheckCircleOutline from './CheckCircleOutline'
 import Close from './Close'
 import CloseSingle from './CloseSingle'
 import Delete from './Delete'
@@ -90,11 +89,10 @@ export {
   CallMade,
   CancelArrowLeft,
   CancelArrowRight,
-  СheckСircle,
-  СheckСircleOutline,
+  CheckCircle,
+  CheckCircleOutline,
   CheckBox,
   CheckBoxOutlineBlank,
-  CheckCircleOutline,
   Close,
   CloseSingle,
   Delete,

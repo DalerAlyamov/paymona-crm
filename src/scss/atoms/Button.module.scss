@@ -1,0 +1,84 @@
+@import '../root.scss';
+
+.root {
+  @include button-1;
+  padding: 12px 16px; 
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: 100ms linear;
+}
+
+.contained {
+  background: $primary-1;
+  color: $light-5;
+  border-color: $primary-1;
+  path {
+    color: $light-5;
+  }
+  &:hover{
+    background: $primary-2;
+    border-color: $primary-2;
+  }
+  &:active{
+    background: $primary-3;
+    border-color: $primary-3;
+  }
+}
+
+.outlined {
+  background: none;
+  border-color: $primary-1;
+  color: $primary-1;
+  path {
+    color: $primary-1;
+  }
+  &:hover{
+    background: $primary-bg-2;
+  }
+  &:active{
+    background: $primary-bg-1;
+  }
+}
+
+.text {
+  background: none;
+  border-color: transparent;
+  color: $primary-1;
+  path {
+    color: $light-5;
+  }
+  &:hover{
+    background: $primary-bg-2;
+  }
+  &:active{
+    background: $primary-bg-1;
+  }
+}
+
+.disabled {
+  cursor: default;
+  &.contained  {
+    background: $light-3;
+    color: $light-1;
+    border-color: $light-3;
+    path {
+      color: $light-1;
+    }
+  }
+  &.outlined {
+    background: transparent;
+    color: $light-1;
+    border-color: $light-3;
+    path {
+      color: $light-1;
+    }
+  }
+  &.text {
+    background: transparent;
+    color: $light-1;
+    border-color: transparent;
+    path {
+      color: $light-1;
+    }
+  }
+}
