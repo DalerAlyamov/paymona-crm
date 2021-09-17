@@ -6,6 +6,7 @@ import AnimatedInputEye from './AnimatedInputEye'
 import Button from './Button' 
 import SidebarButton from './SidebarButton' 
 import SidebarBrand from './SidebarBrand' 
+import SidebarFooter from './SidebarFooter' 
 
 export {
   LoginLeftSide,
@@ -15,5 +16,6 @@ export {
   AnimatedInputEye,
   Button,
   SidebarButton,
-  SidebarBrand
+  SidebarBrand,
+  SidebarFooter
 }

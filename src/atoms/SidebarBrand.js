@@ -4,14 +4,17 @@ import styles from '../scss/atoms/SidebarBrand.module.scss'
 import { Logo } from '../icons'
 
 const SidebarBrand = ({
-  className=''
+  className='',
+  removeText=false
 }) => {
   return (
     <div className={classNames(className, styles.root)}>
       <div className={styles.logo}>
         <Logo size={28} />
       </div>
-      Paymona
+      {!removeText &&
+        'Paymona'
+      }
     </div>
   )
 }

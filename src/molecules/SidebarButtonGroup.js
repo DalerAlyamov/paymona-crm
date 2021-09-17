@@ -2,90 +2,25 @@ import React from 'react'
 import classNames from 'classnames'
 import styles from '../scss/molecules/SidebarButtonGroup.module.scss'
 import { SidebarButton } from '../atoms'
-import { PersonOutline } from '../icons' 
+import { PersonOutline, WorkOutline, PeopleOutline, InfoOutline } from '../icons' 
 
 const SidebarButtonGroup = ({
-  className=''
+  className='',
+  removeText=false
 }) => {
   return (
     <div className={classNames(className, styles.root)}>
       <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
+        {!removeText && 'Сотрудники'}
       </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
+      <SidebarButton beforeIcon={<WorkOutline />}>
+        {!removeText && 'Услуги'}
       </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
+      <SidebarButton beforeIcon={<PeopleOutline />}>
+        {!removeText && 'Клиенты'}
       </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
-      </SidebarButton>
-      <SidebarButton beforeIcon={<PersonOutline />}>
-        Сотрудники
+      <SidebarButton beforeIcon={<InfoOutline />}>
+        {!removeText && 'Сотрудники'}
       </SidebarButton>
     </div>
   )
