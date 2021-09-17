@@ -15,6 +15,13 @@
   display: inline-block;
 }
 
+.info_text {
+  @include header-5;
+  display: block;
+  margin-bottom: 32px;
+  color: $dark-5;
+}
+
 .input {
   margin-bottom: 32px;
 }
@@ -24,4 +31,14 @@
   input {
     color: $primary-1;
   }
+}
+
+.position_relative {
+  position: relative;
+}
+
+.timer {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
 }

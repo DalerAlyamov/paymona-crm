@@ -42,7 +42,7 @@ const LoginRightSide = ({
         className={styles.logo}
       />
 
-      <LoginPanel title='Вход' />
+      <LoginPanel />
 
     </div>
   )
