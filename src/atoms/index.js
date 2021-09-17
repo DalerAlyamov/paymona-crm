@@ -7,6 +7,7 @@ import Button from './Button'
 import SidebarButton from './SidebarButton' 
 import SidebarBrand from './SidebarBrand' 
 import SidebarFooter from './SidebarFooter' 
+import TableColumn from './TableColumn' 
 
 export {
   LoginLeftSide,
@@ -17,5 +18,6 @@ export {
   Button,
   SidebarButton,
   SidebarBrand,
-  SidebarFooter
+  SidebarFooter,
+  TableColumn
 }
