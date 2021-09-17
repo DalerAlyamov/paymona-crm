@@ -1,5 +1,21 @@
 @import '../root.scss';
 
 .root {
-  
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  pointer-events: none;
+  color: $light-1;
+}
+
+.input {
+  @include header-4;
+  color: $dark-4;
+  background: $light-3;
+  border-radius: 8px;
+  &::placeholder {
+    color: $light-1;
+  }
 }
