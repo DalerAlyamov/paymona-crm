@@ -1,0 +1,18 @@
+@import '../root.scss';
+
+.root{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.titleSideBar{
+
+  path{
+    color: $light-5;
+  }
+}
+
+.text{
+  font-size: $fs-md;
+}

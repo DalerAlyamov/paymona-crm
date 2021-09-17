@@ -1,0 +1,11 @@
+@import '../foundation/all';
+
+
+.rotate{
+  transform: rotate(180deg);
+  transition: 100ms;
+}
+
+.dis{
+  pointer-events: n;
+}

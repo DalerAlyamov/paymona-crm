@@ -1,0 +1,19 @@
+@import '../root.scss';
+
+.root{
+ display: flex;
+ justify-content: flex-start;
+ align-items: center; 
+ margin: 15px 0 0 0;
+ padding: 8 0  ;
+ &:hover{
+  background: $dark-4;
+ }
+}
+
+.text{
+  font-family: $inter;
+  font-size: $fs-md;
+  font-weight: $fw-medium;
+  color: $light-5;
+}

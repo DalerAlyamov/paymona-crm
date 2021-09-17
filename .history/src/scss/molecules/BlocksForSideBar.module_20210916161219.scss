@@ -1,0 +1,17 @@
+@import '../root.scss';
+
+.root{
+ display: flex;
+ justify-content: flex-start;
+ align-items: center; 
+ &:hover{
+  background
+ }
+}
+
+.text{
+  font-family: $inter;
+  font-size: $fs-md;
+  font-weight: $fw-medium;
+  color: $light-5;
+}
