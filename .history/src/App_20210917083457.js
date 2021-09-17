@@ -13,7 +13,6 @@ const App = () => {
       {/* <LoginPage isLogged={!user} /> */}
       <div className={classNames('App', user && 'App--close')}>
         <SideBar/>
-        <Emplyee/>
       </div>
     </>
   )

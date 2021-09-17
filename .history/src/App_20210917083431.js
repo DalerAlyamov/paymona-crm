@@ -3,7 +3,7 @@ import SideBar from '../src/organisms/SideBar'
 import { LoginPage } from './organisms'
 import classNames from 'classnames'
 import { useSelector } from 'react-redux'
-import Emplyee from './routes/Emplyee'
+import Emplyee 
 const App = () => {
 
   const user = useSelector(state => state.user)
@@ -13,7 +13,6 @@ const App = () => {
       {/* <LoginPage isLogged={!user} /> */}
       <div className={classNames('App', user && 'App--close')}>
         <SideBar/>
-        <Emplyee/>
       </div>
     </>
   )
