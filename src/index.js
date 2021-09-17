@@ -4,10 +4,13 @@ import App from './App'
 import store from './redux/reducers' 
 import { Provider } from 'react-redux'
 import './scss/global.scss'
+import { MemoryRouter  } from 'react-router-dom'
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <MemoryRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </MemoryRouter>,
   document.getElementById('root')
 )
