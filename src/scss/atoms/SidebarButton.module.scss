@@ -1,0 +1,69 @@
+@import '../root.scss';
+
+.root {
+  @include header-4;
+  padding: 8px 12px; 
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid $dark-1;
+  border-radius: 8px;
+  transition: 200ms cubic-bezier(0, 0, 1, 1);
+  background: $dark-1;
+  color: $light-5;
+  path {
+    color: $light-5;
+  }
+  &:hover{
+    transition: 50ms cubic-bezier(1, 1, 0, 0);
+    background: $dark-3;
+    border-color: $dark-3;
+  }
+  &:active{
+    background: $dark-4;
+    transition: 0 ease-in;
+    border-color: $dark-4;
+  }
+}
+
+.active {
+  color: $light-5;
+  background: $dark-4;
+  border-color: $dark-4;
+  path {
+    color: $light-5;
+  }
+  &:hover{
+    background: $dark-4;
+    border-color: $dark-4;
+  }
+  &:active{
+    background: $dark-4;
+    border-color: $dark-4;
+  }
+}
+
+.disabled {
+  cursor: default;
+  color: $dark-5;
+  background: $dark-1;
+  border-color: $dark-1;
+  path {
+    color: $dark-5;
+  }
+  &:hover{
+    background: $dark-1;
+    border-color: $dark-1;
+  }
+  &:active{
+    background: $dark-1;
+    border-color: $dark-1;
+  }
+}
+
+.before_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}

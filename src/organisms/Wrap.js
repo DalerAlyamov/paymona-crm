@@ -4,7 +4,7 @@ import styles from '../scss/molecules/Wrap.module.scss'
 
 const Wrap = ({
   className='',
-  children='',
+  children=<></>,
   flex=false,
   spaceBetween=false,
   spaceAround=false,

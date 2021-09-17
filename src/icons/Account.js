@@ -8,7 +8,7 @@ const Svg = styled(SvgTemplate)`
 `
 
 const Account = ({ 
-  className,
+  className='',
   size=24
 }) => ( 
   <Svg viewBox='0 0 24 24' className={className} size={size} fill='currentColor'>   

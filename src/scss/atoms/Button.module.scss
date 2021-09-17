@@ -6,6 +6,8 @@
   border: 1px solid transparent;
   border-radius: 8px;
   transition: 100ms linear;
+  display: flex;
+  align-items: center;
 }
 
 .contained {
@@ -80,5 +82,25 @@
     path {
       color: $light-1;
     }
+  }
+}
+
+.before_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  path {
+    transition: 100ms linear;
+  }
+}
+
+.after_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  path {
+    transition: 100ms linear;
   }
 }

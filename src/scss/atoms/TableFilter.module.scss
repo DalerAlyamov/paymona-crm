@@ -1,0 +1,150 @@
+@import '../root.scss';
+
+.root {
+  position: relative;
+  margin-right: 8px;
+}
+
+/* Label styles */
+
+.label {
+  color: $light-1;
+  path {
+    color: $light-1;
+  }
+  &:active {
+    color: $primary-1;
+    path {
+      color: $primary-1;
+    }
+  }
+}
+
+.label--active {
+  color: $primary-1;
+  background: $primary-bg-1;
+  path {
+    color: $primary-1;
+  }
+  &:hover {
+    background: $primary-bg-1;
+  }
+}
+
+/* Menu styles */
+
+.menu {
+  @include shadow-2;
+  min-width: 250px;
+  position: absolute;
+  animation: fadeIn 150ms ease-in forwards;
+  padding: 24px;
+  background: $light-5;
+  border-radius: 8px;
+}
+
+.menu__title {
+  @include header-3;
+  color: $light-1;
+}
+
+.divider {
+  margin: 16px 0;
+  height: 1px;
+  width: 100%;
+  background: $light-3;
+}
+
+/* Sort styles */
+
+.sort_item {
+  @include header-6;
+  margin-top: 16px;
+  color: $light-1;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 100ms linear;
+}
+
+.sort_item--active {
+  color: $primary-1;
+
+  .sort_item__arrow {
+    color: $primary-1;
+    transform: rotateZ(180deg);
+  }
+}
+
+.sort_item__arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 100ms linear;
+  color: $light-1;
+}
+
+/* Filter styles */
+
+.filter_item {
+  @include header-6;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: 100ms linear;
+  margin-top: 16px;
+}
+
+.filter_item--active {
+  .filter_item__arrow {
+    transform: rotateZ(180deg);
+  }
+}
+
+.filter_item__arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 100ms linear;
+  color: $light-1;
+}
+
+/* Filter Tag styles */
+
+.filter_tag {
+  @include header-6;
+  transition: 100ms linear;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-left: 16px;
+}
+
+.filter_tag--active {
+  .filter_tag__checkbox {
+    color: $primary-1;
+  }
+}
+
+.filter_tag__checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 100ms linear;
+  color: $light-1;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+}
