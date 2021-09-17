@@ -18,6 +18,8 @@ const Employees = ({
   
   /* States */
 
+  // const [data, setData] = useState(null)
+
   const [searchValue, setSearchValue] = useState('')
   const [sortList, setSortList] = useState([
     {
@@ -52,6 +54,22 @@ const Employees = ({
       ]
     }
   ])
+
+  
+  /* UseEffects */
+
+  // useEffect(() => {
+  //   const config = {
+  //     url: '',
+  //     method: 'get',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }
+  //   API(config)
+  //     .then(res => res.data)
+  //     .then(res => console.log(res))
+  // }, [])
 
   return (
     <div className={classNames(className, styles.root)}>
