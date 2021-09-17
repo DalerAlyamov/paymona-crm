@@ -1,6 +1,5 @@
 import React from 'react'
 import SideBar from '../src/organisms/SideBar'
-import { LoginPage } from './organisms'
 import classNames from 'classnames'
 import { useSelector } from 'react-redux'
 import Emplyee from './routes/Emplyee'
@@ -11,7 +10,7 @@ const App = () => {
   return (
     <>
       {/* <LoginPage isLogged={!user} /> */}
-      <div className={classNames('App', user && 'App--close')}>
+      <div className={classNames('App', user==='logouted' && 'App--close')}>
         <SideBar/>
         <Emplyee/>
       </div>
