@@ -27,7 +27,6 @@
   padding: 12px 8px;
   z-index: 100;
   background: $light-5;
-  animation: fadeIn 150ms ease-in forwards;
   min-width: 150px;
 
   a, span, button {
@@ -47,6 +46,14 @@
       background: $light-3;
     }
   }
+}
+
+.menu__open {
+  animation: fadeIn 100ms ease-in forwards;
+}
+
+.menu__close {
+  animation: fadeOut 100ms ease-in forwards;
 }
 
 @keyframes fadeIn {

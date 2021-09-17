@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/routes/Employees.module.scss'
-import { Table } from '../organisms'
+import { Table, Topbar } from '../organisms'
 import { TableTools, TableRow } from '../molecules'
 import { Button, TableColumn } from '../atoms'
 import { TableHeaders } from '../molecules'
 
 const Employees = ({
-  className
+  className=''
 }) => {
 
   
@@ -73,8 +73,10 @@ const Employees = ({
 
   return (
     <div className={classNames(className, styles.root)}>
+
+      <Topbar title='Сотрудники' />
       
-      <Table>
+      <Table className={styles.table}>
         
         <TableTools 
           hasFilter

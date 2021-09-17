@@ -11,6 +11,8 @@ import TableColumn from './TableColumn'
 import TableFilter from './TableFilter' 
 import TableSearch from './TableSearch' 
 import TableRowMenu from './TableRowMenu' 
+import TopbarUserPanelLabel from './TopbarUserPanelLabel' 
+import TopbarUserAwatar from './TopbarUserAwatar' 
 
 export {
   LoginLeftSide,
@@ -25,5 +27,7 @@ export {
   TableColumn,
   TableFilter,
   TableSearch,
-  TableRowMenu
+  TableRowMenu,
+  TopbarUserPanelLabel,
+  TopbarUserAwatar
 }

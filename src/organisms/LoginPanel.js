@@ -123,7 +123,7 @@ const LoginPanel = ({
       url: 'login/check_code/',
       method: 'post',
       data: JSON.stringify({
-        code: resendCodeTimeout,
+        code: code__inputValue,
         email: email__inputValue
       })
     } 
@@ -150,12 +150,12 @@ const LoginPanel = ({
       setError('Пароли не совпадают')
       return setEmailChecking(false)
     }
-
+    
     const config = {
       url: 'login/new_password/',
       method: 'post',
       data: JSON.stringify({
-        code: resendCodeTimeout,
+        code: code__inputValue,
         email: email__inputValue,
         password: newPassword
       })

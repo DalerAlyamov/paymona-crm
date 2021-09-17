@@ -29,6 +29,7 @@ import DeleteOutline from './DeleteOutline'
 import Dot from './Dot'
 import Drag from './Drag'
 import Edit from './Edit'
+import Exit from './Exit'
 import Email from './Email'
 import Filter from './Filter'
 import Headset from './Headset'
@@ -100,6 +101,7 @@ export {
   Dot,
   Drag,
   Edit,
+  Exit,
   Email,
   Filter,
   Headset,
