@@ -25,7 +25,7 @@ const TopbarUserPanel = ({
       <TopbarUserPanelLabel onClick={() => setOpen(!open)} />
 
       {open &&
-        <TopbarUserPanelMenu onClose={() => setOpen(false)} open />
+        <TopbarUserPanelMenu onClose={() => setOpen(false)} />
       }
 
     </div>
