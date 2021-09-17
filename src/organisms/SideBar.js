@@ -8,7 +8,7 @@ const SideBar = ({
   className=''
 }) => {
 
-  const [close, setClose] = useState(true)
+  const [close, setClose] = useState(false)
 
   return (
     <div className={classNames(className, styles.root, close && styles.close)}>
