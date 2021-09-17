@@ -9,6 +9,7 @@ const Wrap = ({
   spaceBetween=false,
   spaceAround=false,
   justifyEnd=false,
+  justifyCenter=false,
   alignCenter=false,
   alignEnd=false,
   column=false
@@ -22,6 +23,7 @@ const Wrap = ({
         spaceBetween && styles.spaceBetween,
         spaceAround && styles.spaceAround,
         justifyEnd && styles.justifyEnd,
+        justifyCenter && styles.justifyCenter,
         alignCenter && styles.alignCenter,
         alignEnd && styles.alignEnd,
         column && styles.column
