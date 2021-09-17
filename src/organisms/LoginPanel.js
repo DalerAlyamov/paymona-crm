@@ -6,6 +6,7 @@ import { AnimatedInput } from '../molecules'
 import { Wrap } from '../organisms'
 import { useDispatch } from 'react-redux'
 import { login } from '../redux/actions/userActions'
+import API from '../API/API'
 
 const LoginPanel = ({
   className='',
@@ -15,12 +16,12 @@ const LoginPanel = ({
 
   /* States */
 
-  const [login__inputValue, setLogin__inputValue] = useState('')
+  const [email__inputValue, setEmail__inputValue] = useState('')
 
   const [password__inputValue, setPassword__inputValue] = useState('')
   const [password__inputFocusing, setPassword__inputFocusing] = useState(false)
   
-  const [loginChecking, setLoginChecking] = useState(false)
+  const [emailChecking, setEmailChecking] = useState(false)
 
 
   /* Redux hooks */
@@ -30,26 +31,40 @@ const LoginPanel = ({
 
   /* Refs */
 
-  const buttonLoginRef = useRef(null)
+  const buttonEmailRef = useRef(null)
 
 
   /* Functions */
 
-  const handleLogin = () => {
-    setLoginChecking(true)
+  const handleEmail = () => {
+    setEmailChecking(true)
 
-    const user = {
-      login: login__inputValue, password: password__inputValue
-    }
+    const config = {
+      url: 'login/',
+      method: 'post',
+      data: JSON.stringify({
+        email: email__inputValue,
+        password: password__inputValue
+      })
+    } 
 
-    dispatch(login({...user, status: 'logining'}))
-    
-    setTimeout(() => {
-      dispatch(login({...user, status: 'logined'}))
-      setLoginChecking(false)
-      setLogin__inputValue('')
-      setPassword__inputValue('')
-    }, 1200)
+    API(config)
+      .then(res => res.data)
+      .then(res => {
+        const user = {
+          email: email__inputValue,
+          password: password__inputValue,
+          token: res.access_token
+        }
+        dispatch(login({...user, status: 'logining'}))
+        
+        setTimeout(() => {
+          dispatch(login({...user, status: 'logined'}))
+          setEmailChecking(false)
+          setEmail__inputValue('')
+          setPassword__inputValue('')
+        }, 1200)
+      })
   }
 
   const handleForgetPassword = () => {
@@ -65,10 +80,10 @@ const LoginPanel = ({
       <LoginTitle className={styles.title}>{title}</LoginTitle>
       
       <AnimatedInput 
-        className={classNames(styles.input, loginChecking && styles.input__acceptance)}
-        placeholder='Логин'
-        value={login__inputValue} 
-        setValue={setLogin__inputValue}
+        className={classNames(styles.input, emailChecking && styles.input__acceptance)}
+        placeholder='Email'
+        value={email__inputValue} 
+        setValue={setEmail__inputValue}
         initialFocusing={true}
         onKeyPress={e => {
           if (e.code === 'Enter')
@@ -77,7 +92,7 @@ const LoginPanel = ({
       />
       
       <AnimatedInput 
-        className={classNames(styles.input, loginChecking && styles.input__acceptance)}
+        className={classNames(styles.input, emailChecking && styles.input__acceptance)}
         placeholder='Пароль'
         value={password__inputValue} 
         setValue={setPassword__inputValue}
@@ -85,7 +100,7 @@ const LoginPanel = ({
         onBlur={() => setPassword__inputFocusing(false)}
         onKeyPress={e => {
           if (e.code === 'Enter')
-            buttonLoginRef.current.click()
+            buttonEmailRef.current.click()
         }}
         isPassword
       />
@@ -95,15 +110,15 @@ const LoginPanel = ({
         <Button 
           onClick={() => handleForgetPassword()} 
           type='text' 
-          disabled={loginChecking}
+          disabled={emailChecking}
         >
           Забыли пароль?
         </Button>
 
         <Button 
-          onClick={() => handleLogin()} 
-          disabled={loginChecking}
-          ref={buttonLoginRef}
+          onClick={() => handleEmail()} 
+          disabled={emailChecking}
+          ref={buttonEmailRef}
         >
           Войти
         </Button>
