@@ -34,7 +34,6 @@ const TableTools = ({
       return next
     })
   }
-  
 
   const handleSetFilter = text => {
     setFilterList(prev => {
@@ -62,16 +61,14 @@ const TableTools = ({
 
       <Wrap flex alignCenter justifyEnd>
         {hasFilter && 
-          <>
-            <TableFilter 
-              filterList={filterList}
-              sortList={sortList}
-              onSetFilter={handleSetFilter}
-              onSort={handleSort}
-            />
-            {children}
-          </>
+          <TableFilter 
+            filterList={filterList}
+            sortList={sortList}
+            onSetFilter={handleSetFilter}
+            onSort={handleSort}
+          />
         }
+        {children}
       </Wrap>
 
     </div>
