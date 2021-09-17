@@ -12,7 +12,7 @@ const TableSearch = ({
   return (
     <div className={classNames(className, styles.root)}>
       <div className={styles.icon}>
-        <Search size={20} />
+        <Search size={22} />
       </div>
       <input 
         className={styles.input}

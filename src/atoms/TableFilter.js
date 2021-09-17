@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/atoms/TableFilter.module.scss'
 import { Button } from '.'
@@ -8,19 +8,30 @@ const TableFilter = ({
   className='',
   sortList=[],
   filterList=[],
+  onSetFilter=()=>{},
   onSort=()=>{}
 }) => {
 
   const [open, setOpen] = useState(false)
+  const [openedFilterText, setOpenFilterText] = useState(null)
+
+  useEffect(() => {
+    const handleWindowClick = e => {
+      if (!e.target.closest('.'+styles.root))
+        setOpen(false)
+    }
+    window.addEventListener('click', handleWindowClick)
+    return () => window.removeEventListener('click', handleWindowClick)
+  }, [])
 
   return (
     <div className={classNames(className, styles.root)}>
       
       <Button 
-        type='text' 
-        className={styles.label} 
-        onCllick={() => setOpen(!open)}
-        beforeIcon={<Filter />}
+        type='text'
+        className={classNames(styles.label, open && styles['label--active'])} 
+        onClick={() => setOpen(!open)}
+        beforeIcon={<Filter size={16} />}
       >
         Фильтры
       </Button>
@@ -60,23 +71,23 @@ const TableFilter = ({
                 key={col.text}
                 className={classNames(
                   styles.filter_item, 
-                  col.active && styles['filter_item--active']
+                  openedFilterText === col.text && styles['filter_item--active']
                 )} 
-                onClick={() => onSort(col.text)}
+                onClick={() => setOpenFilterText(prev => prev === col.text ? null : col.text)}
               >
                 {col.text}
                 <div className={styles.filter_item__arrow}>
                   <ArrowHadSmallTop size={16} />
                 </div>
               </button>
-              {col.list.map(filter_tag => 
+              {openedFilterText === col.text && col.list.map(filter_tag => 
                 <button 
                   key={filter_tag.text}
                   className={classNames(
                     styles.filter_tag, 
                     filter_tag.active && styles['filter_tag--active']
                   )} 
-                  onClick={() => onSort(filter_tag.text)}
+                  onClick={() => onSetFilter(filter_tag.text)}
                 >
                   {filter_tag.text}
                   <div className={styles.filter_tag__checkbox}>

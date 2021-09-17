@@ -8,13 +8,21 @@
   position: absolute;
   pointer-events: none;
   color: $light-1;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .input {
   @include header-4;
   color: $dark-4;
   background: $light-3;
+  width: 360px;
   border-radius: 8px;
+  padding: 10px 10px 10px 40px;
   &::placeholder {
     color: $light-1;
   }
