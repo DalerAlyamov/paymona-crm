@@ -10,6 +10,7 @@ import SidebarFooter from './SidebarFooter'
 import TableColumn from './TableColumn' 
 import TableFilter from './TableFilter' 
 import TableSearch from './TableSearch' 
+import TableRowMenu from './TableRowMenu' 
 
 export {
   LoginLeftSide,
@@ -23,5 +24,6 @@ export {
   SidebarFooter,
   TableColumn,
   TableFilter,
-  TableSearch
+  TableSearch,
+  TableRowMenu
 }

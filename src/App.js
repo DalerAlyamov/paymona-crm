@@ -1,5 +1,4 @@
 import React from 'react'
-import classNames from 'classnames'
 import { LoginPage, SideBar } from './organisms'
 import { useSelector } from 'react-redux'
 import { Employees } from './routes'
@@ -11,10 +10,12 @@ const App = () => {
   return (
     <>
       <LoginPage />
-      <div className={classNames('App', user.status === 'logouted' && 'App--close')}>
-        <SideBar />
-        <Employees />
-      </div>
+      {user.status !== 'logouted' &&
+        <div className='App'>
+          <SideBar />
+          <Employees />
+        </div>
+      }
     </>
   )
 }

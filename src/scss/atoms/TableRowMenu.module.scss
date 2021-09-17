@@ -1,0 +1,61 @@
+@import '../root.scss';
+
+.root {
+  position: relative;
+}
+
+.label {
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  transition: 150ms linear;
+  &:hover {
+    background: $light-3;
+  }
+  &:active {
+    background: $primary-bg-1;
+  }
+}
+
+.menu {
+  @include shadow-2;
+  position: absolute;
+  right: 0;
+  border-radius: 12px;
+  padding: 12px 8px;
+  z-index: 100;
+  background: $light-5;
+  animation: fadeIn 150ms ease-in forwards;
+  min-width: 150px;
+
+  a, span, button {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 11px 8px;
+    width: 100%;
+    display: inline-block;
+    transition: 150ms linear;
+    text-align: left;
+    border-radius: 8px;
+    &:hover {
+      background: $primary-bg-2;
+    }
+    &:active {
+      background: $light-3;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

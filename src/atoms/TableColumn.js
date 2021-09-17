@@ -3,11 +3,19 @@ import classNames from 'classnames'
 import styles from '../scss/atoms/TableColumn.module.scss'
 
 const TableColumn = ({
-  className
+  className='',
+  type='default',
+  children=<></>
 }) => {
   return (
-    <div className={classNames(className, styles.root)}>
-      
+    <div 
+      className={classNames(
+        className, 
+        styles.root,
+        styles[type]
+      )}
+    >
+      {children}
     </div>
   )
 }

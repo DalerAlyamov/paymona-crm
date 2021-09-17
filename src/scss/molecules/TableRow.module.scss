@@ -1,5 +1,10 @@
 @import '../root.scss';
 
 .root {
-  
+  display: grid;
+  padding: 16px 24px;
+}
+
+.honest {
+  background: $primary-bg-2;
 }

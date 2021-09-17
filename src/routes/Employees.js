@@ -2,14 +2,20 @@ import React, { useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/routes/Employees.module.scss'
 import { Table } from '../organisms'
-import { TableTools } from '../molecules'
-import { Button } from '../atoms'
+import { TableTools, TableRow } from '../molecules'
+import { Button, TableColumn } from '../atoms'
+import { TableHeaders } from '../molecules'
 
 const Employees = ({
   className
 }) => {
 
+  
+  /* Variables */
 
+  const template = ['1fr', '1fr', '1fr', '1fr']
+
+  
   /* States */
 
   const [searchValue, setSearchValue] = useState('')
@@ -66,9 +72,50 @@ const Employees = ({
           </Button>
         </TableTools>
 
+        <TableHeaders template={template}>
+          {['Отображаемое имя', 'Должность', 'Отдел', 'Последнее посещение'].map(col => 
+            <TableColumn key={col}>
+              {col}
+            </TableColumn>  
+          )}
+        </TableHeaders>
+
+        <TableRow 
+          honest
+          template={template} 
+          id={1} 
+          menu={<Menu />}
+        >
+          <TableColumn>
+            Далер
+          </TableColumn>
+          <TableColumn>
+            Webdev
+          </TableColumn>
+          <TableColumn>
+            Frontend
+          </TableColumn>
+          <TableColumn>
+            19/11/2020
+          </TableColumn>
+        </TableRow>
+
       </Table>
 
     </div>
+  )
+}
+
+const Menu = () => {
+  return (
+    <>
+      <button>
+        Редактировать
+      </button>
+      <button>
+        Удалить
+      </button>
+    </>
   )
 }
 
