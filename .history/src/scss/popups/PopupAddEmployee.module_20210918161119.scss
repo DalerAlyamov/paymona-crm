@@ -1,0 +1,29 @@
+@import '../root.scss';
+
+.root{
+  width: 558px;
+  height: 432px;
+}
+
+.title{
+  width: 100%;
+  display: inline-block;
+  padding: 16px 24px;
+  border-bottom: 1px solid $light-3;
+  @include header-3;
+}
+
+.survey{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 24px;
+}
+
+.bigBlock{
+  padding: 24px 24px 24px 0;
+}
+
+.desc{
+  
+}

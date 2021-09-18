@@ -84,6 +84,10 @@ const Employees = ({
       <Topbar 
         titleList={[
           {
+            text: 'Дом',
+            link: '/home'
+          },
+          {
             text: 'Сотрудники',
             link: '/employees'
           }
@@ -102,13 +106,13 @@ const Employees = ({
           setSearchValue={setSearchValue}
         >
           <Button type='outlined' onClick={() => dispatch(openPopup(<PopupAddEmployee
-            title='Добавить сотрудника'
+            
           />))}>
             Добавить сотрудника
           </Button>
         </TableTools>
 
-        <TableHeaders template={template} hasMenu>
+        <TableHeaders template={template}>
           {['Отображаемое имя', 'Должность', 'Отдел', 'Последнее посещение'].map(col => 
             <TableColumn key={col}>
               {col}
@@ -117,7 +121,6 @@ const Employees = ({
         </TableHeaders>
 
         <TableRow 
-          hasMenu
           honest
           template={template} 
           id={1} 

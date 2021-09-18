@@ -16,7 +16,7 @@ const SideBar = ({
       <SidebarBrand removeText={close} />
 
       <SidebarButtonGroup removeText={close} />
-
+          
       <SidebarFooter onClick={() => setClose(!close)} />
 
     </div>

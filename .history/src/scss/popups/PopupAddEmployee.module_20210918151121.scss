@@ -1,0 +1,11 @@
+@import '../root.scss';
+
+.root{
+  width: 558px;
+  height: 432px;
+}
+
+.title{
+  @include header-3;
+  padding: 18px 0 10px  ;
+}

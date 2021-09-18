@@ -1,0 +1,14 @@
+@import '../root.scss';
+
+.root{
+  width: 558px;
+  height: 432px;
+}
+
+.title{
+  width: 100%;
+  display: inline-block;
+  padding: 16;
+  border-bottom: 1px solid $light-3;
+  @include header-3;
+}
