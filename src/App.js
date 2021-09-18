@@ -3,6 +3,7 @@ import { LoginPage, Popup, SideBar } from './organisms'
 import { useSelector } from 'react-redux'
 import { Employees, Services } from './routes'
 import { Route } from 'react-router-dom'
+import styles from './scss/App.module.scss'
  
 const App = () => {
 
@@ -13,7 +14,7 @@ const App = () => {
       <Popup />
       <LoginPage />
       {user.status !== 'logouted' &&
-        <div className='App'>
+        <div className={styles.root}>
           <SideBar />
           <Route path='/employees' component={Employees} />
           <Route path='/services' component={Services} />

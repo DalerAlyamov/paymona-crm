@@ -7,12 +7,13 @@ const TableRow = ({
   id=0,
   honest=false,
   className='',
+  hasMenu=false,
   template=['1fr'],
   menu=<></>,
   children=<></>
 }) => {
 
-  const gridTemplate = [...template, '48px']
+  const gridTemplate = hasMenu ? [...template, '48px'] : template
 
   return (
     <div 
@@ -24,9 +25,11 @@ const TableRow = ({
       style={{ gridTemplateColumns: gridTemplate.join(' ') }}
     >
       {children}
-      <TableRowMenu id={id}>
-        {menu}
-      </TableRowMenu>
+      {hasMenu &&
+        <TableRowMenu id={id}>
+          {menu}
+        </TableRowMenu>
+      }
     </div>
   )
 }

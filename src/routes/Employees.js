@@ -106,7 +106,7 @@ const Employees = ({
           </Button>
         </TableTools>
 
-        <TableHeaders template={template}>
+        <TableHeaders template={template} hasMenu>
           {['Отображаемое имя', 'Должность', 'Отдел', 'Последнее посещение'].map(col => 
             <TableColumn key={col}>
               {col}
@@ -115,6 +115,7 @@ const Employees = ({
         </TableHeaders>
 
         <TableRow 
+          hasMenu
           honest
           template={template} 
           id={1} 

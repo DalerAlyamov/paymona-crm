@@ -11,18 +11,6 @@
   font-family: sans-serif;
 }
 
-.App {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100vh;
-}
-
-.App--close, .App--close * {
-  pointer-events: none;
-}
-
 button, button * {
   cursor: pointer;
 }

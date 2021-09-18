@@ -4,11 +4,12 @@ import styles from '../scss/molecules/TableHeaders.module.scss'
 
 const TableHeaders = ({
   className='',
+  hasMenu=false,
   template=['1fr'],
   children=<></>
 }) => {
 
-  const gridTemplate = [...template, '48px']
+  const gridTemplate = hasMenu ? [...template, '48px'] : template
 
   return (
     <div
