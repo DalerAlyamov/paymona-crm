@@ -17,7 +17,7 @@ const Wrap = ({
 }) => {
   return (
     <div 
-      styles={{ gap: gap+'px' }}
+      style={{ gap: gap+'px' }}
       className={classNames(
         className, 
         styles.root,

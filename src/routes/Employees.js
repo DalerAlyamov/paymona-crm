@@ -81,7 +81,9 @@ const Employees = ({
   return (
     <div className={classNames(className, styles.root)}>
 
-      <Topbar title='Сотрудники' />
+      <Topbar 
+        title={['Сотрудники']} 
+      />
       
       <Table className={styles.table}>
         

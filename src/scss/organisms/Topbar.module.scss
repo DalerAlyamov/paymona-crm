@@ -12,3 +12,9 @@
   @include header-3;
   color: $dark-2;
 }
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
