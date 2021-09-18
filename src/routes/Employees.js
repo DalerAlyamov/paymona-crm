@@ -7,7 +7,7 @@ import { Button, TableColumn } from '../atoms'
 import { TableHeaders } from '../molecules'
 import { useDispatch } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
-import { PopupAddEmployee } from '../popup'
+import { PopupAddEmployee } from '../popups'
 const Employees = ({
   className=''
 }) => {
@@ -146,7 +146,7 @@ const Employees = ({
 const Menu = () => {
   return (
     <>
-      <button>
+      <button >
         Редактировать
       </button>
       <button>

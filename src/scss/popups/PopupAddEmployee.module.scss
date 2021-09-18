@@ -18,19 +18,17 @@
   flex-direction: column;
   width: 100%;
   padding: 24px;
-}
-
-.bigBlock{
-  padding: 24px 24px 24px 0;
+  gap: 24px;
 }
 
 .bigBlock2{
   display: flex;
   justify-content: space-between;
-  padding: 24px 24px 24px 0;
 }
 
 .desc{
-  @include header-6;
+  @include header-7;
   color: $light-1;
+  margin-top: 4px;
+  display: inline-block;
 }

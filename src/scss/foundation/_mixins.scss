@@ -40,6 +40,13 @@
   letter-spacing: $ls-sm;
 }
 
+@mixin header-7 {
+  font-family: $inter;
+  font-weight: $fw-light;
+  font-size: $fs-xs;
+  letter-spacing: $ls-sm;
+}
+
 @mixin button-1 {
   font-family: $inter;
   font-weight: $fw-bold;
