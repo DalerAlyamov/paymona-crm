@@ -1,0 +1,52 @@
+@import '../root.scss';
+
+.root {
+  padding-bottom: 24px;
+  border-bottom: 1px solid $light-2;
+}
+
+.edit_btn {
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $light-1;
+  transition: 100ms linear;
+}
+
+.edit_icon {
+  margin-left: 5px;
+  transition: 100ms linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  @include header-1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrow {
+  transition: 100ms linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50px;
+  border: 1px solid $light-5;
+  &:hover {
+    background: $primary-bg-2;
+  }
+  &:active {
+    border: 1px solid $light-2;
+    background: $light-3;
+  }
+}
+
+.arrow__rotate {
+  transform: rotateZ(180deg);
+}

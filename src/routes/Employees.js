@@ -84,10 +84,6 @@ const Employees = ({
       <Topbar 
         titleList={[
           {
-            text: 'Дом',
-            link: '/home'
-          },
-          {
             text: 'Сотрудники',
             link: '/employees'
           }

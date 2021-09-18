@@ -5,6 +5,7 @@ import Table from './Table'
 import Wrap from './Wrap' 
 import Topbar from './Topbar' 
 import Popup from './Popup' 
+import Service from './Service' 
 
 export {
   LoginPage,
@@ -13,5 +14,6 @@ export {
   Table,
   Wrap,
   Topbar,
-  Popup
+  Popup,
+  Service
 }

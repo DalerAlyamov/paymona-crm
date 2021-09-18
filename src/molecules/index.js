@@ -7,6 +7,7 @@ import TableRow from './TableRow'
 import TopbarUserPanel from './TopbarUserPanel'
 import TopbarUserPanelMenu from './TopbarUserPanelMenu'
 import PopupPanel from './PopupPanel'
+import ServiceLabel from './ServiceLabel'
 
 export {
   AnimatedInput,
@@ -17,5 +18,6 @@ export {
   TableRow,
   TopbarUserPanel,
   TopbarUserPanelMenu,
-  PopupPanel
+  PopupPanel,
+  ServiceLabel
 }
