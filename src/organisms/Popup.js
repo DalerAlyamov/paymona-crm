@@ -1,7 +1,9 @@
 import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import styles from '../scss/organisms/Popup.module.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { PopupPanel } from '../molecules'
+import { closePopup } from '../redux/actions/popupActions'
 
 const Popup = ({
   className
@@ -58,9 +60,9 @@ const Popup = ({
         />
 
         <div className={styles.panel} ref={panelRef}>
-          <Panel minHeight={popup.minHeight} minWidth={popup.minWidth}>
+          <PopupPanel minHeight={popup.minHeight} minWidth={popup.minWidth}>
             {content}
-          </Panel>
+          </PopupPanel>
         </div>
       </div>
     )

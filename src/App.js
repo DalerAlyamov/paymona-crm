@@ -1,5 +1,5 @@
 import React from 'react'
-import { LoginPage, SideBar } from './organisms'
+import { LoginPage, Popup, SideBar } from './organisms'
 import { useSelector } from 'react-redux'
 import { Employees } from './routes'
 import { Route } from 'react-router-dom'
@@ -10,6 +10,7 @@ const App = () => {
 
   return (
     <>
+      <Popup />
       <LoginPage />
       {user.status !== 'logouted' &&
         <div className='App'>

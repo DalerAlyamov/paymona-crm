@@ -21,7 +21,7 @@
   border: 1px solid $light-5;
 
   path {
-    color: $dark-5;
+    color: $light-1;
     transition: 100ms ease-out;
   }
   
@@ -29,7 +29,7 @@
     background: $light-2;
     
     path {
-      color: $dark-1;
+      color: $dark-4;
     }
   }
   &:active {

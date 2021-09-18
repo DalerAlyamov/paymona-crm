@@ -1,4 +1,4 @@
-import { OPEN_POPUP, CLOSE_POPUP } from '../types/popupTypes'
+import { OPEN_POPUP, CLOSE_POPUP } from '../types'
 
 const popupReducer = (state = { active: false, content: null, minWidth: 0, minHeight: 0 }, action) => {
   switch(action.type) {

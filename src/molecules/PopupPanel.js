@@ -1,9 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
 import styles from '../scss/molecules/PopupPanel.module.scss'
-import { Close } from '../../'
+import { CloseSingle } from '../icons'
 import { useDispatch } from 'react-redux'
-import { closePopup } from '../../../redux/actions/popupActions'
+import { closePopup } from '../redux/actions/popupActions'
 
 const PopupPanel = ({
   minWidth,
@@ -23,7 +23,7 @@ const PopupPanel = ({
       style={{ minWidth, minHeight }}
     >
       <button className={styles.close} onClick={() => dispatch(closePopup())}>
-        <Close size={20} />
+        <CloseSingle size={20} />
       </button>
 
       {children}

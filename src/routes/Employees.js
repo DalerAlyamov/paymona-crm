@@ -5,6 +5,8 @@ import { Table, Topbar } from '../organisms'
 import { TableTools, TableRow } from '../molecules'
 import { Button, TableColumn } from '../atoms'
 import { TableHeaders } from '../molecules'
+import { useDispatch } from 'react-redux'
+import { openPopup } from '../redux/actions/popupActions'
 
 const Employees = ({
   className=''
@@ -14,6 +16,11 @@ const Employees = ({
   /* Variables */
 
   const template = ['1fr', '1fr', '1fr', '1fr']
+  
+
+  /* Redux Hooks */
+
+  const dispatch = useDispatch()
 
   
   /* States */
@@ -87,7 +94,7 @@ const Employees = ({
           setFilterList={setFilterList}
           setSearchValue={setSearchValue}
         >
-          <Button type='outlined'>
+          <Button type='outlined' onClick={() => dispatch(openPopup('Создать сотрудника'))}>
             Добавить сотрудника
           </Button>
         </TableTools>
