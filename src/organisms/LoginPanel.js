@@ -167,9 +167,7 @@ const LoginPanel = ({
         setResendCodeTimeout('')
         setNewPassword('')
         setConfirmPassword('')
-        setTimeout(() => {
-          setEmailChecking(false)
-        }, 1500)
+        setEmailChecking(false)
       })
       .catch(error => {
         if(error.response.status === 404)
