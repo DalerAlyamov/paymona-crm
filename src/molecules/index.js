@@ -8,6 +8,7 @@ import TopbarUserPanel from './TopbarUserPanel'
 import TopbarUserPanelMenu from './TopbarUserPanelMenu'
 import PopupPanel from './PopupPanel'
 import ServiceLabel from './ServiceLabel'
+import DropdownInput from './DropdownInput'
 
 export {
   AnimatedInput,
@@ -19,5 +20,6 @@ export {
   TopbarUserPanel,
   TopbarUserPanelMenu,
   PopupPanel,
-  ServiceLabel
+  ServiceLabel,
+  DropdownInput
 }

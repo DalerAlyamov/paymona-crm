@@ -14,6 +14,8 @@ import TableSearch from './TableSearch'
 import TableRowMenu from './TableRowMenu' 
 import TopbarUserPanelLabel from './TopbarUserPanelLabel' 
 import TopbarUserAvatar from './TopbarUserAvatar' 
+import DropdownInputLabel from './DropdownInputLabel' 
+import DropdownInputMenu from './DropdownInputMenu' 
 
 export {
   LoginLeftSide,
@@ -31,5 +33,7 @@ export {
   TableSearch,
   TableRowMenu,
   TopbarUserPanelLabel,
-  TopbarUserAvatar
+  TopbarUserAvatar,
+  DropdownInputLabel,
+  DropdownInputMenu
 }
