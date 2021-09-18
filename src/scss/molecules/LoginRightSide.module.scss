@@ -1,6 +1,7 @@
 @import '../root.scss';
 
 .root {
+  @include shadow-1;
   position: relative;
   width: 50%;
   height: 100%;
@@ -10,6 +11,7 @@
 }
 
 .logo {
+  @include shadow-1;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);

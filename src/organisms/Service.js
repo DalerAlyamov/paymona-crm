@@ -9,7 +9,8 @@ const Service = ({
   className='',
   title='',
   headers=[],
-  clientList=[]
+  clientList=[],
+  initialOpenState=false
 }) => {
 
   
@@ -17,7 +18,7 @@ const Service = ({
 
   const template = ['1fr', '1fr', '1fr']
 
-  const [open, setOpen] = useState()
+  const [open, setOpen] = useState(initialOpenState)
 
   return (
     <div className={classNames(className, styles.root, open && styles.open)}>

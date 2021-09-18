@@ -46,6 +46,7 @@ const Services = ({
 
         <Wrap flex column gap={42}>
           <Service 
+            initialOpenState={true}
             title='Paymona Polls'
             headers={['Клиент', 'Кол-во сотрудников', 'Дата подключения']} 
             clientList={[
@@ -67,6 +68,7 @@ const Services = ({
             ]} 
           />
           <Service 
+            initialOpenState={true}
             title='Paymona Offices'
             headers={['Клиент', 'Кол-во сотрудников', 'Дата подключения']} 
             clientList={[
