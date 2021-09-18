@@ -1,5 +1,4 @@
 import React from 'react'
-import classNames from 'classnames'
 import { LoginPage, Popup, SideBar } from './organisms'
 import { useSelector } from 'react-redux'
 import { Employees } from './routes'
@@ -11,11 +10,6 @@ const App = () => {
 
   return (
     <>
-      {/* <LoginPage isLogged={!user} /> */}
-      <div className={classNames('App', user==='logouted' && 'App--close')}>
-        <SideBar/>
-        <Emplyee/>
-      </div>
       <Popup />
       <LoginPage />
       {user.status !== 'logouted' &&
