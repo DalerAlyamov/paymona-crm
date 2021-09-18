@@ -12,9 +12,6 @@ const PopupAddEmployee = ({
   
 
   /* States */
-
-  // selected user type
-  const [selectedUserType, setSelectedUserType] = useState('Employer')
   
   // name
   const [name__inputValue, setName__inputValue] = useState('')
@@ -22,7 +19,7 @@ const PopupAddEmployee = ({
   // lastName
   const [lastName__inputValue, setLastName__inputValue] = useState('')
   const [lastName__inputFocusing, setLastName__inputFocusing] = useState(false)
-
+  
   // mail
   const [mail__inputValue, setMail__inputValue] = useState('') 
   const [mail__inputFocusing, setMail__inputFocusing] = useState(false)
@@ -30,10 +27,14 @@ const PopupAddEmployee = ({
   // department
   const [department__inputValue, setDepartment__inputValue] = useState('') 
   const [department__inputFocusing, setDepartment__inputFocusing] = useState(false)
-
+  
   // position
   const [position__inputValue, setPosition__inputValue] = useState('') 
   const [position__inputFocusing, setPosition__inputFocusing] = useState(false)
+
+  // dropdown
+  const [userType__selected, setUserType__selected] = useState('Employer')
+  const [userType__initialFocusing, setUserType__initialFocusing] = useState(false)
   
 
   /* Render */
@@ -115,16 +116,25 @@ const PopupAddEmployee = ({
             value={position__inputValue}
             setValue={setPosition__inputValue} 
             initialFocusing={position__inputFocusing}
+            onKeyPress={e => {
+              if (e.code === 'Enter')
+                setUserType__initialFocusing(true)
+            }}
             onBlur={() => setPosition__inputFocusing(false)}
           />
         </Wrap>
 
         <DropdownInput
           id='1'
-          text={`Выберите тип прав (${selectedUserType})`}
+          text={`Выберите тип прав (${userType__selected})`}
+          initialOpening={userType__initialFocusing}
+          onClose={() => setUserType__initialFocusing(false)}
           autoWidth
         >
-          <Menu onClick={type => setSelectedUserType(type)} selectedType={selectedUserType} />
+          <Menu 
+            onClick={type => setUserType__selected(type)}
+            selectedType={userType__selected} 
+          />
         </DropdownInput>
 
       </div>

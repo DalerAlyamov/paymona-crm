@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 import { DropdownInputLabel, DropdownInputMenu } from '../atoms'
+import { Wrap } from '../organisms'
 import styles from '../scss/molecules/DropdownInput.module.scss'
 
 const DropdownInput = ({
@@ -23,20 +24,19 @@ const DropdownInput = ({
   }, [initialOpening])
 
   useEffect(() => {
-    if (open)
-      onOpen()
-    else
-      onClose()
-  }, [open, onOpen, onClose])
-
-  useEffect(() => {
     const handleWindowClick = e => {
-      if (!e.target.closest('#DropdownInput-'+id))
+      if (e.target.closest('.'+styles.wrap)) {
         setOpen(false)
+        onClose()
+      }
+      else if (!e.target.closest('#DropdownInput-'+id)) {
+        setOpen(false)
+        onClose()
+      }
     }
     window.addEventListener('click', handleWindowClick)
     return () => window.removeEventListener('click', handleWindowClick)
-  }, [id])
+  }, [id, onClose])
 
   return (
     <div
@@ -47,6 +47,10 @@ const DropdownInput = ({
 
       <DropdownInputLabel 
         onClick={() => {
+          if (open)
+            onClose()
+          else
+            onOpen()
           setOpen(!open)
           onClick={onClick}
         }} 
@@ -57,7 +61,9 @@ const DropdownInput = ({
 
       {open &&
         <DropdownInputMenu>
-          {children}
+          <Wrap className={styles.wrap}>
+            {children}
+          </Wrap>
         </DropdownInputMenu>
       }
 
