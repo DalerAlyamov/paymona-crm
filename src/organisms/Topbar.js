@@ -24,7 +24,7 @@ const Topbar = ({
                 index === titleList.length-1 && styles.link__disabled
               )}
             >
-              <Link to={item.link}>
+              <Link to={item.link} draggable={false}>
                 {item.text}
               </Link>
             </Button>
