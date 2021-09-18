@@ -57,7 +57,7 @@ const LoginPanel = ({
       url: 'login/',
       method: 'post',
       data: JSON.stringify({
-        email: email__inputValue,
+        email: email__inputValue.replace('@paymona.com', '')+'@paymona.com',
         password: password__inputValue
       })
     } 
@@ -66,7 +66,7 @@ const LoginPanel = ({
       .then(res => res.data)
       .then(res => {
         const user = {
-          email: email__inputValue,
+          email: email__inputValue.replace('@paymona.com', '')+'@paymona.com',
           password: password__inputValue,
           token: res.access_token
         }
@@ -97,7 +97,7 @@ const LoginPanel = ({
       url: 'login/forgot/',
       method: 'post',
       data: JSON.stringify({
-        email: email__inputValue
+        email: email__inputValue.replace('@paymona.com', '')+'@paymona.com'
       })
     } 
 
@@ -124,7 +124,7 @@ const LoginPanel = ({
       method: 'post',
       data: JSON.stringify({
         code: code__inputValue,
-        email: email__inputValue
+        email: email__inputValue.replace('@paymona.com', '')+'@paymona.com'
       })
     } 
 
@@ -156,7 +156,7 @@ const LoginPanel = ({
       method: 'post',
       data: JSON.stringify({
         code: code__inputValue,
-        email: email__inputValue,
+        email: email__inputValue.replace('@paymona.com', '')+'@paymona.com',
         password: newPassword
       })
     } 
@@ -167,9 +167,7 @@ const LoginPanel = ({
         setResendCodeTimeout('')
         setNewPassword('')
         setConfirmPassword('')
-        setTimeout(() => {
-          setEmailChecking(false)
-        }, 1500)
+        setEmailChecking(false)
       })
       .catch(error => {
         if(error.response.status === 404)
@@ -223,6 +221,7 @@ const LoginPanel = ({
           value={email__inputValue} 
           setValue={setEmail__inputValue}
           initialFocusing={true}
+          suffix='@paymona.com'
           onKeyPress={e => {
             if (e.code === 'Enter')
               if (page === 'forget_password')
