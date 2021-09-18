@@ -6,6 +6,7 @@ import TableHeaders from './TableHeaders'
 import TableRow from './TableRow'
 import TopbarUserPanel from './TopbarUserPanel'
 import TopbarUserPanelMenu from './TopbarUserPanelMenu'
+import PopupPanel from './PopupPanel'
 
 export {
   AnimatedInput,
@@ -15,5 +16,6 @@ export {
   TableHeaders,
   TableRow,
   TopbarUserPanel,
-  TopbarUserPanelMenu
+  TopbarUserPanelMenu,
+  PopupPanel
 }

@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
 import userReducer from './userReducer'
+import popupReducer from './popupReducer'
 
 const middleware = [thunk]
 
@@ -28,7 +29,8 @@ const loadFromLocalStorage = () => {
 }
 
 const allReducers = combineReducers({
-  user: userReducer
+  user: userReducer,
+  popup: popupReducer
 })
 
 const presistedState = loadFromLocalStorage()

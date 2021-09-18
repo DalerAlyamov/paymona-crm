@@ -4,6 +4,7 @@ import SideBar from './SideBar'
 import Table from './Table' 
 import Wrap from './Wrap' 
 import Topbar from './Topbar' 
+import Popup from './Popup' 
 
 export {
   LoginPage,
@@ -11,5 +12,6 @@ export {
   SideBar,
   Table,
   Wrap,
-  Topbar
+  Topbar,
+  Popup
 }

@@ -1,0 +1,38 @@
+@import '../root.scss';
+
+.root {
+  position: relative;
+  background: $light-5;
+  z-index: 2000;
+  border-radius: 12px;
+}
+
+.close {
+  position: absolute;
+  right: 13px;
+  top: 9px;
+  padding: 6px;
+  border-radius: 50%;
+  background: $light-3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 150ms linear;
+  border: 1px solid $light-5;
+
+  path {
+    color: $dark-5;
+    transition: 100ms ease-out;
+  }
+  
+  &:hover {
+    background: $light-2;
+    
+    path {
+      color: $dark-1;
+    }
+  }
+  &:active {
+    border-color: $light-1;
+  }
+}
