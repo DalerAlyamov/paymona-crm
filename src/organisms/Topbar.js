@@ -4,23 +4,36 @@ import styles from '../scss/organisms/Topbar.module.scss'
 import { TopbarUserPanel } from '../molecules'
 import { ArrowHadSmallRight } from '../icons' 
 import { Wrap } from '.'
+import { Button } from '../atoms'
+import { Link } from 'react-router-dom'
 
 const Topbar = ({
   className='',
-  title=[]
+  titleList=[]
 }) => {
   return (
     <div className={classNames(className, styles.root)}>
-        {title.map(item => 
-          <Wrap gap={8} flex alignCenter>
-            <span className={styles.title}>
-              {item}
-            </span>
+      <Wrap flex alignCenter>
+        {titleList.map((item, index) =>
+          <React.Fragment key={index}>
+            <Button 
+              small 
+              type='text' 
+              className={classNames(
+                styles.link, 
+                index === titleList.length-1 && styles.link__disabled
+              )}
+            >
+              <Link to={item.link}>
+                {item.text}
+              </Link>
+            </Button>
             <span className={styles.arrow}>
-              <ArrowHadSmallRight size={20} />
+              <ArrowHadSmallRight />
             </span>
-          </Wrap>
+          </React.Fragment> 
         )}
+      </Wrap>
       <TopbarUserPanel />
     </div>
   )
