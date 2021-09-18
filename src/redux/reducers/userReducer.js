@@ -1,11 +1,11 @@
 import { LOGIN, LOGOUT } from '../types'
 
-const userReducer = (state = null, action) => {
+const userReducer = (state = {status: 'logouted'}, action) => {
   switch(action.type) {
     case LOGIN: 
       return action.data.user
     case LOGOUT: 
-      return null
+      return {status: 'logouted'}
     default: 
       return state
   }

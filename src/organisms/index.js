@@ -1,9 +1,17 @@
 import LoginPage from './LoginPage' 
-import LoginRightSide from './LoginRightSide' 
 import LoginPanel from './LoginPanel' 
+import SideBar from './SideBar' 
+import Table from './Table' 
+import Wrap from './Wrap' 
+import Topbar from './Topbar' 
+import Popup from './Popup' 
 
 export {
   LoginPage,
-  LoginRightSide,
-  LoginPanel
+  LoginPanel,
+  SideBar,
+  Table,
+  Wrap,
+  Topbar,
+  Popup
 }

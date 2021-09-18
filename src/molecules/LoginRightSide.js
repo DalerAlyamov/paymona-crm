@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
-import styles from '../scss/organisms/LoginRightSide.module.scss'
+import styles from '../scss/molecules/LoginRightSide.module.scss'
 import { ColoredLogo } from '../atoms'
-import { LoginPanel } from './'
+import { LoginPanel } from '../organisms'
 
 const LoginRightSide = ({
   className='',
   status='close'
 }) => {
 
-  const [logoSize, setLogoSize] = useState(window.innerWidth / 12.8)
-  const [logoPadding, setLogoPadding] = useState(window.innerWidth / 38.4)
+  const [logoSize, setLogoSize] = useState(window.innerHeight / 6.46)
+  const [logoPadding, setLogoPadding] = useState(window.innerHeight / 19.38)
 
   useEffect(() => {
 
     const handleWindowResize = () => {
-      setLogoSize(window.innerWidth / 12.8)
-      setLogoPadding(window.innerWidth / 38.4)
+      setLogoSize(window.innerHeight / 6.46)
+      setLogoPadding(window.innerHeight / 19.38)
     }
     
     window.addEventListener('resize', handleWindowResize)
@@ -26,7 +26,13 @@ const LoginRightSide = ({
   }, [])
 
   return (
-    <div className={classNames(className, styles.root)}>
+    <div 
+      className={classNames(
+        className, 
+        styles.root,
+        styles[status] 
+      )}
+    >
 
       <ColoredLogo 
         hasWhiteBackground 
@@ -36,7 +42,7 @@ const LoginRightSide = ({
         className={styles.logo}
       />
 
-      <LoginPanel title='Вход' />
+      <LoginPanel />
 
     </div>
   )

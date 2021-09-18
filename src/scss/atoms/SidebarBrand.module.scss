@@ -1,0 +1,20 @@
+@import '../root.scss';
+
+.root {
+  @include header-2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 10px;
+  height: 54px;
+  margin: 0 8px;
+  color: $light-5;
+  border-bottom: 1px solid $dark-3;
+}
+
+.logo {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;  
+  justify-content: center;
+}

@@ -1,8 +1,10 @@
 import React from 'react'
-import SideBar from '../src/organisms/SideBar'
 import classNames from 'classnames'
+import { LoginPage, Popup, SideBar } from './organisms'
 import { useSelector } from 'react-redux'
-import Emplyee from './routes/Emplyee'
+import { Employees } from './routes'
+import { Route } from 'react-router-dom'
+ 
 const App = () => {
 
   const user = useSelector(state => state.user)
@@ -14,6 +16,14 @@ const App = () => {
         <SideBar/>
         <Emplyee/>
       </div>
+      <Popup />
+      <LoginPage />
+      {user.status !== 'logouted' &&
+        <div className='App'>
+          <SideBar />
+          <Route path='/employees' component={Employees} />
+        </div>
+      }
     </>
   )
 }

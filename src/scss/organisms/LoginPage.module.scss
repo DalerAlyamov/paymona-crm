@@ -7,4 +7,9 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  z-index: 100000;
+}
+
+.unclickable {
+  pointer-events: none;
 }

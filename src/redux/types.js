@@ -16,3 +16,15 @@ export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 
 /*=====  End of User  ======*/
+
+
+
+/*=============================================
+=                    Popup                    =
+=============================================*/
+
+export const CLOSE_POPUP = 'CLOSE_POPUP'
+export const OPEN_POPUP = 'OPEN_POPUP'
+
+/*=====  End of User  ======*/
+

@@ -1,21 +1,84 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/organisms/LoginPage.module.scss'
 import { LoginLeftSide } from '../atoms'
-import { LoginRightSide } from './'
+import { LoginRightSide } from '../molecules'
+import { useDispatch, useSelector } from 'react-redux'
+import { login, logout } from '../redux/actions/userActions'
 
 const LoginPage = ({
-  className='',
-  isLogged=false
+  className=''
 }) => {
 
+  const dispatch = useDispatch()
+  const logout_timer = 1800000 // 30 min
+
+  const user = useSelector(state => state.user)
+
+  const [status, setStatus] = useState('default')
+
+  useEffect(() => {
+    let timer
+
+    const timerFunc = () => {
+      timer = window.setTimeout(() => {
+        if (user.status === 'logined') {
+          dispatch(login({ ...user, status: 'logouting' }))
+          window.setTimeout(() => {
+            if (user.status === 'logouting')
+              dispatch(logout())
+          }, 1200)
+        }
+      }, logout_timer)
+    }
+
+    if (user.status === 'logined')
+      timerFunc()
+
+    window.addEventListener('click', () => {
+      clearTimeout(timer)
+      timerFunc()
+    })
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('click', () => {
+        clearTimeout(timer)
+        timerFunc()
+      })
+    }
+  }, [user, dispatch])
+
+  useEffect(() => {
+
+    const handleWindowBeforeunload = () => {
+      if(user.status === 'logining' || user.status === 'logouting') 
+        dispatch(logout())
+    }
+
+    window.addEventListener('beforeunload', handleWindowBeforeunload)
+
+    return () => window.removeEventListener('beforeunload', handleWindowBeforeunload)
+  }, [user, dispatch])
+
+  useEffect(() => {
+    if (user.status === 'logouting')
+      return setStatus('closing')
+    if (user.status === 'logining')
+      return setStatus('opening')
+    if (user.status === 'logouted')
+      return setStatus('close')
+    if (user.status === 'logined')
+      return setStatus('open')
+  }, [user])
+
   return (
-    <div className={classNames(className, styles.root)}>
+    <div className={classNames(className, styles.root, user.status === 'logined' && styles.unclickable)}>
 
-      <LoginLeftSide status={isLogged ? 'open' : 'close' } />
+      <LoginLeftSide status={status} />
 
-      <LoginRightSide status={isLogged ? 'open' : 'close' } />
-      
+      <LoginRightSide status={status} />
+
     </div>
   )
 }

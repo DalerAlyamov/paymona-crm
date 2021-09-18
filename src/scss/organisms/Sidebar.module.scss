@@ -1,24 +1,31 @@
-@import '../foundation/all';
+@import '../root.scss';
 
-.root{
-  display: flex;
-  flex-direction: column;
+.root {
   background: $dark-1;
   height: 100vh;
-}
-
-.items{
-  margin-right: 8px;
-}
-
-.menu{
-  height: 100%;
+  min-width: 290px;
   display: flex;
-  align-items: flex-end;
-  margin: 0 0 20px 20px;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-x: hidden;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: $dark-1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $dark-5;
+    border-radius: 8px;
+  }
 }
 
-.sideBarMini{
+.close {
+  min-width: 68px;
   width: 68px;
-  height: 100vh;
 }

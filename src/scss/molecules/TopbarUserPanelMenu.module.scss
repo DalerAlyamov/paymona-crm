@@ -1,0 +1,39 @@
+@import '../root.scss';
+
+.root {
+  @include shadow-2;
+  padding: 24px 0;
+  position: absolute;
+  z-index: 100;
+  top: calc(100%);
+  right: 0;
+  min-width: 260px;
+  background: $light-5;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  opacity: 0;
+  animation: fadeIn 100ms ease-in forwards;
+}
+
+.email {
+  @include header-5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $dark-1;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(8px, -10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
