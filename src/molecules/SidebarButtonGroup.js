@@ -15,10 +15,10 @@ const SidebarButtonGroup = ({
   return (
     <div className={classNames(className, styles.root)}>
 
-      <Link to='/employee'>
+      <Link to='/employees'>
         <SidebarButton 
           beforeIcon={<PersonOutline />} 
-          active={location.pathname === '/employee'}
+          active={location.pathname === '/employees'}
         >
           {!removeText && 'Сотрудники'}
         </SidebarButton>

@@ -30,3 +30,7 @@ button, button * {
 svg {
   pointer-events: none;
 }
+
+body, html {
+  overflow-x: hidden;
+}

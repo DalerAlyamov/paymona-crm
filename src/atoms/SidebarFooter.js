@@ -10,8 +10,7 @@ const SidebarFooter = ({
 }) => {
   return (
     <div className={classNames(className, styles.root)}>
-      <SidebarButton onClick={onClick} beforeIcon={<Menu />}>
-      </SidebarButton>
+      <SidebarButton onClick={onClick} beforeIcon={<Menu />} />    
     </div>
   )
 }

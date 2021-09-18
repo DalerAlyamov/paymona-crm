@@ -12,10 +12,12 @@ const Wrap = ({
   justifyCenter=false,
   alignCenter=false,
   alignEnd=false,
-  column=false
+  column=false,
+  gap=0
 }) => {
   return (
     <div 
+      styles={{ gap: gap+'px' }}
       className={classNames(
         className, 
         styles.root,

@@ -1,16 +1,31 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/routes/Employees.module.scss'
-import { Table } from '../organisms'
-import { TableTools } from '../molecules'
-import { Button } from '../atoms'
+import { Table, Topbar } from '../organisms'
+import { TableTools, TableRow } from '../molecules'
+import { Button, TableColumn } from '../atoms'
+import { TableHeaders } from '../molecules'
+import { useDispatch } from 'react-redux'
+import { openPopup } from '../redux/actions/popupActions'
 
 const Employees = ({
-  className
+  className=''
 }) => {
 
+  
+  /* Variables */
 
+  const template = ['1fr', '1fr', '1fr', '1fr']
+  
+
+  /* Redux Hooks */
+
+  const dispatch = useDispatch()
+
+  
   /* States */
+
+  // const [data, setData] = useState(null)
 
   const [searchValue, setSearchValue] = useState('')
   const [sortList, setSortList] = useState([
@@ -47,10 +62,28 @@ const Employees = ({
     }
   ])
 
+  
+  /* UseEffects */
+
+  // useEffect(() => {
+  //   const config = {
+  //     url: '',
+  //     method: 'get',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }
+  //   API(config)
+  //     .then(res => res.data)
+  //     .then(res => console.log(res))
+  // }, [])
+
   return (
     <div className={classNames(className, styles.root)}>
+
+      <Topbar title='Сотрудники' />
       
-      <Table>
+      <Table className={styles.table}>
         
         <TableTools 
           hasFilter
@@ -61,14 +94,55 @@ const Employees = ({
           setFilterList={setFilterList}
           setSearchValue={setSearchValue}
         >
-          <Button type='outlined'>
+          <Button type='outlined' onClick={() => dispatch(openPopup('Создать сотрудника'))}>
             Добавить сотрудника
           </Button>
         </TableTools>
 
+        <TableHeaders template={template}>
+          {['Отображаемое имя', 'Должность', 'Отдел', 'Последнее посещение'].map(col => 
+            <TableColumn key={col}>
+              {col}
+            </TableColumn>  
+          )}
+        </TableHeaders>
+
+        <TableRow 
+          honest
+          template={template} 
+          id={1} 
+          menu={<Menu />}
+        >
+          <TableColumn>
+            Далер
+          </TableColumn>
+          <TableColumn>
+            Webdev
+          </TableColumn>
+          <TableColumn>
+            Frontend
+          </TableColumn>
+          <TableColumn>
+            19/11/2020
+          </TableColumn>
+        </TableRow>
+
       </Table>
 
     </div>
+  )
+}
+
+const Menu = () => {
+  return (
+    <>
+      <button>
+        Редактировать
+      </button>
+      <button>
+        Удалить
+      </button>
+    </>
   )
 }
 

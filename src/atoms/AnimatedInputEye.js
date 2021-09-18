@@ -10,7 +10,7 @@ const AnimatedInputEye = ({
 }) => {
 
   return (
-    <button
+    <span
       className={classNames(
         className,
         styles.root
@@ -18,7 +18,7 @@ const AnimatedInputEye = ({
       onClick={onClick}
     >
       {visibility ? <VisibilityOff /> : <Visibility />}
-    </button>
+    </span>
   )
 }
 

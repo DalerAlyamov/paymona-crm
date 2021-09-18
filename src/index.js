@@ -7,7 +7,7 @@ import './scss/global.scss'
 import { MemoryRouter  } from 'react-router-dom'
 
 ReactDOM.render(
-  <MemoryRouter initialEntries={['/employee']}>
+  <MemoryRouter initialEntries={['/employees']}>
     <Provider store={store}>
       <App />
     </Provider>

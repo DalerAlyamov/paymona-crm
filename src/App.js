@@ -1,8 +1,8 @@
 import React from 'react'
-import classNames from 'classnames'
-import { LoginPage, SideBar } from './organisms'
+import { LoginPage, Popup, SideBar } from './organisms'
 import { useSelector } from 'react-redux'
 import { Employees } from './routes'
+import { Route } from 'react-router-dom'
  
 const App = () => {
 
@@ -10,11 +10,14 @@ const App = () => {
 
   return (
     <>
+      <Popup />
       <LoginPage />
-      <div className={classNames('App', user.status === 'logouted' && 'App--close')}>
-        <SideBar />
-        <Employees />
-      </div>
+      {user.status !== 'logouted' &&
+        <div className='App'>
+          <SideBar />
+          <Route path='/employees' component={Employees} />
+        </div>
+      }
     </>
   )
 }

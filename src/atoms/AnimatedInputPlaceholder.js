@@ -5,14 +5,16 @@ import styles from '../scss/atoms/AnimatedInputPlaceholder.module.scss'
 const AnimatedInputPlaceholder = ({
   className='',
   children=<></>,
-  active=false
+  active=false,
+  error=false
 }) => {
   return (
     <span
       className={classNames(
         className, 
         styles.root,
-        active && styles.root_active
+        active && styles.root_active,
+        error && styles.error
       )}
     >
       {children}
