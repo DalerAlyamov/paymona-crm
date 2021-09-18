@@ -4,13 +4,22 @@ import styles from '../scss/atoms/DropdownInputLabel.module.scss'
 
 const DropdownInputLabel = ({
   className='',
-  children=<></>
+  active=false,
+  children=<></>,
+  onClick=()=>{}
 }) => {
 
   return (
-    <div className={classNames(className, styles.root)}>
+    <button
+      onClick={onClick} 
+      className={classNames(
+        className, 
+        styles.root,
+        active && styles.active 
+      )}
+    >
       {children}
-    </div>
+    </button>
   )
 }
 

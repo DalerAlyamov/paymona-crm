@@ -1,5 +1,19 @@
 @import '../root.scss';
 
 .root {
-  
+  @include header-5;
+  padding: 12px 16px;
+  border: 1px solid $light-1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $light-1;
+  width: 100%;
+  transition: 100ms linear;
+}
+
+.active {
+  border-color: $primary-1;
+  color: $primary-1;
 }

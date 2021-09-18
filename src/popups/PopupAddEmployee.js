@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
 import styles from '../scss/popups/PopupAddEmployee.module.scss'
-import { AnimatedInput } from '../molecules'
+import { AnimatedInput, DropdownInput } from '../molecules'
 import { Wrap } from '../organisms'
+import classNames from 'classnames'
+import { Dot } from '../icons'
 
 const PopupAddEmployee = ({
-  title
+  title,
+  className
 }) => {
   
 
   /* States */
+
+  // selected user type
+  const [selectedUserType, setSelectedUserType] = useState('Employer')
   
   // name
   const [name__inputValue, setName__inputValue] = useState('')
@@ -25,15 +31,15 @@ const PopupAddEmployee = ({
   const [department__inputValue, setDepartment__inputValue] = useState('') 
   const [department__inputFocusing, setDepartment__inputFocusing] = useState(false)
 
-  
   // position
   const [position__inputValue, setPosition__inputValue] = useState('') 
   const [position__inputFocusing, setPosition__inputFocusing] = useState(false)
   
+
   /* Render */
   
   return (
-    <div className={styles.root}>
+    <div className={classNames(className, styles.root)}>
       <span className={styles.title}>
         {title}
       </span>
@@ -113,13 +119,62 @@ const PopupAddEmployee = ({
           />
         </Wrap>
 
-        <AnimatedInput
-          placeholder='Выберите тип прав' 
+        <DropdownInput
+          id='1'
+          text={`Выберите тип прав (${selectedUserType})`}
           autoWidth
-        />
+        >
+          <Menu onClick={type => setSelectedUserType(type)} selectedType={selectedUserType} />
+        </DropdownInput>
 
       </div>
     </div>
+  )
+}
+
+const Menu = ({
+  onClick=()=>{},
+  selectedType=()=>{}
+}) => {
+
+  const dotSize = 14
+
+  return (
+    <>
+      <button 
+        className={classNames(styles.dropdown_menu_item, selectedType === 'Sales' && styles.dropdown_menu_item__active)} 
+        onClick={() => onClick('Sales')}
+      >
+        {selectedType === 'Sales' &&
+          <div className={styles.dropdown_menu_item__dot}>
+            <Dot size={dotSize} />
+          </div>
+        }
+        Sales
+      </button>
+      <button 
+        className={classNames(styles.dropdown_menu_item, selectedType === 'Teamlead' && styles.dropdown_menu_item__active)} 
+        onClick={() => onClick('Teamlead')}
+      >
+        {selectedType === 'Teamlead' &&
+          <div className={styles.dropdown_menu_item__dot}>
+            <Dot size={dotSize} />
+          </div>
+        }
+        Teamlead
+      </button>
+      <button 
+        className={classNames(styles.dropdown_menu_item, selectedType === 'Employer' && styles.dropdown_menu_item__active)} 
+        onClick={() => onClick('Employer')}
+      >
+        {selectedType === 'Employer' &&
+          <div className={styles.dropdown_menu_item__dot}>
+            <Dot size={dotSize} />
+          </div>
+        }
+        Employer
+      </button>
+    </>
   )
 }
 

@@ -29,13 +29,13 @@
   background: $light-5;
   min-width: 150px;
 
-  a, span, button {
+  a, span, li, button {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    justify-content: flex-start;
     padding: 11px 8px;
     width: 100%;
-    display: inline-block;
     transition: 150ms linear;
     text-align: left;
     border-radius: 8px;

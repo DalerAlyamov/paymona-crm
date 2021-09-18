@@ -12,7 +12,10 @@ const Dot = ({
   size=24
 }) => ( 
   <Svg viewBox='0 0 24 24' className={className} size={size} fill='currentColor'>   
-    <circle cx={size/2} cy={size/2} r={size/4} fill="currentColor"/>
+    <path 
+      d="M18 12C18 8.68629 15.3137 6 12 6C10.4189 6 9 6.59352 7.90888 7.61103C6.74155 8.69962 6 10.2674 6 12C6 15.3137 8.68629 18 12 18C15.3137 18 18 15.3137 18 12Z" 
+      fill="currentColor"
+    />
   </Svg>
 )
 
