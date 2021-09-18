@@ -81,7 +81,18 @@ const Employees = ({
   return (
     <div className={classNames(className, styles.root)}>
 
-      <Topbar title='Сотрудники' />
+      <Topbar 
+        titleList={[
+          {
+            text: 'Дом',
+            link: '/home'
+          },
+          {
+            text: 'Сотрудники',
+            link: '/employees'
+          }
+        ]} 
+      />
       
       <Table className={styles.table}>
         

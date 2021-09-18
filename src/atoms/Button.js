@@ -9,6 +9,7 @@ const Button = React.forwardRef(({
   active=false,
   beforeIcon=null,
   afterIcon=null,
+  small,
   type='contained',
   onClick=()=>{}
 }, ref) => {
@@ -25,7 +26,8 @@ const Button = React.forwardRef(({
         styles.root,
         styles[type],
         active && styles.active,
-        disabled && styles.disabled
+        disabled && styles.disabled,
+        small && styles.small
       )}
       onClick={handleClick}
     >

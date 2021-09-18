@@ -8,7 +8,22 @@
   justify-content: space-between;
 }
 
-.title {
-  @include header-3;
-  color: $dark-2;
+.link {
+  a {
+    @include header-3;
+    color: $light-1;
+  }
+}
+
+.link__disabled {
+  pointer-events: none;
+  a {
+    color: $dark-2;
+  }
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
