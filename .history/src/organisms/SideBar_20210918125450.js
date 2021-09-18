@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
-import styles from '../scss/organisms/Sidebar.module.scss'
+import styles from '../scss/organisms/SideBar.module.scss'
 import { SidebarBrand, SidebarFooter } from '../atoms'
 import { SidebarButtonGroup } from '../molecules'
 
