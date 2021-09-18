@@ -35,27 +35,19 @@ const PopupAddEmployee = ({
           <span className={styles.desc}>
            *Это будет логином пользователя
           </span>
-          </div>
-        <Wrap
+          <Wrap
           flex
           gap={30}
         >  
           <AnimatedInput
-            placeholder='Отдел' 
+            placeholder='' 
             width={240} 
           />
           <AnimatedInput
-            placeholder='Должность' 
+            placeholder='Фамилия' 
             width={240} 
           />
         </Wrap>
-
-        <div className={styles.bigBlock2}>
-          <AnimatedInput
-            placeholder='Выберите тип прав' 
-            width={520} 
-          />
-          
         </div>
 
       </div>

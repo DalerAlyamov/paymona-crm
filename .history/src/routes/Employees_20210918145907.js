@@ -106,7 +106,7 @@ const Employees = ({
           setSearchValue={setSearchValue}
         >
           <Button type='outlined' onClick={() => dispatch(openPopup(<PopupAddEmployee
-            title='Добавить сотрудника'
+            title=''
           />))}>
             Добавить сотрудника
           </Button>

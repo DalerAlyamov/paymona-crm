@@ -7,7 +7,7 @@ import { Button, TableColumn } from '../atoms'
 import { TableHeaders } from '../molecules'
 import { useDispatch } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
-import { PopupAddEmployee } from '../popup'
+import 
 const Employees = ({
   className=''
 }) => {
@@ -105,9 +105,7 @@ const Employees = ({
           setFilterList={setFilterList}
           setSearchValue={setSearchValue}
         >
-          <Button type='outlined' onClick={() => dispatch(openPopup(<PopupAddEmployee
-            title='Добавить сотрудника'
-          />))}>
+          <Button type='outlined' onClick={() => dispatch(openPopup(<PopupAddEmployee/>))}>
             Добавить сотрудника
           </Button>
         </TableTools>

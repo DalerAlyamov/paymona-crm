@@ -53,7 +53,7 @@ const PopupAddEmployee = ({
         <div className={styles.bigBlock2}>
           <AnimatedInput
             placeholder='Выберите тип прав' 
-            width={520} 
+            width={510} 
           />
           
         </div>

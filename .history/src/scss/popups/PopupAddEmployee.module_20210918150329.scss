@@ -1,0 +1,10 @@
+@import '../root.scss';
+
+.root{
+  
+}
+
+.title{
+  padding: 20px 0 0 10px;
+  @include header-3
+}

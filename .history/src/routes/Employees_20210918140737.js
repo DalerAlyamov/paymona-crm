@@ -105,9 +105,7 @@ const Employees = ({
           setFilterList={setFilterList}
           setSearchValue={setSearchValue}
         >
-          <Button type='outlined' onClick={() => dispatch(openPopup(<PopupAddEmployee
-            title='Добавить сотрудника'
-          />))}>
+          <Button type='outlined' onClick={() => dispatch(openPopup(<PopupAddEmployee/>))}>
             Добавить сотрудника
           </Button>
         </TableTools>

@@ -29,33 +29,8 @@ const PopupAddEmployee = ({
         <div className={styles.bigBlock}>
           <AnimatedInput
             placeholder='Электронная почта' 
-            width={510} 
-            suffix='@paymona.com'
-          />
-          <span className={styles.desc}>
-           *Это будет логином пользователя
-          </span>
-          </div>
-        <Wrap
-          flex
-          gap={30}
-        >  
-          <AnimatedInput
-            placeholder='Отдел' 
             width={240} 
           />
-          <AnimatedInput
-            placeholder='Должность' 
-            width={240} 
-          />
-        </Wrap>
-
-        <div className={styles.bigBlock2}>
-          <AnimatedInput
-            placeholder='Выберите тип прав' 
-            width={520} 
-          />
-          
         </div>
 
       </div>

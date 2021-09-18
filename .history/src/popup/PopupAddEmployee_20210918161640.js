@@ -50,10 +50,10 @@ const PopupAddEmployee = ({
           />
         </Wrap>
 
-        <div className={styles.bigBlock2}>
+        <div className={styles.bigBlock}>
           <AnimatedInput
-            placeholder='Выберите тип прав' 
-            width={520} 
+            placeholder='Электронная почта' 
+            width={510} 
           />
           
         </div>
