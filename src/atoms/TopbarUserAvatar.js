@@ -1,9 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
-import styles from '../scss/atoms/TopbarUserAwatar.module.scss'
+import styles from '../scss/atoms/TopbarUserAvatar.module.scss'
 import { Person } from '../icons'
 
-const TopbarUserAwatar = ({
+const TopbarUserAvatar = ({
   className=''
 }) => {
 
@@ -14,4 +14,4 @@ const TopbarUserAwatar = ({
   )
 }
 
-export default TopbarUserAwatar
+export default TopbarUserAvatar

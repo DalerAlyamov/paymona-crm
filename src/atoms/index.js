@@ -12,7 +12,7 @@ import TableFilter from './TableFilter'
 import TableSearch from './TableSearch' 
 import TableRowMenu from './TableRowMenu' 
 import TopbarUserPanelLabel from './TopbarUserPanelLabel' 
-import TopbarUserAwatar from './TopbarUserAwatar' 
+import TopbarUserAvatar from './TopbarUserAvatar' 
 
 export {
   LoginLeftSide,
@@ -29,5 +29,5 @@ export {
   TableSearch,
   TableRowMenu,
   TopbarUserPanelLabel,
-  TopbarUserAwatar
+  TopbarUserAvatar
 }

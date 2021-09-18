@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import styles from '../scss/molecules/TopbarUserPanelMenu.module.scss'
-import { Button, TopbarUserAwatar } from '../atoms'
+import { Button, TopbarUserAvatar } from '../atoms'
 import { Wrap } from '../organisms'
 import { useSelector } from 'react-redux'
 import { Exit } from '../icons'
@@ -18,7 +18,7 @@ const TopbarUserPanelMenu = ({
 
   return (
     <div className={classNames(className, styles.root)}>
-      <TopbarUserAwatar />
+      <TopbarUserAvatar />
 
       <Wrap>
         <div className={styles.email}>
