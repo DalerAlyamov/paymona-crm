@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/molecules/AnimatedInput.module.scss'
-import { AnimatedInputEye, AnimatedInputPlaceholder } from '../atoms'
+import { AnimatedInputEye, AnimatedInputPlaceholder, AnimatedInputSuffix } from '../atoms'
 
 const AnimatedInput = ({
   className='',
@@ -11,6 +11,7 @@ const AnimatedInput = ({
   autoWidth=false,
   value='',
   initialFocusing=false,
+  suffix='',
   isPassword,
   setValue = () => {},
   onFocus = () => {},
@@ -52,9 +53,10 @@ const AnimatedInput = ({
       className={classNames(
         className, 
         styles.root,
-        error && styles.error
+        error && styles.error,
+        (isFocus || value.trim()) && styles.active
       )}
-      style={{ width: autoWidth ? '100%' : 'auto' }}
+      style={{ width: autoWidth ? '100%' : width+'px' }}
     >
 
       <AnimatedInputPlaceholder active={isFocus || value.trim() !== ''} error={error}>
@@ -64,8 +66,7 @@ const AnimatedInput = ({
       <input
         ref={input}
         type={textVisibility ? 'text' : 'password'}
-        className={classNames(styles.input, (isFocus || value.trim()) && styles.input_active)}
-        style={{ width: autoWidth ? '100%' : width+'px' }}
+        className={styles.input}
         value={value}
         onChange={e => setValue(e.target.value)}
         onFocus={handleFocus}
@@ -78,6 +79,12 @@ const AnimatedInput = ({
           onClick={() => setTextVisibility(!textVisibility)}
           visibility={textVisibility}
         />
+      }
+
+      {suffix !== '' &&
+        <AnimatedInputSuffix>
+          {suffix}
+        </AnimatedInputSuffix>
       }
       
     </div>

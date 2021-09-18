@@ -3,6 +3,7 @@ import ColoredLogo from './ColoredLogo'
 import LoginTitle from './LoginTitle' 
 import AnimatedInputPlaceholder from './AnimatedInputPlaceholder' 
 import AnimatedInputEye from './AnimatedInputEye' 
+import AnimatedInputSuffix from './AnimatedInputSuffix' 
 import Button from './Button' 
 import SidebarButton from './SidebarButton' 
 import SidebarBrand from './SidebarBrand' 
@@ -20,6 +21,7 @@ export {
   LoginTitle,
   AnimatedInputPlaceholder,
   AnimatedInputEye,
+  AnimatedInputSuffix,
   Button,
   SidebarButton,
   SidebarBrand,

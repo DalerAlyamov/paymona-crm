@@ -8,6 +8,7 @@
   left: 16px;
   transition: 100ms ease-in-out;
   pointer-events: none;
+  z-index: 15;
 }
 
 .root_active {

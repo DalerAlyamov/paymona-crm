@@ -1,0 +1,14 @@
+@import '../root.scss';
+
+.root {
+  @include header-5;
+  padding: 12px;
+  background: $light-3;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: $dark-5;
+  z-index: 16;
+}
