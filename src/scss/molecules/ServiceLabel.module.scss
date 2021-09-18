@@ -12,6 +12,12 @@
   justify-content: space-between;
   color: $light-1;
   transition: 100ms linear;
+  &:hover {
+    color: $dark-5;
+  }
+  &:active {
+    color: $dark-4;
+  }
 }
 
 .edit_icon {
