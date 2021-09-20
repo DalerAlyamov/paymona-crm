@@ -82,6 +82,27 @@ const Employees = ({
   ]
 
 
+  /* Functions */
+
+  const handleDeleteEmplyeee = id => {
+    if (user.type !== 'superuser')
+      return dispatch(openPopup('Только superuser способен удалять пользователей'), 100)
+    if (id === user.id)
+      return dispatch(openPopup('Нельзя удалять самого себя!'), 100)
+
+    const config = {
+      url: 'employee/delete/'+id,
+      method: 'delete',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      }
+    }
+    API(config)
+      .then(res => res.data)
+      .then(data => setData(data))
+  }
+
+
   /* UseEffects */
 
   useEffect(() => {
@@ -130,6 +151,7 @@ const Employees = ({
           }
           rowPropsTemplate={['name', 'surname', 'position', 'department', 'type']}
           onEditRow={row_id => dispatch(openPopup(<PopupEditEmployee id={row_id} setData={setData} />))}
+          onDeleteRow={row_id => handleDeleteEmplyeee(row_id)}
         />
 
       </Table>
