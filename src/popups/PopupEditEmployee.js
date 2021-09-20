@@ -280,7 +280,7 @@ const PopupEditEmployee = ({
       </div>
 
       <FooterPanelInPopup
-        btn1='Добавить'
+        btn1='Сохранить'
         btn2='Отмена'
         onClick={() => handleEditEmployee('hello')}
       />    
