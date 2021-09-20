@@ -1,0 +1,64 @@
+@import '../root.scss';
+
+.root{
+  width: 558px;
+}
+
+.title{
+  width: 100%;
+  display: inline-block;
+  padding: 16px 24px;
+  border-bottom: 1px solid $light-3;
+  @include header-3;
+}
+
+.survey{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 24px;
+  gap: 24px;
+}
+
+.bigBlock2{
+  display: flex;
+  justify-content: space-between;
+}
+
+.desc{
+  @include header-7;
+  color: $light-1;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+.dropdown_menu_item {
+  @include header-5;
+  position: relative;
+  padding-left: 24px !important;
+  border: 1px dashed transparent;
+  &:focus {
+    border: 1px dashed $light-1;
+  }
+}
+
+.dropdown_menu_item__active {
+  color: $primary-1;
+  .dropdown_menu_item__dot {
+    color: $primary-1;
+  }  
+}
+
+.dropdown_menu_item__dot {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+}
+
+
+

@@ -8,7 +8,7 @@ import { Button } from '../atoms'
 import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
 import { PopupAddEmployee } from '../popups'
-
+import PopupEdit from '../popups/PopupEdit'
 const Employees = ({
   className=''
 }) => {
@@ -139,9 +139,16 @@ const Employees = ({
 }
 
 const Menu = () => {
+
+  const dispatch = useDispatch()
+
   return (
     <>
-      <button >
+      <button 
+        onClick={() => {
+        dispatch(openPopup(<PopupEdit/>))
+      }}
+      >
         Редактировать
       </button>
       <button>

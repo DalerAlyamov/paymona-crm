@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import styles from '../scss/popups/PopupAddEmployee.module.scss'
-import { AnimatedInput, DropdownInput } from '../molecules'
+import { AnimatedInput, DropDownInput } from '../molecules'
 import { Wrap } from '../organisms'
 import classNames from 'classnames'
 import { Dot } from '../icons'
+import FooterPanelInPopup from '../molecules/FooterPanelInPopup'
+import TopPanelInPopup from '../molecules/TopPanelInPopup'
 
 const PopupAddEmployee = ({
-  title,
   className
 }) => {
   
@@ -41,9 +42,11 @@ const PopupAddEmployee = ({
   
   return (
     <div className={classNames(className, styles.root)}>
-      <span className={styles.title}>
-        {title}
-      </span>
+
+        <TopPanelInPopup
+          title='Добавить сотрудника'
+        />
+
       <div className={styles.survey}>
 
         <Wrap
@@ -124,7 +127,7 @@ const PopupAddEmployee = ({
           />
         </Wrap>
 
-        <DropdownInput
+        <DropDownInput
           id='1'
           text={
             userType__selected !== '' ? 
@@ -140,9 +143,12 @@ const PopupAddEmployee = ({
             onClick={type => setUserType__selected(type)}
             selectedType={userType__selected} 
           />
-        </DropdownInput>
+        </DropDownInput>
 
       </div>
+
+        <FooterPanelInPopup/>    
+            
     </div>
   )
 }

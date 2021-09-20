@@ -4,14 +4,6 @@
   width: 558px;
 }
 
-.title{
-  width: 100%;
-  display: inline-block;
-  padding: 16px 24px;
-  border-bottom: 1px solid $light-3;
-  @include header-3;
-}
-
 .survey{
   display: flex;
   flex-direction: column;
@@ -54,3 +46,6 @@
   justify-content: center;
   transform: translateY(-50%);
 }
+
+
+
