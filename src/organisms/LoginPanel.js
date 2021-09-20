@@ -4,7 +4,7 @@ import styles from '../scss/organisms/LoginPanel.module.scss'
 import { LoginTitle, Button } from '../atoms'
 import { AnimatedInput } from '../molecules'
 import { Wrap } from '../organisms'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../redux/actions/userActions'
 import API from '../API/API'
 
@@ -38,6 +38,7 @@ const LoginPanel = ({
   /* Redux hooks */
 
   const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
 
 
   /* Refs */
@@ -155,14 +156,21 @@ const LoginPanel = ({
       return setEmailChecking(false)
     }
     
+    let data = {
+      email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com',
+      password: newPassword
+    }
+
+    if (code__inputValue)
+      data = {...data, code: code__inputValue}
+
+    if (user.token)
+      data = {...data, token: user.token}
+
     const config = {
       url: 'login/new_password/',
       method: 'post',
-      data: JSON.stringify({
-        code: code__inputValue,
-        email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com',
-        password: newPassword
-      })
+      data: JSON.stringify(data)
     } 
 
     API(config)
