@@ -4,7 +4,7 @@ import { AnimatedInput } from '../molecules'
 import FooterPanelInPopup from '../molecules/FooterPanelInPopup'
 import TopPanelInPopup from '../molecules/TopPanelInPopup'
 import { Wrap } from '../organisms'
-import styles from '../scss/popups/PopupEditEmployee.module.scss'
+import styles from '../scss/popups/PopupEdit.module.scss'
 const PopupEditEmployee = ({
   className
 }) => {
