@@ -11,7 +11,7 @@ const TopbarUserAvatar = ({
 
   return (
     <div className={classNames(className, styles.root)}> 
-      <img src={user.avatar} alt="" />
+      <img src={user.avatar} alt="" className={styles.img} />
     </div>
   )
 }

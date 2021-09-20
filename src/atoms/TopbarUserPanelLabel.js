@@ -20,7 +20,7 @@ const TopbarUserPanelLabel = ({
       )} 
       onClick={onClick}
     >
-      <img src={user.avatar} alt="" />
+      <img src={user.avatar} alt="" className={styles.img} />
     </button>
   )
 }
