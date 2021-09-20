@@ -1,1 +1,10 @@
 @import '../root.scss';
+
+.rowButton {
+  width: 100%;
+  cursor: pointer;
+}
+
+.rowButton__unclickable {
+  cursor: default !important;
+}

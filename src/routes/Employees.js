@@ -138,13 +138,14 @@ const Employees = ({
 
         <TableRowContainer
           hasFilter
+          hasRowMenu
           data={data}
           template={template}
           headers={['Имя', 'Фамилия', 'Должность', 'Отдел', 'Тип']}
           initialSortList={sortList}
           initialFilterList={filterList}
           toolsChildren={
-            <Button 
+            <Button
               type='outlined' 
               onClick={() => dispatch(openPopup(<PopupAddEmployee setData={setData} title='Добавить сотрудника'/>))}
             >

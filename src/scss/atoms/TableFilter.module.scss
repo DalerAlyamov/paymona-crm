@@ -37,6 +37,7 @@
   @include shadow-2;
   min-width: 250px;
   position: absolute;
+  right: 0;
   animation: fadeIn 150ms ease-in forwards;
   padding: 24px;
   background: $light-5;

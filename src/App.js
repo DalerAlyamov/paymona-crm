@@ -1,7 +1,7 @@
 import React from 'react'
 import { LoginPage, Popup, SideBar } from './organisms'
 import { useSelector } from 'react-redux'
-import { Employees, Services } from './routes'
+import { Employees, Services, Feedbacks } from './routes'
 import { Route } from 'react-router-dom'
 import styles from './scss/App.module.scss'
  
@@ -18,6 +18,7 @@ const App = () => {
           <SideBar />
           <Route path='/employees' component={Employees} />
           <Route path='/services' component={Services} />
+          <Route path='/feedbacks' component={Feedbacks} />
         </div>
       }
     </>

@@ -11,12 +11,15 @@ const TableRowContainer = ({
   template=['1fr'],
   headers=[],
   hasFilter=false,
+  hasRowMenu=false,
+  isRowClickable=false,
   initialSortList=[],
   initialFilterList=[],
   toolsChildren=<></>,
   rowPropsTemplate=<></>,
   onEditRow=()=>{},
-  onDeleteRow=()=>{}
+  onDeleteRow=()=>{},
+  onRowClick=()=>{}
 }) => {
 
   
@@ -70,7 +73,7 @@ const TableRowContainer = ({
         {toolsChildren}
       </TableTools>
 
-      <TableHeaders template={template} hasMenu>
+      <TableHeaders template={template} hasMenu={hasRowMenu}>
         {headers.map(col => 
           <TableColumn key={col}>
             {col}
@@ -79,20 +82,28 @@ const TableRowContainer = ({
       </TableHeaders>
 
       {editedData.map((row, index) => 
-        <TableRow 
-          hasMenu
-          id={row.id} 
-          key={row.id}
-          honest={index%2===0}
-          template={template}
-          menu={<Menu onEditRow={() => onEditRow(row.id)} onDeleteRow={() => onDeleteRow(row.id)} />}
-        >
-          {rowPropsTemplate.map((prop, index) => 
-            <TableColumn key={index}>
-              {row[prop]}
-            </TableColumn>  
+        <div
+          key={row.id} 
+          className={classNames(
+            styles.rowButton, 
+            !isRowClickable && styles.rowButton__unclickable
           )}
-        </TableRow>  
+          onClick={() => onRowClick(row.id)}
+        >
+          <TableRow 
+            hasMenu={hasRowMenu}
+            id={row.id} 
+            honest={index%2===0}
+            template={template}
+            menu={<Menu onEditRow={() => onEditRow(row.id)} onDeleteRow={() => onDeleteRow(row.id)} />}
+          >
+            {rowPropsTemplate.map((prop, index) => 
+              <TableColumn key={index}>
+                {row[prop]}
+              </TableColumn>  
+            )}
+          </TableRow>  
+        </div>
       )}
     </div>
   )
