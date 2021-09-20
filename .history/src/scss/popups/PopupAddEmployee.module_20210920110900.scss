@@ -4,6 +4,14 @@
   width: 558px;
 }
 
+.title{
+  width: 100%;
+  display: inline-block;
+  padding: 16px 24px;
+  border-bottom: 1px solid $light-3;
+  @include header-3;
+}
+
 .survey{
   display: flex;
   flex-direction: column;
@@ -52,5 +60,15 @@
   transform: translateY(-50%);
 }
 
+.added{
+  width: 100%;
+  background: $light-3;
+  height: 78px;
+  border-radius: 0 0 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px;
+}
 
 

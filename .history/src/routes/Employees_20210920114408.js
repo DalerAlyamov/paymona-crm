@@ -146,9 +146,6 @@ const Employees = ({
 }
 
 const Menu = () => {
-
-  const dispatch = useDispatch()
-
   return (
     <>
       <button 

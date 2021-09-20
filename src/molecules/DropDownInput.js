@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 import { DropdownInputLabel, DropdownInputMenu } from '../atoms'
 import { Wrap } from '../organisms'
-import styles from '../scss/molecules/DropdownInput.module.scss'
+import styles from '../scss/molecules/DropDownInput.module.scss'
 
 const DropdownInput = ({
   id='',

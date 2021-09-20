@@ -8,7 +8,6 @@ import { TableHeaders } from '../molecules'
 import { useDispatch } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
 import { PopupAddEmployee } from '../popups'
-import PopupEdit from '../popups/PopupEdit'
 const Employees = ({
   className=''
 }) => {
@@ -146,15 +145,10 @@ const Employees = ({
 }
 
 const Menu = () => {
-
-  const dispatch = useDispatch()
-
   return (
     <>
       <button 
-        onClick={() => {
-          dispatch(openPopup(<PopupEdit/>))
-        }}
+        onClick={}
       >
         Редактировать
       </button>

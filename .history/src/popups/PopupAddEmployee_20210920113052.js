@@ -4,12 +4,16 @@ import { AnimatedInput, DropDownInput } from '../molecules'
 import { Wrap } from '../organisms'
 import classNames from 'classnames'
 import { Dot } from '../icons'
+import { useDispatch } from 'react-redux'
 import FooterPanelInPopup from '../molecules/FooterPanelInPopup'
 import TopPanelInPopup from '../molecules/TopPanelInPopup'
 
 const PopupAddEmployee = ({
   className
 }) => {
+
+  //redux
+  const dispatch = useDispatch()
   
 
   /* States */
@@ -44,7 +48,7 @@ const PopupAddEmployee = ({
     <div className={classNames(className, styles.root)}>
 
         <TopPanelInPopup
-          title='Добавить сотрудника'
+          titl
         />
 
       <div className={styles.survey}>

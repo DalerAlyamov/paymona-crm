@@ -3,13 +3,18 @@ import styles from '../scss/popups/PopupAddEmployee.module.scss'
 import { AnimatedInput, DropDownInput } from '../molecules'
 import { Wrap } from '../organisms'
 import classNames from 'classnames'
+import { Button } from '../atoms'
 import { Dot } from '../icons'
-import FooterPanelInPopup from '../molecules/FooterPanelInPopup'
-import TopPanelInPopup from '../molecules/TopPanelInPopup'
+import { useDispatch } from 'react-redux'
+import { closePopup } from '../redux/actions/popupActions'
 
 const PopupAddEmployee = ({
+  title,
   className
 }) => {
+
+  //redux
+  const dispatch = useDispatch()
   
 
   /* States */
@@ -42,11 +47,9 @@ const PopupAddEmployee = ({
   
   return (
     <div className={classNames(className, styles.root)}>
-
-        <TopPanelInPopup
-          title='Добавить сотрудника'
-        />
-
+      <span className={styles.title}>
+        {title}
+      </span>
       <div className={styles.survey}>
 
         <Wrap
@@ -142,8 +145,7 @@ const PopupAddEmployee = ({
 
       </div>
 
-        <FooterPanelInPopup/>    
-            
+      \
     </div>
   )
 }
