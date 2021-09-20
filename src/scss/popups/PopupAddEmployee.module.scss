@@ -20,14 +20,9 @@
   gap: 24px;
 }
 
-.bigBlock2{
-  display: flex;
-  justify-content: space-between;
-}
-
 .desc{
   @include header-7;
-  color: $light-1;
+  color: $dark-5;
   margin-top: 4px;
   display: inline-block;
 }
