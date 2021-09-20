@@ -68,7 +68,8 @@ const LoginPanel = ({
         const user = {
           email: email__inputValue.replace('@paymona.com', '')+'@paymona.com',
           password: password__inputValue,
-          token: res.access_token
+          token: res.access_token,
+          type: res.type
         }
         dispatch(login({...user, status: 'logining'}))
         

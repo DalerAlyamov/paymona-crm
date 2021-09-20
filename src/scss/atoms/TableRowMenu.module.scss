@@ -10,11 +10,9 @@
   align-items: center;
   justify-content: center;
   padding: 12px;
-  transition: 150ms linear;
-  &:hover {
-    background: $light-3;
-  }
+  transition: 400ms linear;
   &:active {
+    transition: 200ms linear;
     background: $primary-bg-1;
   }
 }
@@ -28,6 +26,7 @@
   z-index: 100;
   background: $light-5;
   min-width: 150px;
+  animation: fadeIn 100ms ease-in forwards;
 
   a, span, li, button {
     display: flex;
@@ -46,14 +45,6 @@
       background: $light-3;
     }
   }
-}
-
-.menu__open {
-  animation: fadeIn 100ms ease-in forwards;
-}
-
-.menu__close {
-  animation: fadeOut 100ms ease-in forwards;
 }
 
 @keyframes fadeIn {
