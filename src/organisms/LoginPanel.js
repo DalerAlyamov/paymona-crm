@@ -70,7 +70,9 @@ const LoginPanel = ({
           email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com',
           password: password__inputValue,
           token: res.access_token,
-          type: res.type
+          type: res.type,
+          avatar: res.avatar,
+          surname: res.surname
         }
         dispatch(login({...user, status: 'logining'}))
 
