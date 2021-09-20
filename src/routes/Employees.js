@@ -3,9 +3,8 @@ import classNames from 'classnames'
 import API from '../API/API'
 import styles from '../scss/routes/Employees.module.scss'
 import { Table, Topbar } from '../organisms'
-import { TableTools, TableRow } from '../molecules'
-import { Button, TableColumn } from '../atoms'
-import { TableHeaders } from '../molecules'
+import { TableRowContainer } from '../molecules'
+import { Button } from '../atoms'
 import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
 import { PopupAddEmployee } from '../popups'
@@ -30,12 +29,16 @@ const Employees = ({
 
   const [data, setData] = useState([])
 
-  const [searchValue, setSearchValue] = useState('')
-  const [sortList, setSortList] = useState([
+  const sortList = [
     {
       id: 'name',
       text: 'По имени',
       active: true
+    },
+    {
+      id: 'surname',
+      text: 'По фамилии',
+      active: false
     },
     {
       id: 'position',
@@ -52,8 +55,8 @@ const Employees = ({
       text: 'По типу',
       active: false
     }
-  ])
-  const [filterList, setFilterList] = useState([
+  ]
+  const filterList = [
     {
       id: 'type',
       text: 'По типу',
@@ -67,14 +70,18 @@ const Employees = ({
           active: true
         },
         {
-          text: 'employer',
+          text: 'employe',
+          active: true
+        },
+        {
+          text: 'superuser',
           active: true
         }
       ]
     }
-  ])
+  ]
 
-  
+
   /* UseEffects */
 
   useEffect(() => {
@@ -90,6 +97,9 @@ const Employees = ({
       .then(res => setData(res))
   }, [user.token])
 
+
+  /* Render */
+
   return (
     <div className={classNames(className, styles.root)}>
 
@@ -101,60 +111,26 @@ const Employees = ({
           }
         ]} 
       />
-      
+
       <Table className={styles.table}>
-        
-        <TableTools 
-          hasFilter
-          sortList={sortList}
-          filterList={filterList}
-          searchValue={searchValue}
-          setSortList={setSortList}
-          setFilterList={setFilterList}
-          setSearchValue={setSearchValue}
-        >
-          <Button 
-            type='outlined' 
-            onClick={() => dispatch(openPopup(<PopupAddEmployee title='Добавить сотрудника'/>))}
-          >
-            Добавить сотрудника
-          </Button>
-        </TableTools>
 
-        <TableHeaders template={template} hasMenu>
-          {['Имя', 'Фамилия', 'Должность', 'Отдел', 'Тип'].map(col => 
-            <TableColumn key={col}>
-              {col}
-            </TableColumn>  
-          )}
-        </TableHeaders>
-
-        {data.map((col, index) => 
-          <TableRow 
-            hasMenu
-            id={col.id} 
-            key={col.id}
-            honest={index%2===0}
-            template={template} 
-            menu={<Menu />}
-          >
-            <TableColumn>
-              {col.name}
-            </TableColumn>
-            <TableColumn>
-              {col.surname}
-            </TableColumn>
-            <TableColumn>
-              {col.position}
-            </TableColumn>
-            <TableColumn>
-              {col.department}
-            </TableColumn>
-            <TableColumn>
-              {col.type}
-            </TableColumn>
-          </TableRow>  
-        )}
+        <TableRowContainer
+          data={data}
+          template={template}
+          headers={['Имя', 'Фамилия', 'Должность', 'Отдел', 'Тип']}
+          initialSortList={sortList}
+          initialFilterList={filterList}
+          toolsChildren={
+            <Button 
+              type='outlined' 
+              onClick={() => dispatch(openPopup(<PopupAddEmployee title='Добавить сотрудника'/>))}
+            >
+              Добавить сотрудника
+            </Button>
+          }
+          menu={<Menu />}
+          rowPropsTemplate={['name', 'surname', 'position', 'department', 'type']}
+        />
 
       </Table>
 
