@@ -7,7 +7,7 @@ import { TableRowContainer } from '../molecules'
 import { Button } from '../atoms'
 import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
-import { PopupAddEmployee } from '../popups'
+import { PopupAddEmployee, PopupEditEmployee } from '../popups'
 
 const Employees = ({
   className=''
@@ -129,6 +129,7 @@ const Employees = ({
             </Button>
           }
           rowPropsTemplate={['name', 'surname', 'position', 'department', 'type']}
+          onEditRow={row_id => dispatch(openPopup(<PopupEditEmployee id={row_id} />))}
         />
 
       </Table>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from '../scss/popups/PopupAddEmployee.module.scss'
+import styles from '../scss/popups/PopupEditEmployee.module.scss'
 import { AnimatedInput, DropDownInput } from '../molecules'
 import { Wrap } from '../organisms'
 import { ErrorText } from '../atoms'
@@ -11,8 +11,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
 import { closePopup } from '../redux/actions/popupActions'
 
-const PopupAddEmployee = ({
+const PopupEditEmployee = ({
   className='',
+  id=0,
   setData=()=>{}
 }) => {
   
@@ -80,25 +81,43 @@ const PopupAddEmployee = ({
     return !errors.length
   }
 
-  const handleAddEmployee = () => {
+  const handleEditEmployee = () => {
 
     if (!checkValidation())
       return
 
     const config = {
-      url: 'employee/create/',
-      method: 'post',
+      url: 'employee/patch/'+id,
+      method: 'patch',
       headers: {
         'Authorization': 'Bearer ' + user.token
       },
-      data: JSON.stringify({
-        email: mail__inputValue.trim().replaceAll('@paymona.com', '')+'@paymona.com',
-        name: name__inputValue.trim(),
-        surname: lastName__inputValue.trim(),
-        department: department__inputValue.trim(),
-        position: position__inputValue.trim(),
-        type: userType__selected.trim()
-      })
+      data: JSON.stringify([
+        {
+          patch: 'email',
+          to: mail__inputValue.trim().replaceAll('@paymona.com', '')+'@paymona.com',
+        },
+        {
+          patch: 'name',
+          to: name__inputValue.trim(),
+        },
+        {
+          patch: 'surname',
+          to: lastName__inputValue.trim(),
+        },
+        {
+          patch: 'department',
+          to: department__inputValue.trim(),
+        },
+        {
+          patch: 'position',
+          to: position__inputValue.trim(),
+        },
+        {
+          patch: 'type',
+          to: userType__selected.trim()
+        }
+      ])
     }
 
     API(config)
@@ -106,14 +125,6 @@ const PopupAddEmployee = ({
       .then(data => {
         setData(data)
         dispatch(closePopup())
-      })
-      .catch(error => {
-        const errors = []
-        
-        if (error.response.data.message === 'Email already exists')
-          errors.push({type: 'email', text: 'Пользователь с такой электронной почтой уже существует'}) 
-
-        setValidation_errors(errors)
       })
   }
 
@@ -123,9 +134,7 @@ const PopupAddEmployee = ({
   return (
     <div className={classNames(className, styles.root)}>
 
-      <TopPanelInPopup
-        title='Добавить сотрудника'
-      />
+      <TopPanelInPopup title='Изменит сотрудника' />
 
       <div className={styles.survey}>
 
@@ -273,7 +282,7 @@ const PopupAddEmployee = ({
       <FooterPanelInPopup
         btn1='Добавить'
         btn2='Отмена'
-        onClick={() => handleAddEmployee('hello')}
+        onClick={() => handleEditEmployee('hello')}
       />    
             
     </div>
@@ -326,4 +335,4 @@ const Menu = ({
   )
 }
 
-export default PopupAddEmployee
+export default PopupEditEmployee

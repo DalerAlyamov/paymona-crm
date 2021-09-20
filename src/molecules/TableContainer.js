@@ -4,9 +4,6 @@ import styles from '../scss/molecules/TableRowContainer.module.scss'
 import { dynamicSort } from '../functions'
 import { TableHeaders, TableRow, TableTools } from '.'
 import { TableColumn } from '../atoms'
-import { useDispatch } from 'react-redux'
-import { openPopup } from '../redux/actions/popupActions'
-import { PopupEdit } from '../popups'
 
 const TableRowContainer = ({
   className='',
@@ -16,7 +13,9 @@ const TableRowContainer = ({
   initialSortList=[],
   initialFilterList=[],
   toolsChildren=<></>,
-  rowPropsTemplate=<></>
+  rowPropsTemplate=<></>,
+  onEditRow=()=>{},
+  onDeleteRow=()=>{}
 }) => {
 
   
@@ -85,7 +84,7 @@ const TableRowContainer = ({
           key={row.id}
           honest={index%2===0}
           template={template}
-          menu={<Menu id={row.id} />}
+          menu={<Menu onEditRow={() => onEditRow(row.id)} onDeleteRow={() => onDeleteRow(row.id)} />}
         >
           {rowPropsTemplate.map((prop, index) => 
             <TableColumn key={index}>
@@ -99,21 +98,15 @@ const TableRowContainer = ({
 }
 
 const Menu = ({
-  id
+  onEditRow, onDeleteRow
 }) => {
-
-  const dispatch = useDispatch()
 
   return (
     <>
-      <button 
-        onClick={() => {
-        dispatch(openPopup(<PopupEdit id={id} />))
-      }}
-      >
+      <button onClick={() => onEditRow()}>
         Редактировать
       </button>
-      <button>
+      <button onClick={() => onDeleteRow()}>
         Удалить
       </button>
     </>

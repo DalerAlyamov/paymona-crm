@@ -1,8 +1,8 @@
 import PopupAddEmployee from './PopupAddEmployee'
-import PopupEdit from './PopupEdit'
+import PopupEditEmployee from './PopupEditEmployee'
 import PopupServicesAdd from './PopupServicesAdd'
 export {
   PopupAddEmployee,
-  PopupEdit,
+  PopupEditEmployee,
   PopupServicesAdd  
 }
