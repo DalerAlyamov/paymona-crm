@@ -1,11 +1,11 @@
 import PopupAddEmployee from './PopupAddEmployee'
 import PopupEditEmployee from './PopupEditEmployee'
 import PopupServicesAdd from './PopupServicesAdd'
-import Sms from './Sms'
+import PopupFitback from './PopupFitback'
 
 export {
   PopupAddEmployee,
   PopupEditEmployee,
   PopupServicesAdd,
-  Sms
+  PopupFitback
 }
