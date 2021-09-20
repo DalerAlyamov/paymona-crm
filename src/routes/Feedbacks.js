@@ -71,7 +71,36 @@ const Feedbacks = ({
   
   /* States */
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState([
+    {
+      id: 1,
+      name: 'Tcell',
+      status: 'Не прочитано',
+      service: 'Опрос',
+      date_of_send: '12/05/2021'
+    },
+    {
+      id: 2,
+      name: 'Tcell',
+      status: 'Не прочитано',
+      service: 'Машинное обучение',
+      date_of_send: '24/04/2021'
+    },
+    {
+      id: 3,
+      name: 'Мегафон',
+      status: 'Прочитано',
+      service: 'Аналитика',
+      date_of_send: '30/03/2021'
+    },
+    {
+      id: 4,
+      name: 'Мегафон',
+      status: 'Прочитано',
+      service: 'Машинное обучение',
+      date_of_send: '24/03/2021'
+    }
+  ])
   
 
   /* Render */
@@ -99,7 +128,7 @@ const Feedbacks = ({
           headers={['Отправитель', 'Статаус', 'Услуга', 'Дата отправки']}
           initialSortList={sortList}
           initialFilterList={filterList}
-          rowPropsTemplate={[]}
+          rowPropsTemplate={['name', 'status', 'service', 'date_of_send']}
         />
 
       </Table>

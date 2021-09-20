@@ -86,7 +86,7 @@ const TableRowContainer = ({
           key={row.id} 
           className={classNames(
             styles.rowButton, 
-            !isRowClickable && styles.rowButton__unclickable
+            isRowClickable && styles.rowButton__clickable
           )}
           onClick={() => onRowClick(row.id)}
         >
