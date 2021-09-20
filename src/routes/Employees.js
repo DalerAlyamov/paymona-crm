@@ -7,7 +7,7 @@ import { TableRowContainer } from '../molecules'
 import { Button } from '../atoms'
 import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
-import { PopupAddEmployee, PopupEditEmployee } from '../popups'
+import { PopupAddEmployee, PopupEditEmployee, PopupFitback } from '../popups'
 
 const Employees = ({
   className=''
@@ -17,17 +17,6 @@ const Employees = ({
   /* Variables */
 
   const template = ['1fr', '1fr', '1fr', '1fr', '1fr']
-  
-
-  /* Redux Hooks */
-
-  const dispatch = useDispatch()
-  const user = useSelector(state => state.user)
-
-  
-  /* States */
-
-  const [data, setData] = useState([])
 
   const sortList = [
     {
@@ -80,6 +69,19 @@ const Employees = ({
       ]
     }
   ]
+  
+
+  /* Redux Hooks */
+
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+
+  
+  /* States */
+
+  const [data, setData] = useState([])
+
+  const [sendData, setSendData] = useState([])
 
 
   /* Functions */
@@ -120,6 +122,26 @@ const Employees = ({
   }, [user.token])
 
 
+  const SendData = () => {
+    const config = {
+      url: `/employee/get/`,
+      method: 'post',
+      headers: {
+        'Authorization': 'Bearer ' + user.token,
+        'Content-Type': 'application/json',
+      }
+     }
+       API(config)
+       .then(res => res.data)
+       .then(res => setSendData(res) )
+  }
+
+
+  //Function
+
+
+
+
   /* Render */
 
   return (
@@ -145,7 +167,7 @@ const Employees = ({
           toolsChildren={
             <Button 
               type='outlined' 
-              onClick={() => dispatch(openPopup(<PopupAddEmployee setData={setData} title='Добавить сотрудника'/>))}
+              onClick={() => dispatch(openPopup(<PopupFitback setData={SendData()} title='Добавить сотрудника'/>))}
             >
               Добавить сотрудника
             </Button>

@@ -5,14 +5,14 @@ import FooterPanelInPopup from '../molecules/FooterPanelInPopup'
 import TopPanelInPopup from '../molecules/TopPanelInPopup'
 import { Wrap } from '../organisms'
 import styles from '../scss/popups/PopupServices.module.scss'
-const PopupServicesAdd = ({
+const PopupServicesEdit = ({
   className,
 
 }) => {
   return (
     <div className={classNames(className, styles.root)}>
       <TopPanelInPopup
-        title='Добавить услугу'
+        title='Редактировать услугу'
       />
         <Wrap
           flex
@@ -27,13 +27,13 @@ const PopupServicesAdd = ({
         </Wrap>
 
       <FooterPanelInPopup
-          btn1='Добавить'
+          btn1='Сохратить'
           btn2='Отмена'
-          onClick={() =>{}}
+          onClick={() => {}}
       />
 
     </div>
   )
 }
 
-export default PopupServicesAdd
+export default PopupServicesEdit
