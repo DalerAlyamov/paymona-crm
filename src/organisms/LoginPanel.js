@@ -4,7 +4,7 @@ import styles from '../scss/organisms/LoginPanel.module.scss'
 import { LoginTitle, Button } from '../atoms'
 import { AnimatedInput } from '../molecules'
 import { Wrap } from '../organisms'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../redux/actions/userActions'
 import API from '../API/API'
 
@@ -38,6 +38,7 @@ const LoginPanel = ({
   /* Redux hooks */
 
   const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
 
 
   /* Refs */
@@ -69,19 +70,26 @@ const LoginPanel = ({
           email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com',
           password: password__inputValue,
           token: res.access_token,
-          type: res.type
+          type: res.type,
+          avatar: res.avatar,
+          surname: res.surname
         }
-        dispatch(login({...user, status: 'logining'}))
 
-        if (res['one-time'])
+        if (res['one-time']) {
           setPage('change_password')
-        else
+          setEmailChecking(false)
+          dispatch(login({...user, status: 'logouted'}))
+          setPassword__inputValue('')
+        }
+        else {
+          dispatch(login({...user, status: 'logining'}))
           setTimeout(() => {
             dispatch(login({...user, status: 'logined'}))
             setEmailChecking(false)
             setEmail__inputValue('')
             setPassword__inputValue('')
           }, 1200)
+        }
       })
       .catch(error => {
         if(error.response.status === 404)
@@ -154,16 +162,32 @@ const LoginPanel = ({
       setError('Пароли не совпадают')
       return setEmailChecking(false)
     }
-    
-    const config = {
-      url: 'login/new_password/',
+
+    let data = {
+      email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com',
+      password: newPassword
+    }
+
+    let config = {
       method: 'post',
-      data: JSON.stringify({
-        code: code__inputValue,
-        email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com',
-        password: newPassword
-      })
+      data: JSON.stringify(data)
     } 
+
+    if (code__inputValue) {
+      data = {...data, code: code__inputValue}
+      config = {...config, url: 'login/new_password/'} 
+    }
+
+    if (user.token) {
+      data = {...data, token: user.token}
+      config = {
+        ...config, 
+        url: 'login/change_one_time_password/',
+        headers: {
+          'Authorization': 'Bearer ' + user.token
+        },
+      }
+    }
 
     API(config)
       .then(() => {

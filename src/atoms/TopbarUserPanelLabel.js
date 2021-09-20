@@ -1,13 +1,15 @@
 import React from 'react'
 import classNames from 'classnames'
 import styles from '../scss/atoms/TopbarUserPanelLabel.module.scss'
-import { Person } from '../icons'
+import { useSelector } from 'react-redux'
 
 const TopbarUserPanelLabel = ({
   className='',
   active=false,
   onClick=()=>{}
 }) => {
+
+  const user = useSelector(state => state.user)
 
   return (
     <button 
@@ -18,7 +20,7 @@ const TopbarUserPanelLabel = ({
       )} 
       onClick={onClick}
     >
-      <Person />
+      <img src={user.avatar} alt="" className={styles.img} />
     </button>
   )
 }

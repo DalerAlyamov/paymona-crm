@@ -7,6 +7,6 @@ export {
   PopupAddEmployee,
   PopupEditEmployee,
   PopupServicesAdd,
-  Sms,
+  Sms
   PopupServicesAdd 
 }

@@ -1,15 +1,17 @@
 import React from 'react'
 import classNames from 'classnames'
 import styles from '../scss/atoms/TopbarUserAvatar.module.scss'
-import { Person } from '../icons'
+import { useSelector } from 'react-redux'
 
 const TopbarUserAvatar = ({
   className=''
 }) => {
 
+  const user = useSelector(state => state.user)
+
   return (
     <div className={classNames(className, styles.root)}> 
-      <Person size={60} />
+      <img src={user.avatar} alt="" className={styles.img} />
     </div>
   )
 }

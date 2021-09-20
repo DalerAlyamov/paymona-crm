@@ -6,7 +6,8 @@ import Sms from './Sms'
 export {
   PopupAddEmployee,
   PopupEditEmployee,
+<<<<<<< HEAD
   PopupServicesAdd,
-  Sms,
+  Sms
   PopupServicesAdd 
 }

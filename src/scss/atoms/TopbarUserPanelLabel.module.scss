@@ -5,6 +5,7 @@
   width: 34px;
   height: 34px;
   background: $light-2;
+  border: 1px solid $light-2;
   border-radius: 50px;
   display: flex;
   align-items: center;
@@ -21,4 +22,8 @@
   background: $primary-bg-1;
   color: $primary-3;
   transition: 100ms linear;
+}
+
+.img {
+  border-radius: 50px;
 }
