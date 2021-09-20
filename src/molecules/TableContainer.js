@@ -10,6 +10,7 @@ const TableRowContainer = ({
   data=[],
   template=['1fr'],
   headers=[],
+  hasFilter=false,
   initialSortList=[],
   initialFilterList=[],
   toolsChildren=<></>,
@@ -58,7 +59,7 @@ const TableRowContainer = ({
     <div className={classNames(className, styles.root)}>
 
       <TableTools 
-        hasFilter
+        hasFilter={hasFilter}
         sortList={sortList}
         filterList={filterList}
         searchValue={searchValue}

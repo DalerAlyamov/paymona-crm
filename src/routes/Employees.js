@@ -137,6 +137,7 @@ const Employees = ({
       <Table className={styles.table}>
 
         <TableRowContainer
+          hasFilter
           data={data}
           template={template}
           headers={['Имя', 'Фамилия', 'Должность', 'Отдел', 'Тип']}
