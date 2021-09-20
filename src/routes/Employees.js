@@ -70,7 +70,7 @@ const Employees = ({
           active: true
         },
         {
-          text: 'employe',
+          text: 'employee',
           active: true
         },
         {
@@ -129,7 +129,7 @@ const Employees = ({
             </Button>
           }
           rowPropsTemplate={['name', 'surname', 'position', 'department', 'type']}
-          onEditRow={row_id => dispatch(openPopup(<PopupEditEmployee id={row_id} />))}
+          onEditRow={row_id => dispatch(openPopup(<PopupEditEmployee id={row_id} setData={setData} />))}
         />
 
       </Table>

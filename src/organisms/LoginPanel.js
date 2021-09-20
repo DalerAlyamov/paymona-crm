@@ -74,17 +74,22 @@ const LoginPanel = ({
           avatar: res.avatar,
           surname: res.surname
         }
-        dispatch(login({...user, status: 'logining'}))
 
-        if (res['one-time'])
+        if (res['one-time']) {
           setPage('change_password')
-        else
+          setEmailChecking(false)
+          dispatch(login({...user, status: 'logouted'}))
+          setPassword__inputValue('')
+        }
+        else {
+          dispatch(login({...user, status: 'logining'}))
           setTimeout(() => {
             dispatch(login({...user, status: 'logined'}))
             setEmailChecking(false)
             setEmail__inputValue('')
             setPassword__inputValue('')
           }, 1200)
+        }
       })
       .catch(error => {
         if(error.response.status === 404)
@@ -157,23 +162,32 @@ const LoginPanel = ({
       setError('Пароли не совпадают')
       return setEmailChecking(false)
     }
-    
+
     let data = {
       email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com',
       password: newPassword
     }
 
-    if (code__inputValue)
-      data = {...data, code: code__inputValue}
-
-    if (user.token)
-      data = {...data, token: user.token}
-
-    const config = {
-      url: 'login/new_password/',
+    let config = {
       method: 'post',
       data: JSON.stringify(data)
     } 
+
+    if (code__inputValue) {
+      data = {...data, code: code__inputValue}
+      config = {...config, url: 'login/new_password/'} 
+    }
+
+    if (user.token) {
+      data = {...data, token: user.token}
+      config = {
+        ...config, 
+        url: 'login/change_one_time_password/',
+        headers: {
+          'Authorization': 'Bearer ' + user.token
+        },
+      }
+    }
 
     API(config)
       .then(() => {

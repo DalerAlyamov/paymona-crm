@@ -312,15 +312,15 @@ const Menu = ({
         teamlead
       </button>
       <button 
-        className={classNames(styles.dropdown_menu_item, selectedType === 'employer' && styles.dropdown_menu_item__active)} 
-        onClick={() => onClick('employer')}
+        className={classNames(styles.dropdown_menu_item, selectedType === 'employee' && styles.dropdown_menu_item__active)} 
+        onClick={() => onClick('employee')}
       >
-        {selectedType === 'employer' &&
+        {selectedType === 'employee' &&
           <div className={styles.dropdown_menu_item__dot}>
             <Dot size={dotSize} />
           </div>
         }
-        employer
+        employee
       </button>
     </>
   )

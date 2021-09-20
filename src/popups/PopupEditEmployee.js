@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../scss/popups/PopupEditEmployee.module.scss'
 import { AnimatedInput, DropDownInput } from '../molecules'
 import { Wrap } from '../organisms'
@@ -36,10 +36,6 @@ const PopupEditEmployee = ({
   const [lastName__inputValue, setLastName__inputValue] = useState('')
   const [lastName__inputFocusing, setLastName__inputFocusing] = useState(false)
   
-  // mail
-  const [mail__inputValue, setMail__inputValue] = useState('') 
-  const [mail__inputFocusing, setMail__inputFocusing] = useState(false)
-  
   // department
   const [department__inputValue, setDepartment__inputValue] = useState('') 
   const [department__inputFocusing, setDepartment__inputFocusing] = useState(false)
@@ -64,9 +60,6 @@ const PopupEditEmployee = ({
     if (lastName__inputValue.trim() === '') 
       errors.push({type: 'surname', text: 'Введите фамилию пользователя'}) 
 
-    if (mail__inputValue.trim() === '') 
-      errors.push({type: 'email', text: 'Введит электронная почту пользователя'}) 
-
     if (department__inputValue.trim() === '') 
       errors.push({type: 'department', text: 'Введите отдел пользователя'})
 
@@ -74,7 +67,7 @@ const PopupEditEmployee = ({
       errors.push({type: 'position', text: 'Введите должность пользователя'})
 
     if (userType__selected.trim() === '') 
-    errors.push({type: 'type', text: 'Выберите тип пользователя'}) 
+      errors.push({type: 'type', text: 'Выберите тип пользователя'}) 
 
     setValidation_errors(errors)
 
@@ -93,10 +86,6 @@ const PopupEditEmployee = ({
         'Authorization': 'Bearer ' + user.token
       },
       data: JSON.stringify([
-        {
-          patch: 'email',
-          to: mail__inputValue.trim().replaceAll('@paymona.com', '')+'@paymona.com',
-        },
         {
           patch: 'name',
           to: name__inputValue.trim(),
@@ -127,6 +116,29 @@ const PopupEditEmployee = ({
         dispatch(closePopup())
       })
   }
+  
+
+  /* useEffects */
+
+  useEffect(() => {
+    const config = {
+      url: 'employee/get/'+id,
+      method: 'get',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      }
+    }
+
+    API(config) 
+      .then(res => res.data)
+      .then(user => {
+        setName__inputValue(user.name)
+        setPosition__inputValue(user.position)
+        setLastName__inputValue(user.surname)
+        setDepartment__inputValue(user.department)
+        setUserType__selected(user.type)
+      })
+  }, [id, user.token])
 
 
   /* Render */
@@ -134,7 +146,7 @@ const PopupEditEmployee = ({
   return (
     <div className={classNames(className, styles.root)}>
 
-      <TopPanelInPopup title='Изменит сотрудника' />
+      <TopPanelInPopup title='Изменить сотрудника' />
 
       <div className={styles.survey}>
 
@@ -172,7 +184,7 @@ const PopupEditEmployee = ({
               error={validation_errors.find(error => error.type === 'surname')}
               onKeyPress={e => {
                 if (e.code === 'Enter')
-                  setMail__inputFocusing(true)
+                  setDepartment__inputFocusing(true)
               }}
               onBlur={() => setLastName__inputFocusing(false)}
             />
@@ -182,34 +194,6 @@ const PopupEditEmployee = ({
               </ErrorText>
             }
           </Wrap>
-        </Wrap>
-
-        <Wrap flex column gap={4}>
-
-          <Wrap>
-            <AnimatedInput
-              placeholder='Электронная почта' 
-              autoWidth
-              suffix='@paymona.com'
-              value={mail__inputValue}
-              setValue={setMail__inputValue}
-              initialFocusing={mail__inputFocusing}
-              error={validation_errors.find(error => error.type === 'email')}
-              onKeyPress={e => {
-                if (e.code === 'Enter')
-                  setDepartment__inputFocusing(true)
-              }}
-              onBlur={() => setMail__inputFocusing(false)}
-            />
-            <span className={styles.desc}>
-            *Это будет логином пользователя
-            </span>
-          </Wrap>
-          {validation_errors.find(error => error.type === 'email') &&
-            <ErrorText>
-              {validation_errors.find(error => error.type === 'email').text}
-            </ErrorText>
-          }
         </Wrap>
 
         <Wrap flex gap={30}>  
@@ -321,15 +305,15 @@ const Menu = ({
         teamlead
       </button>
       <button 
-        className={classNames(styles.dropdown_menu_item, selectedType === 'employer' && styles.dropdown_menu_item__active)} 
-        onClick={() => onClick('employer')}
+        className={classNames(styles.dropdown_menu_item, selectedType === 'employee' && styles.dropdown_menu_item__active)} 
+        onClick={() => onClick('employee')}
       >
-        {selectedType === 'employer' &&
+        {selectedType === 'employee' &&
           <div className={styles.dropdown_menu_item__dot}>
             <Dot size={dotSize} />
           </div>
         }
-        employer
+        employee
       </button>
     </>
   )
