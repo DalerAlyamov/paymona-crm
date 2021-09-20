@@ -6,10 +6,10 @@ import { useDispatch } from 'react-redux'
 import { closePopup } from '../redux/actions/popupActions'
 
 const PopupPanel = ({
-  minWidth,
-  minHeight,
-  className,
-  children
+  minWidth=500,
+  minHeight=500,
+  className='',
+  children=<></>
 }) => {
 
   const dispatch = useDispatch()
@@ -20,7 +20,7 @@ const PopupPanel = ({
         className, 
         styles.root
       )} 
-      style={{ minWidth, minHeight }}
+      style={{ minWidth: minWidth+'px', minHeight: minHeight+'px' }}
     >
       <button className={styles.close} onClick={() => dispatch(closePopup())}>
         <CloseSingle size={20} />

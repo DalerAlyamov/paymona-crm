@@ -7,7 +7,7 @@ import { TableRowContainer } from '../molecules'
 import { Button } from '../atoms'
 import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
-import { PopupEditEmployee, PopupFitback, PopupInfoText } from '../popups'
+import { PopupEditEmployee, PopupAddEmployee, PopupInfoText } from '../popups'
 
 const Employees = ({
   className=''
@@ -87,9 +87,9 @@ const Employees = ({
   const handleDeleteEmplyeee = id => {
 
     if (user.type !== 'superuser')
-      return dispatch(openPopup(<PopupInfoText text='Только superuser способен удалять пользователей' />), 100)
+      return dispatch(openPopup(<PopupInfoText text='Только superuser способен удалять пользователей' />, 500))
     if (id === user.id)
-      return dispatch(openPopup(<PopupInfoText text='Нельзя удалять самого себя' />), 100)
+      return dispatch(openPopup(<PopupInfoText text='Нельзя удалять самого себя' />, 500))
 
     const config = {
       url: 'employee/delete/'+id,
@@ -145,7 +145,7 @@ const Employees = ({
           toolsChildren={
             <Button 
               type='outlined' 
-              onClick={() => dispatch(openPopup(<PopupFitback setData={setData} title='Добавить сотрудника'/>))}
+              onClick={() => dispatch(openPopup(<PopupAddEmployee setData={setData} title='Добавить сотрудника'/>))}
             >
               Добавить сотрудника
             </Button>
