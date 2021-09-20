@@ -85,6 +85,7 @@ const Employees = ({
   /* Functions */
 
   const handleDeleteEmplyeee = id => {
+
     if (user.type !== 'superuser')
       return dispatch(openPopup('Только superuser способен удалять пользователей'), 100)
     if (id === user.id)

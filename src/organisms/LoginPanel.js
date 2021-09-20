@@ -72,7 +72,8 @@ const LoginPanel = ({
           token: res.access_token,
           type: res.type,
           avatar: res.avatar,
-          surname: res.surname
+          surname: res.surname,
+          id: res.id
         }
 
         if (res['one-time']) {
