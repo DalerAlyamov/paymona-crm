@@ -6,7 +6,7 @@ import styles from '../scss/atoms/TableRowMenu.module.scss'
 const TableRowMenu = ({
   id=0,
   className='',
-  children=<></>
+  children=''
 }) => {
 
   const [open, setOpen] = useState(false)

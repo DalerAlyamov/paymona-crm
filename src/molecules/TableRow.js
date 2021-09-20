@@ -10,7 +10,7 @@ const TableRow = ({
   hasMenu=false,
   template=['1fr'],
   menu=<></>,
-  children=<></>
+  children=''
 }) => {
 
   const gridTemplate = hasMenu ? [...template, '48px'] : template

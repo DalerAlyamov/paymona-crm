@@ -103,6 +103,19 @@ const Employees = ({
       .then(data => setData(data))
   }
 
+  const handleReloadData = () => {
+    const config = {
+      url: 'employee/get/',
+      method: 'get',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      }
+    }
+    API(config)
+      .then(res => res.data)
+      .then(res => setData(res))
+  }
+
 
   /* UseEffects */
 
@@ -144,6 +157,7 @@ const Employees = ({
           headers={['Имя', 'Фамилия', 'Должность', 'Отдел', 'Тип']}
           initialSortList={sortList}
           initialFilterList={filterList}
+          onReload={() => handleReloadData()}
           toolsChildren={
             <Button
               type='outlined' 

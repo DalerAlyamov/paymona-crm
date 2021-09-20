@@ -4,7 +4,7 @@ import styles from '../scss/atoms/SidebarButton.module.scss'
  
 const SidebarButton = React.forwardRef(({
   className='',
-  children=<></>,
+  children='',
   disabled=false,
   active=false,
   beforeIcon=null,

@@ -5,7 +5,7 @@ import styles from '../scss/atoms/TableColumn.module.scss'
 const TableColumn = ({
   className='',
   type='default',
-  children=<></>
+  children=''
 }) => {
   return (
     <div 

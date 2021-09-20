@@ -4,12 +4,13 @@ import styles from '../scss/atoms/Button.module.scss'
 
 const Button = React.forwardRef(({
   className='',
-  children=<></>,
+  children='',
   disabled=false,
   active=false,
+  small=false,
+  circle=false,
   beforeIcon=null,
   afterIcon=null,
-  small,
   type='contained',
   onClick=()=>{}
 }, ref) => {
@@ -17,6 +18,8 @@ const Button = React.forwardRef(({
   const handleClick = () => {
     !disabled && onClick()
   }
+
+  console.log(children)
 
   return (
     <button 
@@ -27,7 +30,9 @@ const Button = React.forwardRef(({
         styles[type],
         active && styles.active,
         disabled && styles.disabled,
-        small && styles.small
+        small && styles.small,
+        children === '' && styles.clean_icon,
+        circle && styles.circle
       )}
       onClick={handleClick}
     >

@@ -6,7 +6,7 @@ const TableHeaders = ({
   className='',
   hasMenu=false,
   template=['1fr'],
-  children=<></>
+  children=''
 }) => {
 
   const gridTemplate = hasMenu ? [...template, '48px'] : template

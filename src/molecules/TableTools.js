@@ -7,7 +7,7 @@ import { Wrap } from '../organisms'
 const TableTools = ({
   className='',
   hasFilter=false,
-  children=<></>,
+  children='',
   sortList=[],
   filterList=[],
   searchValue='',

@@ -3,7 +3,8 @@ import classNames from 'classnames'
 import styles from '../scss/molecules/TableRowContainer.module.scss'
 import { dynamicSort } from '../functions'
 import { TableHeaders, TableRow, TableTools } from '.'
-import { TableColumn } from '../atoms'
+import { Button, TableColumn } from '../atoms'
+import { Replay } from '../icons'
 
 const TableRowContainer = ({
   className='',
@@ -19,7 +20,8 @@ const TableRowContainer = ({
   rowPropsTemplate=<></>,
   onEditRow=()=>{},
   onDeleteRow=()=>{},
-  onRowClick=()=>{}
+  onRowClick=()=>{},
+  onReload=()=>{}
 }) => {
 
   
@@ -72,6 +74,14 @@ const TableRowContainer = ({
       >
         {toolsChildren}
       </TableTools>
+
+      <Button 
+        circle
+        type='text'
+        className={styles.reload_btn}
+        beforeIcon={<Replay />} 
+        onClick={onReload}
+      />   
 
       <TableHeaders template={template} hasMenu={hasRowMenu}>
         {headers.map(col => 

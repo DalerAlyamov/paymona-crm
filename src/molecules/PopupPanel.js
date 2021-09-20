@@ -9,7 +9,7 @@ const PopupPanel = ({
   minWidth=500,
   minHeight=500,
   className='',
-  children=<></>
+  children=''
 }) => {
 
   const dispatch = useDispatch()

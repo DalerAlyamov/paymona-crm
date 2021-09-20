@@ -4,7 +4,7 @@ import styles from '../scss/atoms/LoginTitle.module.scss'
 
 const LoginTitle = ({
   className='',
-  children=<></>
+  children=''
 }) => {
   return (
     <span className={classNames(className, styles.root)}>

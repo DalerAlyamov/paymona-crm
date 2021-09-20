@@ -4,7 +4,7 @@ import styles from '../scss/organisms/Table.module.scss'
 
 const Table = ({
   className='',
-  children=<></>
+  children=''
 }) => {
   return (
     <div className={classNames(className, styles.root)}>
