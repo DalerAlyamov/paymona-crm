@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
+import API from '../API/API'
 import styles from '../scss/routes/Employees.module.scss'
 import { Table, Topbar } from '../organisms'
 import { TableTools, TableRow } from '../molecules'
 import { Button, TableColumn } from '../atoms'
 import { TableHeaders } from '../molecules'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
 import { PopupAddEmployee } from '../popups'
+
 const Employees = ({
   className=''
 }) => {
@@ -15,33 +17,39 @@ const Employees = ({
   
   /* Variables */
 
-  const template = ['1fr', '1fr', '1fr', '1fr']
+  const template = ['1fr', '1fr', '1fr', '1fr', '1fr']
   
 
   /* Redux Hooks */
 
   const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
 
   
   /* States */
 
-  // const [data, setData] = useState(null)
+  const [data, setData] = useState([])
 
   const [searchValue, setSearchValue] = useState('')
   const [sortList, setSortList] = useState([
     {
-      id: 'login',
-      text: 'По логину',
+      id: 'name',
+      text: 'По имени',
       active: true
+    },
+    {
+      id: 'position',
+      text: 'По должности',
+      active: false
+    },
+    {
+      id: 'departament',
+      text: 'По отделу',
+      active: false
     },
     {
       id: 'type',
       text: 'По типу',
-      active: false
-    },
-    {
-      id: 'last_login',
-      text: 'По последнему посещению',
       active: false
     }
   ])
@@ -51,11 +59,15 @@ const Employees = ({
       text: 'По типу',
       list: [
         {
-          text: 'Superuser',
+          text: 'sales',
           active: true
         },
         {
-          text: 'User',
+          text: 'teamlead',
+          active: true
+        },
+        {
+          text: 'employer',
           active: true
         }
       ]
@@ -65,18 +77,18 @@ const Employees = ({
   
   /* UseEffects */
 
-  // useEffect(() => {
-  //   const config = {
-  //     url: '',
-  //     method: 'get',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   }
-  //   API(config)
-  //     .then(res => res.data)
-  //     .then(res => console.log(res))
-  // }, [])
+  useEffect(() => {
+    const config = {
+      url: 'employee/get/',
+      method: 'get',
+      headers: {
+        'Authorization': user.token
+      }
+    }
+    API(config)
+      .then(res => res.data)
+      .then(res => setData(res))
+  }, [user.token])
 
   return (
     <div className={classNames(className, styles.root)}>
@@ -110,33 +122,39 @@ const Employees = ({
         </TableTools>
 
         <TableHeaders template={template} hasMenu>
-          {['Отображаемое имя', 'Должность', 'Отдел', 'Последнее посещение'].map(col => 
+          {['Имя', 'Фамилия', 'Должность', 'Отдел', 'Тип'].map(col => 
             <TableColumn key={col}>
               {col}
             </TableColumn>  
           )}
         </TableHeaders>
 
-        <TableRow 
-          hasMenu
-          honest
-          template={template} 
-          id={1} 
-          menu={<Menu />}
-        >
-          <TableColumn>
-            Далер
-          </TableColumn>
-          <TableColumn>
-            Webdev
-          </TableColumn>
-          <TableColumn>
-            Frontend
-          </TableColumn>
-          <TableColumn>
-            19/11/2020
-          </TableColumn>
-        </TableRow>
+        {data.map((col, index) => 
+          <TableRow 
+            hasMenu
+            id={col.id} 
+            key={col.id}
+            honest={index%2===0}
+            template={template} 
+            menu={<Menu />}
+          >
+            <TableColumn>
+              {col.name}
+            </TableColumn>
+            <TableColumn>
+              {col.surname}
+            </TableColumn>
+            <TableColumn>
+              {col.position}
+            </TableColumn>
+            <TableColumn>
+              {col.department}
+            </TableColumn>
+            <TableColumn>
+              {col.type}
+            </TableColumn>
+          </TableRow>  
+        )}
 
       </Table>
 
