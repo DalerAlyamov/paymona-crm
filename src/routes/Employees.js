@@ -7,7 +7,7 @@ import { TableRowContainer } from '../molecules'
 import { Button } from '../atoms'
 import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
-import { PopupAddEmployee, PopupEditEmployee, PopupInfoText } from '../popups'
+import { PopupEditEmployee, PopupFitback, PopupInfoText } from '../popups'
 
 const Employees = ({
   className=''
@@ -17,17 +17,6 @@ const Employees = ({
   /* Variables */
 
   const template = ['1fr', '1fr', '1fr', '1fr', '1fr']
-  
-
-  /* Redux Hooks */
-
-  const dispatch = useDispatch()
-  const user = useSelector(state => state.user)
-
-  
-  /* States */
-
-  const [data, setData] = useState([])
 
   const sortList = [
     {
@@ -80,6 +69,17 @@ const Employees = ({
       ]
     }
   ]
+  
+
+  /* Redux Hooks */
+
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+
+  
+  /* States */
+
+  const [data, setData] = useState([])
 
 
   /* Functions */
@@ -118,7 +118,7 @@ const Employees = ({
       .then(res => res.data)
       .then(res => setData(res))
   }, [user.token])
-
+  
 
   /* Render */
 
@@ -145,7 +145,7 @@ const Employees = ({
           toolsChildren={
             <Button 
               type='outlined' 
-              onClick={() => dispatch(openPopup(<PopupAddEmployee setData={setData} title='Добавить сотрудника'/>))}
+              onClick={() => dispatch(openPopup(<PopupFitback setData={setData} title='Добавить сотрудника'/>))}
             >
               Добавить сотрудника
             </Button>
