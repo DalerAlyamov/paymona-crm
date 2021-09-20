@@ -7,10 +7,20 @@ import classNames from 'classnames'
 import { Dot } from '../icons'
 import FooterPanelInPopup from '../molecules/FooterPanelInPopup'
 import TopPanelInPopup from '../molecules/TopPanelInPopup'
+import { useDispatch, useSelector } from 'react-redux'
+import API from '../API/API'
+import { closePopup } from '../redux/actions/popupActions'
 
 const PopupAddEmployee = ({
-  className
+  className='',
+  setData=()=>{}
 }) => {
+  
+
+  /* Redux Hooks */
+
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
   
 
   /* States */
@@ -45,29 +55,29 @@ const PopupAddEmployee = ({
   /* Functions */
   
   const checkValidation = () => {
-    const erros = [] 
+    const errors = [] 
 
     if (name__inputValue.trim() === '') 
-      erros.push('name') // Введите имя пользователя
+      errors.push({type: 'name', text: 'Введите имя пользователя'}) 
 
     if (lastName__inputValue.trim() === '') 
-      erros.push('surname') // Введите фамилию пользователя
+      errors.push({type: 'surname', text: 'Введите фамилию пользователя'}) 
 
     if (mail__inputValue.trim() === '') 
-      erros.push('email') // Введит электронная почту пользователя
+      errors.push({type: 'email', text: 'Введит электронная почту пользователя'}) 
 
     if (department__inputValue.trim() === '') 
-      erros.push('department') // Введите отдел пользователя
+      errors.push({type: 'department', text: 'Введите отдел пользователя'})
 
     if (position__inputValue.trim() === '') 
-      erros.push('position') // Введите должность пользователя
+      errors.push({type: 'position', text: 'Введите должность пользователя'})
 
     if (userType__selected.trim() === '') 
-      erros.push('type') // Выберите тип пользователя
+    errors.push({type: 'type', text: 'Выберите тип пользователя'}) 
 
-    setValidation_errors(erros)
+    setValidation_errors(errors)
 
-    return !erros.length
+    return !errors.length
   }
 
   const handleAddEmployee = () => {
@@ -75,6 +85,36 @@ const PopupAddEmployee = ({
     if (!checkValidation())
       return
 
+    const config = {
+      url: 'employee/create/',
+      method: 'post',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      },
+      data: JSON.stringify({
+        email: mail__inputValue.trim().replaceAll('@paymona.com', '')+'@paymona.com',
+        name: name__inputValue.trim(),
+        surname: lastName__inputValue.trim(),
+        department: department__inputValue.trim(),
+        position: position__inputValue.trim(),
+        type: userType__selected.trim()
+      })
+    }
+
+    API(config)
+      .then(res => res.data)
+      .then(data => {
+        setData(data)
+        dispatch(closePopup())
+      })
+      .catch(error => {
+        const errors = []
+        
+        if (error.response.data.message === 'Email already exists')
+          errors.push({type: 'email', text: 'Пользователь с такой электронной почтой уже существует'}) 
+
+        setValidation_errors(errors)
+      })
   }
 
 
@@ -100,15 +140,15 @@ const PopupAddEmployee = ({
               value={name__inputValue}
               setValue={setName__inputValue}
               initialFocusing={true}
-              error={validation_errors.find(error => error === 'name')}
+              error={validation_errors.find(error => error.type === 'name')}
               onKeyPress={e => {
                 if (e.code === 'Enter')
                   setLastName__inputFocusing(true)
               }}
             />
-            {validation_errors.find(error => error === 'name') &&
+            {validation_errors.find(error => error.type === 'name') &&
               <ErrorText>
-                Введите имя пользователя
+                {validation_errors.find(error => error.type === 'name').text}
               </ErrorText>
             }
           </Wrap>
@@ -120,16 +160,16 @@ const PopupAddEmployee = ({
               value={lastName__inputValue}
               setValue={setLastName__inputValue}
               initialFocusing={lastName__inputFocusing}
-              error={validation_errors.find(error => error === 'surname')}
+              error={validation_errors.find(error => error.type === 'surname')}
               onKeyPress={e => {
                 if (e.code === 'Enter')
                   setMail__inputFocusing(true)
               }}
               onBlur={() => setLastName__inputFocusing(false)}
             />
-            {validation_errors.find(error => error === 'surname') &&
+            {validation_errors.find(error => error.type === 'surname') &&
               <ErrorText>
-                Введите фамилию пользователя
+                {validation_errors.find(error => error.type === 'surname').text}
               </ErrorText>
             }
           </Wrap>
@@ -145,7 +185,7 @@ const PopupAddEmployee = ({
               value={mail__inputValue}
               setValue={setMail__inputValue}
               initialFocusing={mail__inputFocusing}
-              error={validation_errors.find(error => error === 'email')}
+              error={validation_errors.find(error => error.type === 'email')}
               onKeyPress={e => {
                 if (e.code === 'Enter')
                   setDepartment__inputFocusing(true)
@@ -156,9 +196,9 @@ const PopupAddEmployee = ({
             *Это будет логином пользователя
             </span>
           </Wrap>
-          {validation_errors.find(error => error === 'email') &&
+          {validation_errors.find(error => error.type === 'email') &&
             <ErrorText>
-              Введит электронная почту пользователя
+              {validation_errors.find(error => error.type === 'email').text}
             </ErrorText>
           }
         </Wrap>
@@ -172,16 +212,16 @@ const PopupAddEmployee = ({
               value={department__inputValue}
               setValue={setDepartment__inputValue}
               initialFocusing={department__inputFocusing}
-              error={validation_errors.find(error => error === 'department')}
+              error={validation_errors.find(error => error.type === 'department')}
               onKeyPress={e => {
                 if (e.code === 'Enter')
                   setPosition__inputFocusing(true)
               }}
               onBlur={() => setDepartment__inputFocusing(false)}
             />
-            {validation_errors.find(error => error === 'department') &&
+            {validation_errors.find(error => error.type === 'department') &&
               <ErrorText>
-                Введите отдел пользователя
+                {validation_errors.find(error => error.type === 'department').text}
               </ErrorText>
             }
           </Wrap>
@@ -193,16 +233,16 @@ const PopupAddEmployee = ({
               value={position__inputValue}
               setValue={setPosition__inputValue} 
               initialFocusing={position__inputFocusing}
-              error={validation_errors.find(error => error === 'position')}
+              error={validation_errors.find(error => error.type === 'position')}
               onKeyPress={e => {
                 if (e.code === 'Enter')
                   setUserType__initialFocusing(true)
               }}
               onBlur={() => setPosition__inputFocusing(false)}
             />
-            {validation_errors.find(error => error === 'position') &&
+            {validation_errors.find(error => error.type === 'position') &&
               <ErrorText>
-                Введите должность пользователя
+                {validation_errors.find(error => error.type === 'position').text}
               </ErrorText>
             }
           </Wrap>
@@ -217,7 +257,7 @@ const PopupAddEmployee = ({
             `Выберите тип прав`
           }
           initialOpening={userType__initialFocusing}
-          error={validation_errors.find(error => error === 'type')}
+          error={validation_errors.find(error => error.type === 'type')}
           onClose={() => setUserType__initialFocusing(false)}
           autoWidth
           active={userType__selected !== ''}
@@ -250,37 +290,37 @@ const Menu = ({
   return (
     <>
       <button 
-        className={classNames(styles.dropdown_menu_item, selectedType === 'Sales' && styles.dropdown_menu_item__active)} 
-        onClick={() => onClick('Sales')}
+        className={classNames(styles.dropdown_menu_item, selectedType === 'sales' && styles.dropdown_menu_item__active)} 
+        onClick={() => onClick('sales')}
       >
-        {selectedType === 'Sales' &&
+        {selectedType === 'sales' &&
           <div className={styles.dropdown_menu_item__dot}>
             <Dot size={dotSize} />
           </div>
         }
-        Sales
+        sales
       </button>
       <button 
-        className={classNames(styles.dropdown_menu_item, selectedType === 'Teamlead' && styles.dropdown_menu_item__active)} 
-        onClick={() => onClick('Teamlead')}
+        className={classNames(styles.dropdown_menu_item, selectedType === 'teamlead' && styles.dropdown_menu_item__active)} 
+        onClick={() => onClick('teamlead')}
       >
-        {selectedType === 'Teamlead' &&
+        {selectedType === 'teamlead' &&
           <div className={styles.dropdown_menu_item__dot}>
             <Dot size={dotSize} />
           </div>
         }
-        Teamlead
+        teamlead
       </button>
       <button 
-        className={classNames(styles.dropdown_menu_item, selectedType === 'Employer' && styles.dropdown_menu_item__active)} 
-        onClick={() => onClick('Employer')}
+        className={classNames(styles.dropdown_menu_item, selectedType === 'employer' && styles.dropdown_menu_item__active)} 
+        onClick={() => onClick('employer')}
       >
-        {selectedType === 'Employer' &&
+        {selectedType === 'employer' &&
           <div className={styles.dropdown_menu_item__dot}>
             <Dot size={dotSize} />
           </div>
         }
-        Employer
+        employer
       </button>
     </>
   )

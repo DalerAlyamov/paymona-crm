@@ -49,7 +49,7 @@ const LoginPanel = ({
 
   /* Functions */
 
-  const handleEmail = () => {
+  const handleLogin = () => {
     setError('')
     setEmailChecking(true)
 
@@ -57,7 +57,7 @@ const LoginPanel = ({
       url: 'login/',
       method: 'post',
       data: JSON.stringify({
-        email: email__inputValue.replace('@paymona.com', '')+'@paymona.com',
+        email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com',
         password: password__inputValue
       })
     } 
@@ -66,19 +66,22 @@ const LoginPanel = ({
       .then(res => res.data)
       .then(res => {
         const user = {
-          email: email__inputValue.replace('@paymona.com', '')+'@paymona.com',
+          email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com',
           password: password__inputValue,
           token: res.access_token,
           type: res.type
         }
         dispatch(login({...user, status: 'logining'}))
-        
-        setTimeout(() => {
-          dispatch(login({...user, status: 'logined'}))
-          setEmailChecking(false)
-          setEmail__inputValue('')
-          setPassword__inputValue('')
-        }, 1200)
+
+        if (res['one-time'])
+          setPage('change_password')
+        else
+          setTimeout(() => {
+            dispatch(login({...user, status: 'logined'}))
+            setEmailChecking(false)
+            setEmail__inputValue('')
+            setPassword__inputValue('')
+          }, 1200)
       })
       .catch(error => {
         if(error.response.status === 404)
@@ -98,7 +101,7 @@ const LoginPanel = ({
       url: 'login/forgot/',
       method: 'post',
       data: JSON.stringify({
-        email: email__inputValue.replace('@paymona.com', '')+'@paymona.com'
+        email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com'
       })
     } 
 
@@ -125,7 +128,7 @@ const LoginPanel = ({
       method: 'post',
       data: JSON.stringify({
         code: code__inputValue,
-        email: email__inputValue.replace('@paymona.com', '')+'@paymona.com'
+        email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com'
       })
     } 
 
@@ -157,7 +160,7 @@ const LoginPanel = ({
       method: 'post',
       data: JSON.stringify({
         code: code__inputValue,
-        email: email__inputValue.replace('@paymona.com', '')+'@paymona.com',
+        email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com',
         password: newPassword
       })
     } 
@@ -318,7 +321,7 @@ const LoginPanel = ({
             </Button>
 
             <Button 
-              onClick={() => handleEmail()} 
+              onClick={() => handleLogin()} 
               disabled={emailChecking}
               ref={buttonEmailRef}
             >

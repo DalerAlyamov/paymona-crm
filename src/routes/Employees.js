@@ -8,7 +8,7 @@ import { Button } from '../atoms'
 import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
 import { PopupAddEmployee } from '../popups'
-import PopupEdit from '../popups/PopupEdit'
+
 const Employees = ({
   className=''
 }) => {
@@ -89,7 +89,7 @@ const Employees = ({
       url: 'employee/get/',
       method: 'get',
       headers: {
-        'Authorization': user.token
+        'Authorization': 'Bearer ' + user.token
       }
     }
     API(config)
@@ -123,38 +123,17 @@ const Employees = ({
           toolsChildren={
             <Button 
               type='outlined' 
-              onClick={() => dispatch(openPopup(<PopupAddEmployee title='Добавить сотрудника'/>))}
+              onClick={() => dispatch(openPopup(<PopupAddEmployee setData={setData} title='Добавить сотрудника'/>))}
             >
               Добавить сотрудника
             </Button>
           }
-          menu={<Menu />}
           rowPropsTemplate={['name', 'surname', 'position', 'department', 'type']}
         />
 
       </Table>
 
     </div>
-  )
-}
-
-const Menu = () => {
-
-  const dispatch = useDispatch()
-
-  return (
-    <>
-      <button 
-        onClick={() => {
-        dispatch(openPopup(<PopupEdit/>))
-      }}
-      >
-        Редактировать
-      </button>
-      <button>
-        Удалить
-      </button>
-    </>
   )
 }
 

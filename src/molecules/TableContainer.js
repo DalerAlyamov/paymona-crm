@@ -4,6 +4,9 @@ import styles from '../scss/molecules/TableRowContainer.module.scss'
 import { dynamicSort } from '../functions'
 import { TableHeaders, TableRow, TableTools } from '.'
 import { TableColumn } from '../atoms'
+import { useDispatch } from 'react-redux'
+import { openPopup } from '../redux/actions/popupActions'
+import { PopupEdit } from '../popups'
 
 const TableRowContainer = ({
   className='',
@@ -13,7 +16,6 @@ const TableRowContainer = ({
   initialSortList=[],
   initialFilterList=[],
   toolsChildren=<></>,
-  menu=<></>,
   rowPropsTemplate=<></>
 }) => {
 
@@ -82,8 +84,8 @@ const TableRowContainer = ({
           id={row.id} 
           key={row.id}
           honest={index%2===0}
-          template={template} 
-          menu={menu}
+          template={template}
+          menu={<Menu id={row.id} />}
         >
           {rowPropsTemplate.map((prop, index) => 
             <TableColumn key={index}>
@@ -93,6 +95,28 @@ const TableRowContainer = ({
         </TableRow>  
       )}
     </div>
+  )
+}
+
+const Menu = ({
+  id
+}) => {
+
+  const dispatch = useDispatch()
+
+  return (
+    <>
+      <button 
+        onClick={() => {
+        dispatch(openPopup(<PopupEdit id={id} />))
+      }}
+      >
+        Редактировать
+      </button>
+      <button>
+        Удалить
+      </button>
+    </>
   )
 }
 
