@@ -1,0 +1,16 @@
+@import '../root.scss';
+
+.root {
+  @include header-7;
+  color: $red;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+}

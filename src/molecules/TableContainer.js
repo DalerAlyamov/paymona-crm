@@ -85,8 +85,8 @@ const TableRowContainer = ({
           template={template} 
           menu={menu}
         >
-          {rowPropsTemplate.map(prop => 
-            <TableColumn>
+          {rowPropsTemplate.map((prop, index) => 
+            <TableColumn key={index}>
               {row[prop]}
             </TableColumn>  
           )}

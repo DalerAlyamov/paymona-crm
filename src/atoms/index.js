@@ -16,6 +16,7 @@ import TopbarUserPanelLabel from './TopbarUserPanelLabel'
 import TopbarUserAvatar from './TopbarUserAvatar' 
 import DropdownInputLabel from './DropdownInputLabel' 
 import DropdownInputMenu from './DropdownInputMenu' 
+import ErrorText from './ErrorText' 
 
 export {
   LoginLeftSide,
@@ -35,5 +36,6 @@ export {
   TopbarUserPanelLabel,
   TopbarUserAvatar,
   DropdownInputLabel,
-  DropdownInputMenu
+  DropdownInputMenu,
+  ErrorText
 }

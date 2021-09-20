@@ -13,6 +13,7 @@ const DropdownInput = ({
   autoWidth=false,
   initialOpening=false,
   active=false,
+  error=false,
   onClick=() => {},
   onClose=()=>{},
   onOpen=()=>{}
@@ -55,6 +56,7 @@ const DropdownInput = ({
           setOpen(!open)
           onClick={onClick}
         }} 
+        error={error}
         active={open || active}
       >
         {text}
