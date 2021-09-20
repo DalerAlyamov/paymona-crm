@@ -34,7 +34,7 @@ const PopupAddEmployee = ({
   const [position__inputFocusing, setPosition__inputFocusing] = useState(false)
 
   // dropdown
-  const [userType__selected, setUserType__selected] = useState('Employer')
+  const [userType__selected, setUserType__selected] = useState('')
   const [userType__initialFocusing, setUserType__initialFocusing] = useState(false)
   
 
@@ -129,10 +129,15 @@ const PopupAddEmployee = ({
 
         <DropDownInput
           id='1'
-          text={`Выберите тип прав (${userType__selected})`}
+          text={
+            userType__selected !== '' ? 
+            `Тип прав: ${userType__selected}` : 
+            `Выберите тип прав`
+          }
           initialOpening={userType__initialFocusing}
           onClose={() => setUserType__initialFocusing(false)}
           autoWidth
+          active={userType__selected !== ''}
         >
           <Menu 
             onClick={type => setUserType__selected(type)}

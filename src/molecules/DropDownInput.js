@@ -12,6 +12,7 @@ const DropdownInput = ({
   width=380,
   autoWidth=false,
   initialOpening=false,
+  active=false,
   onClick=() => {},
   onClose=()=>{},
   onOpen=()=>{}
@@ -54,7 +55,7 @@ const DropdownInput = ({
           setOpen(!open)
           onClick={onClick}
         }} 
-        active={open}
+        active={open || active}
       >
         {text}
       </DropdownInputLabel>

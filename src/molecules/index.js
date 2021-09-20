@@ -7,8 +7,9 @@ import TableRow from './TableRow'
 import TopbarUserPanel from './TopbarUserPanel'
 import TopbarUserPanelMenu from './TopbarUserPanelMenu'
 import PopupPanel from './PopupPanel'
-import ServiceLabel from './ServiceLabel'
-import DropDownInput from './DropDownInput'
+import ServiceLabel from './ServiceLabel
+import DropdownInput from './DropdownInput'
+import TableRowContainer from './TableContainer'
 
 export {
   AnimatedInput,
@@ -22,4 +23,5 @@ export {
   PopupPanel,
   ServiceLabel,
   DropDownInput
+  TableRowContainer
 }
