@@ -19,8 +19,6 @@ const Button = React.forwardRef(({
     !disabled && onClick()
   }
 
-  console.log(children)
-
   return (
     <button 
       ref={ref}

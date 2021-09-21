@@ -8,6 +8,7 @@ import { Button } from '../atoms'
 import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
 import { PopupEditEmployee, PopupAddEmployee, PopupInfoText } from '../popups'
+import { login, logout } from '../redux/actions/userActions'
 
 const Employees = ({
   className=''
@@ -101,6 +102,14 @@ const Employees = ({
     API(config)
       .then(res => res.data)
       .then(data => setData(data))
+      .catch(error => {
+        if(error.response.status === 401) {
+          dispatch(login({...user, status: 'logouting'}))
+          setTimeout(() => {
+            dispatch(logout())
+          }, 1200)
+        }
+      })
   }
 
   const handleReloadData = () => {
@@ -114,6 +123,14 @@ const Employees = ({
     API(config)
       .then(res => res.data)
       .then(res => setData(res))
+      .catch(error => {
+        if(error.response.status === 401) {
+          dispatch(login({...user, status: 'logouting'}))
+          setTimeout(() => {
+            dispatch(logout())
+          }, 1200)
+        }
+      })
   }
 
 
@@ -130,7 +147,15 @@ const Employees = ({
     API(config)
       .then(res => res.data)
       .then(res => setData(res))
-  }, [user.token])
+      .catch(error => {
+        if(error.response.status === 401) {
+          dispatch(login({...user, status: 'logouting'}))
+          setTimeout(() => {
+            dispatch(logout())
+          }, 1200)
+        }
+      })
+  }, [user, dispatch])
   
 
   /* Render */
