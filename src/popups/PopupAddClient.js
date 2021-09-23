@@ -81,7 +81,7 @@ const PopupAddClient = ({
         domain_name: domain__inputValue.trim(),
         ip_address: IP__inputValue.trim(),
         logo: '',
-        products: []
+        products: products__selected
       })
     }
 
@@ -92,19 +92,12 @@ const PopupAddClient = ({
         dispatch(closePopup())
       })
       .catch(error => {
-        const errors = []
-
         if(error.response.status === 401) {
           dispatch(login({...user, status: 'logouting'}))
           setTimeout(() => {
             dispatch(logout())
           }, 1200)
         }
-        
-        if (error.response.data.message === 'Email already exists')
-          errors.push({type: 'email', text: 'Пользователь с такой электронной почтой уже существует'}) 
-
-        setValidation_errors(errors)
       })
   }
 
@@ -119,90 +112,101 @@ const PopupAddClient = ({
       <Wrap flex column gap={24} className={styles.content}>
 
         {/********************* Name *********************/}
-        <AnimatedInput
-          autoWidth
-          placeholder='Наименование' 
-          value={name__inputValue}
-          setValue={setName__inputValue}
-          initialFocusing={true}
-          error={validation_errors.find(error => error.type === 'name')}
-          onKeyPress={e => {
-            if (e.code === 'Enter')
-              setDomain__inputFocusing(true)
-          }}
-        />
-        {validation_errors.find(error => error.type === 'name') &&
-          <ErrorText>
-            {validation_errors.find(error => error.type === 'name').text}
-          </ErrorText>
-        }
+        <Wrap flex column gap={4}>
+          <AnimatedInput
+            autoWidth
+            placeholder='Наименование' 
+            value={name__inputValue}
+            setValue={setName__inputValue}
+            initialFocusing={true}
+            error={validation_errors.find(error => error.type === 'name')}
+            onKeyPress={e => {
+              if (e.code === 'Enter')
+                setDomain__inputFocusing(true)
+            }}
+          />
+          {validation_errors.find(error => error.type === 'name') &&
+            <ErrorText>
+              {validation_errors.find(error => error.type === 'name').text}
+            </ErrorText>
+          }
+        </Wrap>
 
         {/********************* Domain *********************/}
-        <AnimatedInput
-          autoWidth
-          placeholder='Доменный адрес' 
-          value={domain__inputValue}
-          setValue={setDomain__inputValue}
-          initialFocusing={domain__inputFocusing}
-          error={validation_errors.find(error => error.type === 'domain')}
-          onKeyPress={e => {
-            if (e.code === 'Enter')
-              setIP__inputFocusing(true)
-          }}
-        />
-        {validation_errors.find(error => error.type === 'domain') &&
-          <ErrorText>
-            {validation_errors.find(error => error.type === 'domain').text}
-          </ErrorText>
-        }
+        <Wrap flex column gap={4}>
+          <AnimatedInput
+            autoWidth
+            placeholder='Доменный адрес' 
+            value={domain__inputValue}
+            setValue={setDomain__inputValue}
+            initialFocusing={domain__inputFocusing}
+            error={validation_errors.find(error => error.type === 'domain')}
+            onKeyPress={e => {
+              if (e.code === 'Enter')
+                setIP__inputFocusing(true)
+            }}
+          />
+          {validation_errors.find(error => error.type === 'domain') &&
+            <ErrorText>
+              {validation_errors.find(error => error.type === 'domain').text}
+            </ErrorText>
+          }
+        </Wrap>
 
         {/********************* IP *********************/}
-        <AnimatedInput
-          autoWidth
-          placeholder='IP-сервера' 
-          value={IP__inputValue}
-          setValue={setIP__inputValue}
-          initialFocusing={IP__inputFocusing}
-          error={validation_errors.find(error => error.type === 'ip')}
-          onKeyPress={e => {
-            if (e.code === 'Enter')
-              setProducts__initialFocusing(true)
-          }}
-        />
-        {validation_errors.find(error => error.type === 'ip') &&
-          <ErrorText>
-            {validation_errors.find(error => error.type === 'ip').text}
-          </ErrorText>
-        }
-
-        <DropDownInput
-          id='1'
-          text={
-            products__selected.length ? 
-            `(${products__selected.join(', ')})` : 
-            `Выберите продукт`
-          }
-          initialOpening={products__initialFocusing}
-          error={validation_errors.find(error => error.type === 'pproducts')}
-          onClose={() => setProducts__initialFocusing(false)}
-          autoWidth
-          active={products__selected !== ''}
-        >
-          <Menu 
-            onClick={type => {
-              if (products__selected.includes(type))
-                setProducts__selected(products__selected.filter(product => product !== type))
-              else
-                setProducts__selected([...products__selected, type]
-            )}}
-            products__selected={products__selected} 
+        <Wrap flex column gap={4}>
+          <AnimatedInput
+            autoWidth
+            placeholder='IP-сервера' 
+            value={IP__inputValue}
+            setValue={setIP__inputValue}
+            initialFocusing={IP__inputFocusing}
+            error={validation_errors.find(error => error.type === 'ip')}
+            onKeyPress={e => {
+              if (e.code === 'Enter')
+                setProducts__initialFocusing(true)
+            }}
           />
-        </DropDownInput>
-        {validation_errors.find(error => error.type === 'products') &&
-          <ErrorText>
-            {validation_errors.find(error => error.type === 'pproducts').text}
-          </ErrorText>
-        }
+          {validation_errors.find(error => error.type === 'ip') &&
+            <ErrorText>
+              {validation_errors.find(error => error.type === 'ip').text}
+            </ErrorText>
+          }
+        </Wrap>
+
+        {/********************* Products *********************/}
+        <Wrap flex column gap={4}>
+          <DropDownInput
+            id='1'
+            autoWidth
+            hasArrow
+            closeWhenClickMenu={false}
+            text={
+              products__selected.length ? 
+              `(${products__selected.join(', ')})` : 
+              `Выберите продукт`
+            }
+            initialOpening={products__initialFocusing}
+            error={validation_errors.find(error => error.type === 'products') && !products__selected.length}
+            onClose={() => setProducts__initialFocusing(false)}
+            active={products__selected.length}
+          >
+            <Menu 
+              onClick={type => {
+                if (products__selected.includes(type))
+                  setProducts__selected(products__selected.filter(product => product !== type))
+                else
+                  setProducts__selected([...products__selected, type]
+              )}}
+              products__selected={products__selected} 
+            />
+          </DropDownInput>
+          {validation_errors.find(error => error.type === 'products') && !products__selected.length &&
+            <ErrorText>
+              {validation_errors.find(error => error.type === 'products').text}
+            </ErrorText>
+          }
+        </Wrap>
 
       </Wrap>
 

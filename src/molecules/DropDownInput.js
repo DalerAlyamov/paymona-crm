@@ -15,6 +15,7 @@ const DropdownInput = ({
   active=false,
   error=false,
   hasArrow=false,
+  closeWhenClickMenu=true,
   onClick=() => {},
   onClose=()=>{},
   onOpen=()=>{}
@@ -28,7 +29,7 @@ const DropdownInput = ({
 
   useEffect(() => {
     const handleWindowClick = e => {
-      if (e.target.closest('.'+styles.wrap)) {
+      if (e.target.closest('.'+styles.wrap) && closeWhenClickMenu) {
         setOpen(false)
         onClose()
       }
@@ -39,7 +40,7 @@ const DropdownInput = ({
     }
     window.addEventListener('click', handleWindowClick)
     return () => window.removeEventListener('click', handleWindowClick)
-  }, [id, onClose])
+  }, [id, onClose, closeWhenClickMenu])
 
   return (
     <div
