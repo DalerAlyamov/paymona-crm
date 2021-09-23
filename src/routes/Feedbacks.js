@@ -3,6 +3,9 @@ import classNames from 'classnames'
 import styles from '../scss/routes/Feedbacks.module.scss'
 import { Table, Topbar } from '../organisms'
 import { TableContainer } from '../molecules'
+import { useDispatch, useSelector } from 'react-redux'
+import API from '../API/API'
+import { login, logout } from '../redux/actions/userActions'
 
 const Feedbacks = ({
   className
@@ -67,6 +70,12 @@ const Feedbacks = ({
       ]
     }
   ]
+  
+
+  /* Redux Hooks */
+
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
 
   
   /* States */
@@ -77,7 +86,24 @@ const Feedbacks = ({
   /* Functions */
 
   const handleReloadData = () => {
-
+    const config = {
+      url: 'feedbacks/get/',
+      method: 'get',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      }
+    }
+    API(config)
+      .then(res => res.data)
+      .then(res => setData(res))
+      .catch(error => {
+        if(error.response.status === 401) {
+          dispatch(login({...user, status: 'logouting'}))
+          setTimeout(() => {
+            dispatch(logout())
+          }, 1200)
+        }
+      })
   }
   
 
