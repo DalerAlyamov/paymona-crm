@@ -1,9 +1,5 @@
 @import '../root.scss';
 
-.root {
-  width: 100%;
-}
-
 .flex {
   display: flex;
 }
@@ -34,4 +30,8 @@
 
 .column {
   flex-direction: column;
+}
+
+.autoWidth {
+  width: 100%;
 }

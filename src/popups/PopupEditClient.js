@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
 import { ErrorText } from '../atoms'
@@ -9,9 +9,10 @@ import { AnimatedInput, DropDownInput, FooterPanelInPopup, TopPanelInPopup } fro
 import { Wrap } from '../organisms'
 import { closePopup } from '../redux/actions/popupActions'
 import { login, logout } from '../redux/actions/userActions'
-import styles from '../scss/popups/PopupAddClient.module.scss'
+import styles from '../scss/popups/PopupEditClient.module.scss'
 
-const PopupAddClient = ({
+const PopupEditClient = ({
+  id=0,
   className='',
   setData=()=>{}
 }) => {
@@ -69,7 +70,7 @@ const PopupAddClient = ({
     return !errors.length
   }
 
-  const handleAddClient = async () => {
+  const handleEditClient = async () => {
 
     const logo = await toBase64(avatar)
 
@@ -77,18 +78,33 @@ const PopupAddClient = ({
       return
 
     const config = {
-      url: 'client/create/',
-      method: 'post',
+      url: 'client/patch/'+id,
+      method: 'patch',
       headers: {
         'Authorization': 'Bearer ' + user.token
       },
-      data: JSON.stringify({
-        name: name__inputValue.trim(),
-        domain_name: domain__inputValue.trim(),
-        ip_address: IP__inputValue.trim(),
-        logo,
-        products: products__selected
-      })
+      data: JSON.stringify([
+        {
+          patch: 'name',
+          to: name__inputValue.trim()
+        },
+        {
+          patch: 'domain_name',
+          to: domain__inputValue.trim()
+        },
+        {
+          patch: 'ip_address',
+          to: IP__inputValue.trim()
+        },
+        {
+          patch: 'logo',
+          to: logo
+        },
+        {
+          patch: 'products',
+          to: products__selected.trim()
+        }
+      ])
     }
 
     API(config)
@@ -109,12 +125,43 @@ const PopupAddClient = ({
   }
 
 
+  /* UseEffects */
+  
+  useEffect(() => {
+    const config = {
+      method: 'get',
+      url: 'client/get-for-edit/'+id,
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      }
+    }
+    API(config)
+      .then(res => res.data)
+      .then(res => {
+        setName__inputValue(res.name)
+        setDomain__inputValue(res.domain_name)
+        setIP__inputValue(res.ip_address)
+        setProducts__selected(res.products)
+        setAvatar(res.logo)
+      })
+      .catch(error => {
+        if (!error.response) return
+        if(error.response.status === 401) {
+          dispatch(login({...user, status: 'logouting'}))
+          setTimeout(() => {
+            dispatch(logout())
+          }, 1200)
+        }
+      })
+  }, [id, dispatch, user])
+
+
   /* Render */
   
   return (
     <div className={classNames(className, styles.root)}>
 
-      <TopPanelInPopup title='Добавить клиента' />
+      <TopPanelInPopup title='Редактировать клиента' />
 
       <Wrap flex column gap={24} className={styles.content}>
 
@@ -126,12 +173,12 @@ const PopupAddClient = ({
               <AddCircle size={30} />
             </div>
             <div className={styles.img}>
-              {avatar && <img src={URL.createObjectURL(avatar)} alt="" />}
+              {avatar && <img src={avatar} alt="" />}
             </div>
             <input 
               className={styles.inputFile} 
               type="file" 
-              onChange={e => setAvatar(e.target.files[0])} 
+              onChange={e => setAvatar(toBase64(e.target.files[0]))} 
               accept="image/png, image/gif, image/jpeg" 
             />
           </label>
@@ -242,9 +289,9 @@ const PopupAddClient = ({
       </Wrap>
 
       <FooterPanelInPopup
-        btn1='Добавить'
+        btn1='Сохранить'
         btn2='Отмена'
-        onClick={() => handleAddClient()}
+        onClick={() => handleEditClient()}
       />    
       
     </div>
@@ -281,4 +328,4 @@ const Menu = ({
   )
 }
 
-export default PopupAddClient
+export default PopupEditClient

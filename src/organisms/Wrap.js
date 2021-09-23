@@ -6,6 +6,7 @@ const Wrap = ({
   className='',
   children='',
   flex=false,
+  autoWidth=true,
   spaceBetween=false,
   spaceAround=false,
   justifyEnd=false,
@@ -13,11 +14,12 @@ const Wrap = ({
   alignCenter=false,
   alignEnd=false,
   column=false,
+  grow=0,
   gap=0
 }) => {
   return (
     <div 
-      style={{ gap: gap+'px' }}
+      style={{ gap: gap+'px', flexGrow: grow }}
       className={classNames(
         className, 
         styles.root,
@@ -28,7 +30,8 @@ const Wrap = ({
         justifyCenter && styles.justifyCenter,
         alignCenter && styles.alignCenter,
         alignEnd && styles.alignEnd,
-        column && styles.column
+        column && styles.column,
+        autoWidth && styles.autoWidth
       )}
     >
       {children}

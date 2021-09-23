@@ -8,7 +8,7 @@ import { TableContainer } from '../molecules'
 import { login, logout } from '../redux/actions/userActions'
 import { openPopup } from '../redux/actions/popupActions'
 import { useDispatch, useSelector } from 'react-redux'
-import { PopupAddClient } from '../popups'
+import { PopupAddClient, PopupEditClient } from '../popups'
 
 const Clients = ({
   className
@@ -143,8 +143,8 @@ const Clients = ({
           data={data}
           template={template}
           headers={['Наименование', 'Доменный адрес', 'Кол-во услуг']}
+          searchPropsDependence={['name', 'domain_name']}
           initialSortList={sortList}
-          searchPropsDependence={[]}
           initialFilterList={filterList}
           onReload={() => handleReloadData()}
           toolsChildren={
@@ -156,7 +156,7 @@ const Clients = ({
             </Button>
           }
           rowPropsTemplate={['name', 'domain_name', 'count_of_products']}
-          onEditRow={row_id => dispatch(openPopup('изменить клиента: '+row_id))}
+          onEditRow={row_id => dispatch(openPopup(<PopupEditClient id={row_id} />))}
           onDeleteRow={row_id => handleDeleteClient(row_id)}
         />
 
