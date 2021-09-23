@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/routes/Feedbacks.module.scss'
 import { Table, Topbar } from '../organisms'
-import { TableRowContainer } from '../molecules'
+import { TableContainer } from '../molecules'
 
 const Feedbacks = ({
   className
@@ -71,36 +71,14 @@ const Feedbacks = ({
   
   /* States */
 
-  const [data, setData] = useState([
-    {
-      id: 1,
-      name: 'Tcell',
-      status: 'Не прочитано',
-      service: 'Опрос',
-      date_of_send: '12/05/2021'
-    },
-    {
-      id: 2,
-      name: 'Tcell',
-      status: 'Не прочитано',
-      service: 'Машинное обучение',
-      date_of_send: '24/04/2021'
-    },
-    {
-      id: 3,
-      name: 'Мегафон',
-      status: 'Прочитано',
-      service: 'Аналитика',
-      date_of_send: '30/03/2021'
-    },
-    {
-      id: 4,
-      name: 'Мегафон',
-      status: 'Прочитано',
-      service: 'Машинное обучение',
-      date_of_send: '24/03/2021'
-    }
-  ])
+  const [data, setData] = useState()
+
+  
+  /* Functions */
+
+  const handleReloadData = () => {
+
+  }
   
 
   /* Render */
@@ -119,15 +97,17 @@ const Feedbacks = ({
 
       <Table className={styles.table}>
 
-        <TableRowContainer
-          hasFilter
-          isRowClickable
+        <TableContainer
+          rowClickable
           onRowClick={id => console.log(id)}
+          hasFilter
+          hasRowMenu={false}
           data={data}
           template={template}
           headers={['Отправитель', 'Статаус', 'Услуга', 'Дата отправки']}
           initialSortList={sortList}
           initialFilterList={filterList}
+          onReload={() => handleReloadData()}
           rowPropsTemplate={['name', 'status', 'service', 'date_of_send']}
         />
 

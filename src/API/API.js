@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const API = axios.create({
-  baseURL: `http://192.168.0.114:8000/v1`,
+  baseURL: `https://psu.paymona.com/v1`,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'

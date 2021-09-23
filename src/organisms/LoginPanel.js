@@ -93,6 +93,7 @@ const LoginPanel = ({
         }
       })
       .catch(error => {
+        if (!error.response) return
         if(error.response.status === 404)
           setTimeout(() => {
             setError('Неправильная почта или пароль')

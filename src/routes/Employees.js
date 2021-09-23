@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import API from '../API/API'
 import styles from '../scss/routes/Employees.module.scss'
 import { Table, Topbar } from '../organisms'
-import { TableRowContainer } from '../molecules'
+import { TableContainer } from '../molecules'
 import { Button } from '../atoms'
 import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
@@ -87,8 +87,6 @@ const Employees = ({
 
   const handleDeleteEmplyeee = id => {
 
-    if (user.type !== 'superuser')
-      return dispatch(openPopup(<PopupInfoText text='Только superuser способен удалять пользователей' />, 500))
     if (id === user.id)
       return dispatch(openPopup(<PopupInfoText text='Нельзя удалять самого себя' />, 500))
 
@@ -148,6 +146,7 @@ const Employees = ({
       .then(res => res.data)
       .then(res => setData(res))
       .catch(error => {
+        if (!error.response) return
         if(error.response.status === 401) {
           dispatch(login({...user, status: 'logouting'}))
           setTimeout(() => {
@@ -174,13 +173,14 @@ const Employees = ({
 
       <Table className={styles.table}>
 
-        <TableRowContainer
+        <TableContainer
           hasFilter
-          hasRowMenu
+          hasRowMenu={user.type === 'superuser'}
           data={data}
           template={template}
           headers={['Имя', 'Фамилия', 'Должность', 'Отдел', 'Тип']}
           initialSortList={sortList}
+          searchPropsDependence={['name', 'surname']}
           initialFilterList={filterList}
           onReload={() => handleReloadData()}
           toolsChildren={

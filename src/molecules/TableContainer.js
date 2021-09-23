@@ -1,19 +1,20 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
-import styles from '../scss/molecules/TableRowContainer.module.scss'
+import styles from '../scss/molecules/TableContainer.module.scss'
 import { dynamicSort } from '../functions'
 import { TableHeaders, TableRow, TableTools } from '.'
 import { Button, TableColumn } from '../atoms'
 import { Replay } from '../icons'
 
-const TableRowContainer = ({
+const TableContainer = ({
   className='',
   data=[],
   template=['1fr'],
   headers=[],
+  searchPropsDependence=[],
   hasFilter=false,
   hasRowMenu=false,
-  isRowClickable=false,
+  rowClickable=false,
   initialSortList=[],
   initialFilterList=[],
   toolsChildren=<></>,
@@ -24,7 +25,7 @@ const TableRowContainer = ({
   onReload=()=>{}
 }) => {
 
-  
+
   /* States */
 
   const [editedData, setEditedData] = useState(data)
@@ -36,14 +37,24 @@ const TableRowContainer = ({
 
   /* UseEffects */
 
-  useMemo(() => {
+  useEffect(() => {
 
-    const searchedData = data.filter(row => 
-      row.name.toLowerCase().indexOf(searchValue.trim().toLowerCase()) !== -1 || 
-      row.surname.toLowerCase().indexOf(searchValue.trim().toLowerCase()) !== -1
-    )
+    if (!searchPropsDependence.length)  
+      return setEditedData(data.concat())
 
-    const filteredData = searchedData.filter(row => 
+    let searchedData = data.filter(row => {
+      let access = false
+      searchPropsDependence.forEach(searchProp => {
+        if (row[searchProp].toLowerCase().indexOf(searchValue.trim().toLowerCase()) !== -1)
+          access = true
+      })
+      return access
+    })
+
+    if (searchValue.trim() === '')
+      searchedData = data.concat()
+
+    let filteredData = searchedData.filter(row => 
       filterList.find(filter => 
         filter.list.find(item => 
           item.text === row[filter.id] && item.active
@@ -51,11 +62,17 @@ const TableRowContainer = ({
       )  
     )
 
-    const sortedData = filteredData.sort(dynamicSort(sortList.find(prop => prop.active).id))
+    if (!filterList.length)
+      filteredData = searchedData
+
+    let sortedData = filteredData.sort(dynamicSort(sortList.find(prop => prop.active).id))
+
+    if (!sortList.length)
+      sortedData = filteredData
 
     setEditedData(sortedData)
 
-  }, [data, searchValue, sortList, filterList])
+  }, [data, searchValue, sortList, filterList, searchPropsDependence])
 
 
   /* Render */
@@ -96,7 +113,7 @@ const TableRowContainer = ({
           key={row.id} 
           className={classNames(
             styles.rowButton, 
-            isRowClickable && styles.rowButton__clickable
+            rowClickable && styles.rowButton__clickable
           )}
           onClick={() => onRowClick(row.id)}
         >
@@ -105,7 +122,12 @@ const TableRowContainer = ({
             id={row.id} 
             honest={index%2===0}
             template={template}
-            menu={<Menu onEditRow={() => onEditRow(row.id)} onDeleteRow={() => onDeleteRow(row.id)} />}
+            menu={
+              <Menu 
+                onEditRow={() => onEditRow(row.id)} 
+                onDeleteRow={() => onDeleteRow(row.id)} 
+              />
+            }
           >
             {rowPropsTemplate.map((prop, index) => 
               <TableColumn key={index}>
@@ -135,4 +157,4 @@ const Menu = ({
   )
 }
 
-export default TableRowContainer
+export default TableContainer
