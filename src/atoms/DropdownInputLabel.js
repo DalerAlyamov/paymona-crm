@@ -3,9 +3,9 @@ import classNames from 'classnames'
 import styles from '../scss/atoms/DropdownInputLabel.module.scss'
 
 const DropdownInputLabel = ({
+  arrow=null,
   className='',
   active=false,
-  hasArrow=false,
   error=false,
   children='',
   onClick=()=>{}
@@ -18,11 +18,16 @@ const DropdownInputLabel = ({
         className, 
         styles.root,
         active && styles.active, 
-        hasArrow && styles.hasArrow, 
+        arrow !== null && styles.hasArrow, 
         error && styles.error 
       )}
     >
       {children}
+      {arrow !== null && 
+        <div className={styles.arrow}>
+          {arrow}
+        </div>
+      }
     </button>
   )
 }

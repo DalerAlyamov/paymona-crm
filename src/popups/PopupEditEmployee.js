@@ -3,7 +3,7 @@ import styles from '../scss/popups/PopupEditEmployee.module.scss'
 import { Wrap } from '../organisms'
 import { ErrorText } from '../atoms'
 import classNames from 'classnames'
-import { Dot } from '../icons'
+import { ArrowHadSmallBottom, Dot } from '../icons'
 import { AnimatedInput, DropDownInput, FooterPanelInPopup, TopPanelInPopup } from '../molecules'
 import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
@@ -270,6 +270,7 @@ const PopupEditEmployee = ({
             `Тип прав: ${userType__selected}` : 
             `Выберите тип прав`
           }
+          arrow={<ArrowHadSmallBottom />}
           initialOpening={userType__initialFocusing}
           error={validation_errors.find(error => error.type === 'type')}
           onClose={() => setUserType__initialFocusing(false)}

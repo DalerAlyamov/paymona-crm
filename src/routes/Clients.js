@@ -26,12 +26,12 @@ const Clients = ({
       active: true
     },
     {
-      id: 'domain',
+      id: 'domain_name',
       text: 'По доменному адресу',
       active: false
     },
     {
-      id: 'count_follow_service',
+      id: 'count_of_products',
       text: 'По кол-ве услуг',
       active: false
     }
@@ -155,8 +155,8 @@ const Clients = ({
               Добавить клиента
             </Button>
           }
-          rowPropsTemplate={['name', 'domain', 'count_follow_service']}
-          onEditRow={row_id => dispatch(openPopup('изменить клиента'))}
+          rowPropsTemplate={['name', 'domain_name', 'count_of_products']}
+          onEditRow={row_id => dispatch(openPopup('изменить клиента: '+row_id))}
           onDeleteRow={row_id => handleDeleteClient(row_id)}
         />
 

@@ -9,12 +9,12 @@ const DropdownInput = ({
   className='',
   text='',
   children='',
+  arrow=null,
   width=380,
   autoWidth=false,
   initialOpening=false,
   active=false,
   error=false,
-  hasArrow=false,
   closeWhenClickMenu=true,
   onClick=() => {},
   onClose=()=>{},
@@ -50,7 +50,7 @@ const DropdownInput = ({
     >
 
       <DropdownInputLabel 
-        hasArrow={hasArrow}
+        arrow={arrow}
         onClick={() => {
           if (open)
             onClose()

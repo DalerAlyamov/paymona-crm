@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
 import { ErrorText } from '../atoms'
-import { CheckBox, CheckBoxOutlineBlank } from '../icons'
+import { ArrowHadSmallBottom, CheckBox, CheckBoxOutlineBlank } from '../icons'
 import { AnimatedInput, DropDownInput, FooterPanelInPopup, TopPanelInPopup } from '../molecules'
 import { Wrap } from '../organisms'
 import { closePopup } from '../redux/actions/popupActions'
@@ -71,7 +71,7 @@ const PopupAddClient = ({
       return
 
     const config = {
-      url: 'employee/create/',
+      url: 'client/create/',
       method: 'post',
       headers: {
         'Authorization': 'Bearer ' + user.token
@@ -92,7 +92,8 @@ const PopupAddClient = ({
         dispatch(closePopup())
       })
       .catch(error => {
-        if(error.response.status === 401) {
+        if (!error) return
+        if (error.response.status === 401) {
           dispatch(login({...user, status: 'logouting'}))
           setTimeout(() => {
             dispatch(logout())
@@ -179,12 +180,14 @@ const PopupAddClient = ({
           <DropDownInput
             id='1'
             autoWidth
-            hasArrow
+            arrow={<ArrowHadSmallBottom />}
             closeWhenClickMenu={false}
             text={
-              products__selected.length ? 
-              `(${products__selected.join(', ')})` : 
-              `Выберите продукт`
+              <>
+                {products__selected.length ? 
+                `(${products__selected.join(', ')})` : 
+                `Выберите продукт`}
+              </>
             }
             initialOpening={products__initialFocusing}
             error={validation_errors.find(error => error.type === 'products') && !products__selected.length}
@@ -225,7 +228,7 @@ const Menu = ({
   products__selected=()=>{}
 }) => {
 
-  const productsList = ['paymona poll', 'paymona bi', 'paymona officess', 'paymona ml']
+  const productsList = ['Офисы', 'Опросы']
 
   return (
     <>

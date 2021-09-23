@@ -21,8 +21,19 @@
 .active {
   border-color: $primary-1;
   color: $primary-1;
+  .arrow {
+    transform: rotateZ(-180deg);
+  }
 }
 
 .hasArrow {
-  justify-content: space-between;
+  justify-content: space-between !important;
+  padding: 7px 16px;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 100ms linear;
 }
