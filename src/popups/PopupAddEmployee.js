@@ -279,7 +279,7 @@ const PopupAddEmployee = ({
       <FooterPanelInPopup
         btn1='Добавить'
         btn2='Отмена'
-        onClick={() => setData=() => {}}
+        onClick={() => handleAddEmployee()}
       />    
             
     </div>

@@ -39,6 +39,8 @@ const TableContainer = ({
 
   useEffect(() => {
 
+    if (!data.length) return
+
     if (!searchPropsDependence.length)  
       return setEditedData(data.concat())
 
