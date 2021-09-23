@@ -1,0 +1,27 @@
+@import '../root.scss';
+
+.root{
+  width: 596px;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.title{
+  display: inline-block;
+  padding-top: 24px;
+  text-align: center;
+  color: $light-1;
+  font-size: 12px;
+  letter-spacing:14.52px;
+  font-family: $inter;
+}
+
+.title2{
+  display: inline-block;
+  padding-top: 6px;
+  text-align: center;
+  color: $dark-1;
+}

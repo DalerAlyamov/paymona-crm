@@ -1,0 +1,16 @@
+@import '../root.scss';
+
+.root{
+  width: 596px;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.title{
+  padding-top: 10px;
+  text-align: center;
+  color: $light-1;
+}

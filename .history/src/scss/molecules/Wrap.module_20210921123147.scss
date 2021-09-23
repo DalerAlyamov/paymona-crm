@@ -1,0 +1,41 @@
+@import '../root.scss';
+
+.root {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.spaceBetween {
+  justify-content: space-between;
+}
+
+.spaceAround {
+  justify-content: space-around;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+.alignEnd {
+  align-content: flex-end;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.autoWidth{
+  width: 100%;
+}
