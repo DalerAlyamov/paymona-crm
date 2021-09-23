@@ -7,10 +7,10 @@
   border-radius: 8px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   color: $light-1;
   width: 100%;
   transition: 100ms linear;
+  text-align: left;
 }
 
 .error {

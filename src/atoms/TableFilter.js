@@ -39,64 +39,72 @@ const TableFilter = ({
       {open &&
         <div className={styles.menu}>
           
-          <span className={styles.menu__title}>
-            Сортировка
-          </span>
-          
-          {sortList.map(col => 
-            <button 
-              key={col.text}
-              className={classNames(
-                styles.sort_item, 
-                col.active && styles['sort_item--active']
-              )} 
-              onClick={() => onSort(col.text)}
-            >
-              {col.text}
-              <div className={styles.sort_item__arrow}>
-                <ArrowTop size={16} />
-              </div>
-            </button>
-          )}
-
-          <div className={styles.divider} />
-
-          <span className={styles.menu__title}>
-            Фильтр
-          </span>
-
-          {filterList.map(col => 
-            <React.Fragment key={col.text}>
-              <button 
-                key={col.text}
-                className={classNames(
-                  styles.filter_item, 
-                  openedFilterText === col.text && styles['filter_item--active']
-                )} 
-                onClick={() => setOpenFilterText(prev => prev === col.text ? null : col.text)}
-              >
-                {col.text}
-                <div className={styles.filter_item__arrow}>
-                  <ArrowHadSmallTop size={16} />
-                </div>
-              </button>
-              {openedFilterText === col.text && col.list.map(filter_tag => 
+          {sortList.length !== 0 &&
+            <> 
+              <span className={styles.menu__title}>
+                Сортировка
+              </span>
+              
+              {sortList.map(col => 
                 <button 
-                  key={filter_tag.text}
+                  key={col.text}
                   className={classNames(
-                    styles.filter_tag, 
-                    filter_tag.active && styles['filter_tag--active']
+                    styles.sort_item, 
+                    col.active && styles['sort_item--active']
                   )} 
-                  onClick={() => onSetFilter(filter_tag.text)}
+                  onClick={() => onSort(col.text)}
                 >
-                  {filter_tag.text}
-                  <div className={styles.filter_tag__checkbox}>
-                    {filter_tag.active ? <CheckBox size={16} /> : <CheckBoxOutlineBlank size={16} />}
+                  {col.text}
+                  <div className={styles.sort_item__arrow}>
+                    <ArrowTop size={16} />
                   </div>
                 </button>
               )}
-            </React.Fragment>  
-          )}
+            </>
+          }
+
+          {filterList.length !== 0 && 
+            <>
+              <div className={styles.divider} />
+
+              <span className={styles.menu__title}>
+                Фильтр
+              </span>
+
+              {filterList.map(col => 
+                <React.Fragment key={col.text}>
+                  <button 
+                    key={col.text}
+                    className={classNames(
+                      styles.filter_item, 
+                      openedFilterText === col.text && styles['filter_item--active']
+                    )} 
+                    onClick={() => setOpenFilterText(prev => prev === col.text ? null : col.text)}
+                  >
+                    {col.text}
+                    <div className={styles.filter_item__arrow}>
+                      <ArrowHadSmallTop size={16} />
+                    </div>
+                  </button>
+                  {openedFilterText === col.text && col.list.map(filter_tag => 
+                    <button 
+                      key={filter_tag.text}
+                      className={classNames(
+                        styles.filter_tag, 
+                        filter_tag.active && styles['filter_tag--active']
+                      )} 
+                      onClick={() => onSetFilter(filter_tag.text)}
+                    >
+                      {filter_tag.text}
+                      <div className={styles.filter_tag__checkbox}>
+                        {filter_tag.active ? <CheckBox size={16} /> : <CheckBoxOutlineBlank size={16} />}
+                      </div>
+                    </button>
+                  )}
+                </React.Fragment>  
+              )}
+            </>
+          }
 
         </div>
       }

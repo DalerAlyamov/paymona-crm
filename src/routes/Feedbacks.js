@@ -6,6 +6,7 @@ import { TableContainer } from '../molecules'
 import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
 import { login, logout } from '../redux/actions/userActions'
+import { openPopup } from '../redux/actions/popupActions'
 
 const Feedbacks = ({
   className
@@ -125,7 +126,7 @@ const Feedbacks = ({
 
         <TableContainer
           rowClickable
-          onRowClick={id => console.log(id)}
+          onRowClick={id => dispatch(openPopup('отзыв: '+ id))}
           hasFilter
           hasRowMenu={false}
           data={data}

@@ -111,7 +111,6 @@ const PopupEditEmployee = ({
     API(config)
       .then(res => res.data)
       .then(data => {
-        console.log(data)
         setData(data)
         dispatch(closePopup())
       })

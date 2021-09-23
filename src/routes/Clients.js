@@ -8,6 +8,7 @@ import { TableContainer } from '../molecules'
 import { login, logout } from '../redux/actions/userActions'
 import { openPopup } from '../redux/actions/popupActions'
 import { useDispatch, useSelector } from 'react-redux'
+import { PopupAddClient } from '../popups'
 
 const Clients = ({
   className
@@ -25,12 +26,12 @@ const Clients = ({
       active: true
     },
     {
-      id: 'address',
+      id: 'domain',
       text: 'По доменному адресу',
       active: false
     },
     {
-      id: 'services_count',
+      id: 'count_follow_service',
       text: 'По кол-ве услуг',
       active: false
     }
@@ -119,10 +120,8 @@ const Clients = ({
       })
   }, [user, dispatch])
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
 
+  /* Render */
 
   return (
     <div className={classNames(className, styles.root)}>
@@ -145,18 +144,18 @@ const Clients = ({
           template={template}
           headers={['Наименование', 'Доменный адрес', 'Кол-во услуг']}
           initialSortList={sortList}
-          searchPropsDependence={['name', 'surname']}
+          searchPropsDependence={[]}
           initialFilterList={filterList}
           onReload={() => handleReloadData()}
           toolsChildren={
             <Button
               type='outlined' 
-              onClick={() => dispatch(openPopup('добавить клиента'))}
+              onClick={() => dispatch(openPopup(<PopupAddClient setData={setData} />))}
             >
-              Добавить сотрудника
+              Добавить клиента
             </Button>
           }
-          rowPropsTemplate={['name', 'surname', 'position', 'department', 'type']}
+          rowPropsTemplate={['name', 'domain', 'count_follow_service']}
           onEditRow={row_id => dispatch(openPopup('изменить клиента'))}
           onDeleteRow={row_id => handleDeleteClient(row_id)}
         />

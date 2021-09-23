@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import styles from '../scss/molecules/ServiceLabel.module.scss'
 import { ArrowHadSmallBottom, Edit } from '../icons'
 import { useDispatch } from 'react-redux'
-import PopupServicesEdit from '../popups/PopupServicesEdit'
 import { openPopup } from '../redux/actions/popupActions'
 
 const ServiceLabel = ({
@@ -22,7 +21,7 @@ const ServiceLabel = ({
     <div className={classNames(className, styles.root)}>
 
       <button onClick={() => {
-         dispatch(openPopup(<PopupServicesEdit />))
+         dispatch(openPopup('изменить услугу'))
          handleEditService()}} className={styles.edit_btn}>
         Наименование  
         <div className={styles.edit_icon}>

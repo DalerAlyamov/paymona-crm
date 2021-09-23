@@ -6,7 +6,6 @@ import { Button } from '../atoms'
 import { openPopup } from '../redux/actions/popupActions'
 import { useDispatch } from 'react-redux'
 import { TableTools } from '../molecules'
-import PopupServicesAdd from '../popups/PopupServicesAdd'
 
 const Services = ({
   className
@@ -40,7 +39,7 @@ const Services = ({
           searchValue={searchValue}
           setSearchValue={setSearchValue}
         >
-          <Button type='outlined' onClick={() => dispatch(openPopup(<PopupServicesAdd/>))}>
+          <Button type='outlined' onClick={() => dispatch(openPopup('добавить услугу'))}>
             Добавить услугу
           </Button>
         </TableTools>
