@@ -1,0 +1,11 @@
+@import '../root.scss';
+
+.root {
+  @include header-2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 50px;
+  min-height: 200px;
+}

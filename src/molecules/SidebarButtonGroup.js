@@ -42,10 +42,10 @@ const SidebarButtonGroup = ({
         </SidebarButton>
       </Link>
 
-      <Link to='/reviews'>
+      <Link to='/feedbacks'>
         <SidebarButton 
           beforeIcon={<InfoOutline />} 
-          active={location.pathname === '/reviews'}
+          active={location.pathname === '/feedbacks'}
         >
           {!removeText && 'Отзывы'}
         </SidebarButton>

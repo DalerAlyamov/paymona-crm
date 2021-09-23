@@ -7,7 +7,8 @@ import { TableRowContainer } from '../molecules'
 import { Button } from '../atoms'
 import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
-import { PopupAddEmployee, PopupEditEmployee, PopupFitback } from '../popups'
+import { PopupEditEmployee, PopupAddEmployee, PopupInfoText } from '../popups'
+import { login, logout } from '../redux/actions/userActions'
 
 const Employees = ({
   className=''
@@ -81,16 +82,15 @@ const Employees = ({
 
   const [data, setData] = useState([])
 
-  const [sendData, setSendData] = useState([])
-
 
   /* Functions */
 
   const handleDeleteEmplyeee = id => {
+
     if (user.type !== 'superuser')
-      return dispatch(openPopup('Только superuser способен удалять пользователей'), 100)
+      return dispatch(openPopup(<PopupInfoText text='Только superuser способен удалять пользователей' />, 500))
     if (id === user.id)
-      return dispatch(openPopup('Нельзя удалять самого себя!'), 100)
+      return dispatch(openPopup(<PopupInfoText text='Нельзя удалять самого себя' />, 500))
 
     const config = {
       url: 'employee/delete/'+id,
@@ -102,6 +102,35 @@ const Employees = ({
     API(config)
       .then(res => res.data)
       .then(data => setData(data))
+      .catch(error => {
+        if(error.response.status === 401) {
+          dispatch(login({...user, status: 'logouting'}))
+          setTimeout(() => {
+            dispatch(logout())
+          }, 1200)
+        }
+      })
+  }
+
+  const handleReloadData = () => {
+    const config = {
+      url: 'employee/get/',
+      method: 'get',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      }
+    }
+    API(config)
+      .then(res => res.data)
+      .then(res => setData(res))
+      .catch(error => {
+        if(error.response.status === 401) {
+          dispatch(login({...user, status: 'logouting'}))
+          setTimeout(() => {
+            dispatch(logout())
+          }, 1200)
+        }
+      })
   }
 
 
@@ -118,28 +147,16 @@ const Employees = ({
     API(config)
       .then(res => res.data)
       .then(res => setData(res))
-  }, [user.token])
-
-
-  const SendData = () => {
-    const config = {
-      url: `/employee/get/`,
-      method: 'post',
-      headers: {
-        'Authorization': 'Bearer ' + user.token,
-        'Content-Type': 'application/json',
-      }
-     }
-       API(config)
-       .then(res => res.data)
-       .then(res => setSendData(res) )
-  }
-
-
-  //Function
-
-
-
+      .catch(error => {
+        if(error.response.status === 401) {
+          dispatch(login({...user, status: 'logouting'}))
+          setTimeout(() => {
+            dispatch(logout())
+          }, 1200)
+        }
+      })
+  }, [user, dispatch])
+  
 
   /* Render */
 
@@ -158,15 +175,18 @@ const Employees = ({
       <Table className={styles.table}>
 
         <TableRowContainer
+          hasFilter
+          hasRowMenu
           data={data}
           template={template}
           headers={['Имя', 'Фамилия', 'Должность', 'Отдел', 'Тип']}
           initialSortList={sortList}
           initialFilterList={filterList}
+          onReload={() => handleReloadData()}
           toolsChildren={
-            <Button 
+            <Button
               type='outlined' 
-              onClick={() => dispatch(openPopup(<PopupFitback setData={SendData()} title='Добавить сотрудника'/>))}
+              onClick={() => dispatch(openPopup(<PopupAddEmployee setData={setData} title='Добавить сотрудника'/>))}
             >
               Добавить сотрудника
             </Button>

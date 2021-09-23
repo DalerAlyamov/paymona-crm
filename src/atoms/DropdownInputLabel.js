@@ -6,7 +6,7 @@ const DropdownInputLabel = ({
   className='',
   active=false,
   error=false,
-  children=<></>,
+  children='',
   onClick=()=>{}
 }) => {
 

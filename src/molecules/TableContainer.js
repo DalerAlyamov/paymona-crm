@@ -3,19 +3,25 @@ import classNames from 'classnames'
 import styles from '../scss/molecules/TableRowContainer.module.scss'
 import { dynamicSort } from '../functions'
 import { TableHeaders, TableRow, TableTools } from '.'
-import { TableColumn } from '../atoms'
+import { Button, TableColumn } from '../atoms'
+import { Replay } from '../icons'
 
 const TableRowContainer = ({
   className='',
   data=[],
   template=['1fr'],
   headers=[],
+  hasFilter=false,
+  hasRowMenu=false,
+  isRowClickable=false,
   initialSortList=[],
   initialFilterList=[],
   toolsChildren=<></>,
   rowPropsTemplate=<></>,
   onEditRow=()=>{},
-  onDeleteRow=()=>{}
+  onDeleteRow=()=>{},
+  onRowClick=()=>{},
+  onReload=()=>{}
 }) => {
 
   
@@ -58,7 +64,7 @@ const TableRowContainer = ({
     <div className={classNames(className, styles.root)}>
 
       <TableTools 
-        hasFilter
+        hasFilter={hasFilter}
         sortList={sortList}
         filterList={filterList}
         searchValue={searchValue}
@@ -69,7 +75,15 @@ const TableRowContainer = ({
         {toolsChildren}
       </TableTools>
 
-      <TableHeaders template={template} hasMenu>
+      <Button 
+        circle
+        type='text'
+        className={styles.reload_btn}
+        beforeIcon={<Replay />} 
+        onClick={onReload}
+      />   
+
+      <TableHeaders template={template} hasMenu={hasRowMenu}>
         {headers.map(col => 
           <TableColumn key={col}>
             {col}
@@ -78,20 +92,28 @@ const TableRowContainer = ({
       </TableHeaders>
 
       {editedData.map((row, index) => 
-        <TableRow 
-          hasMenu
-          id={row.id} 
-          key={row.id}
-          honest={index%2===0}
-          template={template}
-          menu={<Menu onEditRow={() => onEditRow(row.id)} onDeleteRow={() => onDeleteRow(row.id)} />}
-        >
-          {rowPropsTemplate.map((prop, index) => 
-            <TableColumn key={index}>
-              {row[prop]}
-            </TableColumn>  
+        <div
+          key={row.id} 
+          className={classNames(
+            styles.rowButton, 
+            isRowClickable && styles.rowButton__clickable
           )}
-        </TableRow>  
+          onClick={() => onRowClick(row.id)}
+        >
+          <TableRow 
+            hasMenu={hasRowMenu}
+            id={row.id} 
+            honest={index%2===0}
+            template={template}
+            menu={<Menu onEditRow={() => onEditRow(row.id)} onDeleteRow={() => onDeleteRow(row.id)} />}
+          >
+            {rowPropsTemplate.map((prop, index) => 
+              <TableColumn key={index}>
+                {row[prop]}
+              </TableColumn>  
+            )}
+          </TableRow>  
+        </div>
       )}
     </div>
   )

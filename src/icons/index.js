@@ -68,6 +68,7 @@ import Visibility from './Visibility'
 import VisibilityOff from './VisibilityOff'
 import Work from './Work'
 import WorkOutline from './WorkOutline'
+import Replay from './Replay'
 
 export {
   Account,
@@ -139,5 +140,6 @@ export {
   Visibility,
   VisibilityOff,
   Work,
-  WorkOutline
+  WorkOutline,
+  Replay
 }

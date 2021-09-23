@@ -4,7 +4,7 @@ import styles from '../scss/atoms/AnimatedInputSuffix.module.scss'
 
 const AnimatedInputSuffix = ({
   className='',
-  children=<></>
+  children=''
 }) => {
   return (
     <div className={classNames(className, styles.root)}>

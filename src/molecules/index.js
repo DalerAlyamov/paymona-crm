@@ -10,8 +10,8 @@ import PopupPanel from './PopupPanel'
 import ServiceLabel from './ServiceLabel'
 import DropDownInput from './DropDownInput'
 import TableRowContainer from './TableContainer'
-import TopPanelInPopup from '../molecules/TopPanelInPopup'
 import FooterPanelInPopup from './FooterPanelInPopup'
+import TopPanelInPopup from './TopPanelInPopup'
 export {
   AnimatedInput,
   LoginRightSide,
@@ -25,6 +25,6 @@ export {
   ServiceLabel,
   DropDownInput,
   TableRowContainer,
-  TopPanelInPopup,
-  FooterPanelInPopup
+  FooterPanelInPopup,
+  TopPanelInPopup
 }

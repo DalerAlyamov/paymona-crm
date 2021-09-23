@@ -8,7 +8,7 @@ import { openPopup } from '../redux/actions/popupActions'
 
 const ServiceLabel = ({
   className='',
-  children=<></>,
+  children='',
   open=false,
   onClick=()=>{}
 }) => {

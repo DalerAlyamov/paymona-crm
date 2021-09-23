@@ -4,7 +4,7 @@ import styles from '../scss/atoms/DropdownInputMenu.module.scss'
 
 const DropdownInputMenu = ({
   className='',
-  children=<></>
+  children=''
 }) => {
 
   return (

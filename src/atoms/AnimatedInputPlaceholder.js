@@ -4,7 +4,7 @@ import styles from '../scss/atoms/AnimatedInputPlaceholder.module.scss'
 
 const AnimatedInputPlaceholder = ({
   className='',
-  children=<></>,
+  children='',
   active=false,
   error=false
 }) => {

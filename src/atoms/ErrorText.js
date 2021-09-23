@@ -5,7 +5,7 @@ import { Info } from '../icons'
 
 const ErrorText = ({
   className='',
-  children=<></>
+  children=''
 }) => {
 
   return (

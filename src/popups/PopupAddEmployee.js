@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
 import styles from '../scss/popups/PopupAddEmployee.module.scss'
-import { AnimatedInput, DropDownInput } from '../molecules'
 import { Wrap } from '../organisms'
 import { ErrorText } from '../atoms'
 import classNames from 'classnames'
 import { Dot } from '../icons'
-import FooterPanelInPopup from '../molecules/FooterPanelInPopup'
-import TopPanelInPopup from '../molecules/TopPanelInPopup'
+import { AnimatedInput, DropDownInput, FooterPanelInPopup, TopPanelInPopup } from '../molecules'
 import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
 import { closePopup } from '../redux/actions/popupActions'
+import { login, logout } from '../redux/actions/userActions'
 
 const PopupAddEmployee = ({
   className='',
@@ -109,6 +108,13 @@ const PopupAddEmployee = ({
       })
       .catch(error => {
         const errors = []
+
+        if(error.response.status === 401) {
+          dispatch(login({...user, status: 'logouting'}))
+          setTimeout(() => {
+            dispatch(logout())
+          }, 1200)
+        }
         
         if (error.response.data.message === 'Email already exists')
           errors.push({type: 'email', text: 'Пользователь с такой электронной почтой уже существует'}) 

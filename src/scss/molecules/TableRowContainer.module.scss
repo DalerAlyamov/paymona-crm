@@ -1,1 +1,23 @@
 @import '../root.scss';
+
+.rowButton {
+  width: 100%;
+  cursor: default !important;
+}
+
+.rowButton__clickable {
+  cursor: pointer !important;
+  div {
+    transition: 100ms linear;
+  }
+  &:hover {
+    div {
+      filter: brightness(95%);
+    }
+  }
+  &:active {
+    div {
+      filter: brightness(90%);
+    }
+  }
+}

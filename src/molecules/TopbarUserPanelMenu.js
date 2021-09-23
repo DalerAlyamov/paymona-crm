@@ -30,8 +30,8 @@ const TopbarUserPanelMenu = ({
         type='outlined'
         beforeIcon={<Exit size={16} />}
         onClick={() => {
-          dispatch(login({...user, status: 'logouting'}))
           onClose()
+          dispatch(login({...user, status: 'logouting'}))
           setTimeout(() => {
             dispatch(logout())
           }, 1200)

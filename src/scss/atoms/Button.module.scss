@@ -47,7 +47,7 @@
   border-color: transparent;
   color: $primary-1;
   path {
-    color: $light-5;
+    color: $primary-1;
   }
   &:hover{
     background: $primary-bg-2;
@@ -107,4 +107,14 @@
 
 .small {
   padding: 8px 10px; 
+}
+
+.clean_icon {
+  .before_icon, .after_icon {
+    margin: 0;
+  }
+}
+
+.circle {
+  border-radius: 500px;
 }
