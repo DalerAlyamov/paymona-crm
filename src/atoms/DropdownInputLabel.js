@@ -5,6 +5,7 @@ import styles from '../scss/atoms/DropdownInputLabel.module.scss'
 const DropdownInputLabel = ({
   className='',
   active=false,
+  hasArrow=false,
   error=false,
   children='',
   onClick=()=>{}
@@ -17,6 +18,7 @@ const DropdownInputLabel = ({
         className, 
         styles.root,
         active && styles.active, 
+        hasArrow && styles.hasArrow, 
         error && styles.error 
       )}
     >

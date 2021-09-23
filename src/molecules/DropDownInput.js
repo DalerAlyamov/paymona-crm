@@ -14,6 +14,7 @@ const DropdownInput = ({
   initialOpening=false,
   active=false,
   error=false,
+  hasArrow=false,
   onClick=() => {},
   onClose=()=>{},
   onOpen=()=>{}
@@ -48,6 +49,7 @@ const DropdownInput = ({
     >
 
       <DropdownInputLabel 
+        hasArrow={hasArrow}
         onClick={() => {
           if (open)
             onClose()
