@@ -29,7 +29,7 @@ const SidebarButtonGroup = ({
           beforeIcon={<WorkOutline />} 
           active={location.pathname === '/services'}
         >
-          {!removeText && 'Услуги'}
+          {!removeText && 'Продукты'}
         </SidebarButton>
       </Link>
 

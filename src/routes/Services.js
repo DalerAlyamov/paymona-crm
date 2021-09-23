@@ -27,7 +27,7 @@ const Services = ({
       <Topbar 
         titleList={[
           {
-            text: 'Услуги',
+            text: 'Продукты',
             link: '/services'
           }
         ]} 

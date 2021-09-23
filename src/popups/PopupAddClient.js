@@ -29,7 +29,7 @@ const PopupAddClient = ({
   const [validation_errors, setValidation_errors] = useState([])
   
   // Avatar
-  const [avatar, setAvatar] = useState(null)
+  const [avatar, setAvatar] = useState('')
   
   // name
   const [name__inputValue, setName__inputValue] = useState('')
@@ -69,9 +69,9 @@ const PopupAddClient = ({
     return !errors.length
   }
 
-  const handleAddClient = async () => {
+  const handleAddClient = () => {
 
-    const logo = await toBase64(avatar)
+    const logo = avatar
 
     if (!checkValidation())
       return
@@ -126,12 +126,12 @@ const PopupAddClient = ({
               <AddCircle size={30} />
             </div>
             <div className={styles.img}>
-              {avatar && <img src={URL.createObjectURL(avatar)} alt="" />}
+              {avatar!=='' && <img src={avatar} alt="" />}
             </div>
             <input 
               className={styles.inputFile} 
               type="file" 
-              onChange={e => setAvatar(e.target.files[0])} 
+              onChange={async e => setAvatar(await toBase64(e.target.files[0]))} 
               accept="image/png, image/gif, image/jpeg" 
             />
           </label>

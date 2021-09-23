@@ -70,9 +70,9 @@ const PopupEditClient = ({
     return !errors.length
   }
 
-  const handleEditClient = async () => {
+  const handleEditClient = () => {
 
-    const logo = await toBase64(avatar)
+    const logo = avatar
 
     if (!checkValidation())
       return
@@ -102,7 +102,7 @@ const PopupEditClient = ({
         },
         {
           patch: 'products',
-          to: products__selected.trim()
+          to: products__selected
         }
       ])
     }
@@ -130,7 +130,7 @@ const PopupEditClient = ({
   useEffect(() => {
     const config = {
       method: 'get',
-      url: 'client/get-for-edit/'+id,
+      url: 'client/get_for_edit/'+id,
       headers: {
         'Authorization': 'Bearer ' + user.token
       }
@@ -143,6 +143,7 @@ const PopupEditClient = ({
         setIP__inputValue(res.ip_address)
         setProducts__selected(res.products)
         setAvatar(res.logo)
+        console.log(res.logo)
       })
       .catch(error => {
         if (!error.response) return
@@ -178,7 +179,7 @@ const PopupEditClient = ({
             <input 
               className={styles.inputFile} 
               type="file" 
-              onChange={e => setAvatar(toBase64(e.target.files[0]))} 
+              onChange={async e => setAvatar(await toBase64(e.target.files[0]))} 
               accept="image/png, image/gif, image/jpeg" 
             />
           </label>
