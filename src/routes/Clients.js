@@ -119,6 +119,10 @@ const Clients = ({
       })
   }, [user, dispatch])
 
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+
 
   return (
     <div className={classNames(className, styles.root)}>
