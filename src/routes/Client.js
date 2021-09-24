@@ -282,7 +282,7 @@ const Client = ({
           />
         </Wrap>
 
-        <TableHeaders template={template} hasMenu>
+        <TableHeaders template={template} hasMenu={user.status === 'superuser'}>
           {headers.map(col => 
             <TableColumn key={col}>
               {col}
@@ -298,7 +298,7 @@ const Client = ({
             )}
           >
             <TableRow
-              hasMenu
+              hasMenu={user.status === 'superuser'}
               id={row.id} 
               clickable={false}
               honest={index%2===0}

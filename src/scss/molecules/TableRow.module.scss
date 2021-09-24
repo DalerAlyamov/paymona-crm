@@ -2,7 +2,7 @@
 
 .root {
   display: grid;
-  padding: 16px 24px;
+  padding: 20px 24px !important;
   background: $light-5;
 }
 
@@ -15,7 +15,7 @@
   .root {
     width: 100%;
     flex-grow: 1;
-    padding-right: 0;
+    padding-right: 0 !important;
     cursor: pointer;
     transition: 100ms linear;
     &:hover {
@@ -27,15 +27,21 @@
   }
 }
 
+.wrap__with__menu {
+  .root {
+    padding-right: 20px !important;
+  }
+}
+
 .menu_wrap {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   align-self: baseline;
-  padding-top: 16px;
+  padding-top: 20px;
   padding-right: 24px;
-  padding-bottom: 16px;
+  padding-bottom: 20px;
   background: $light-5;
 }
 

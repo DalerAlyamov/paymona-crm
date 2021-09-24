@@ -99,7 +99,7 @@ const TableContainer = ({
         type='text'
         className={styles.reload_btn}
         beforeIcon={<Replay />} 
-        onClick={onReload}
+        onClick={() => onReload()}
       />
 
       <TableHeaders template={template} hasMenu={hasRowMenu}>

@@ -12,7 +12,9 @@ const App = () => {
   return (
     <>
       <Popup />
-      <LoginPage />
+      {user.status !== 'logined' && 
+        <LoginPage />
+      }
       {user.status !== 'logouted' &&
         <div className={styles.root}>
           <SideBar />

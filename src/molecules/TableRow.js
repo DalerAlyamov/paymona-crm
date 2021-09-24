@@ -37,11 +37,11 @@ const TableRow = ({
     )
   else 
     return (
-      <div className={styles.wrap}>
+      <div className={classNames(styles.wrap, !hasMenu && styles.wrap__with__menu)}>
         <div 
           className={classNames(
             className, 
-            styles.root
+            styles.root,
           )}
           onClick={onClick}
           style={{ gridTemplateColumns: gridTemplate.join(' ') }}

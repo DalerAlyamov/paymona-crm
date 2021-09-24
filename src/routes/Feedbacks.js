@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/routes/Feedbacks.module.scss'
 import { Table, Topbar } from '../organisms'
@@ -15,16 +15,16 @@ const Feedbacks = ({
   
   /* Variables */
 
-  const template = ['1fr', '1fr', '1fr', '1fr']
+  const template = ['1fr', '1fr', '1fr', '1fr', '1fr']
 
   const sortList = [
     {
-      id: 'sender',
+      id: 'client',
       text: 'Отправитель',
       active: true
     },
     {
-      id: 'date_of_send',
+      id: 'created_at',
       text: 'Дата отправки',
       active: false
     }
@@ -81,7 +81,7 @@ const Feedbacks = ({
   
   /* States */
 
-  const [data, setData] = useState()
+  const [data, setData] = useState([])
 
 
   /* Functions */
@@ -90,7 +90,7 @@ const Feedbacks = ({
     if (user.status !== 'logined' && user.status !== 'logining') 
       return
     const config = {
-      url: 'feedbacks/get/',
+      url: 'feedback/get',
       method: 'get',
       headers: {
         'Authorization': 'Bearer ' + user.token
@@ -107,6 +107,33 @@ const Feedbacks = ({
   }
 
 
+  /* Effects */
+
+  useEffect(() => {
+    if (user.status !== 'logined' && user.status !== 'logining') 
+      return
+    const config = {
+      url: 'feedback/get',
+      method: 'get',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      }
+    }
+    API(config)
+      .then(res => res.data)
+      .then(res => setData(res))
+      .catch(error => {
+        if (!error || !error.response) return
+        if (error.response.status === 401) 
+          dispatch(logouting())
+      })
+  }, [user, dispatch])
+
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+  
+
   /* Render */
 
   return (
@@ -122,17 +149,17 @@ const Feedbacks = ({
       <Table className={styles.table}>
 
         <TableContainer
-          rowClickable
-          onRowClick={id => dispatch(openPopup('отзыв: '+ id))}
           hasFilter
-          hasRowMenu={false}
+          rowClickable
           data={data}
           template={template}
-          headers={['Отправитель', 'Статаус', 'Услуга', 'Дата отправки']}
+          onRowClick={row_id => dispatch(openPopup(row_id))}
+          headers={['Отправитель', 'Заголовок', 'Статус', 'Продукт', 'Дата отправки']}
           initialSortList={sortList}
+          searchPropsDependence={['client', 'title']}
           initialFilterList={filterList}
           onReload={() => handleReloadData()}
-          rowPropsTemplate={['name', 'status', 'service', 'date_of_send']}
+          rowPropsTemplate={['client', 'title', 'status', 'product', 'created_at']}
         />
 
       </Table>
