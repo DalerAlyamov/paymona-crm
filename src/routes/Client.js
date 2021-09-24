@@ -5,8 +5,9 @@ import { useParams } from 'react-router'
 import API from '../API/API'
 import { Button, TableColumn } from '../atoms'
 import { dynamicSort } from '../functions'
+import { Replay } from '../icons'
 import { TableHeaders, TableRow, TableTools } from '../molecules'
-import { Table, Topbar } from '../organisms'
+import { Table, Topbar, Wrap } from '../organisms'
 import { PopupAddEmployeeToClient } from '../popups'
 import { openPopup } from '../redux/actions/popupActions'
 import { login } from '../redux/actions/userActions'
@@ -182,6 +183,33 @@ const Client = ({
   }, [tableData, searchValue, sortList, filterList, searchPropsDependence])
 
 
+  /* Functions */
+
+  const handleReloadTableData = () => {
+
+    const config = {
+      method: 'get',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      }
+    }
+    
+    const dataConfig = {
+      ...config,
+      url: 'client/get_for_edit/'+id
+    }
+
+    API(dataConfig)
+      .then(res => res.data)
+      .then(data => setData(data))
+      .catch(error => {
+        if (!error.response) return
+        if (error.response.status === 401) 
+          dispatch(login({...user, status: 'logouting'}))
+      })
+  }
+
+
   /* Render */
 
   if (!data) return <></>
@@ -223,6 +251,16 @@ const Client = ({
             Добавить пользователя
           </Button>
         </TableTools>
+
+        <Wrap>
+          <Button 
+            circle
+            type='text'
+            className={styles.reload_btn}
+            beforeIcon={<Replay />} 
+            onClick={() => handleReloadTableData()}
+          />
+        </Wrap>
 
         <TableHeaders template={template} hasMenu>
           {headers.map(col => 

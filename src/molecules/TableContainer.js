@@ -100,7 +100,7 @@ const TableContainer = ({
         className={styles.reload_btn}
         beforeIcon={<Replay />} 
         onClick={onReload}
-      />   
+      />
 
       <TableHeaders template={template} hasMenu={hasRowMenu}>
         {headers.map(col => 
