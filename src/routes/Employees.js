@@ -8,7 +8,7 @@ import { Button } from '../atoms'
 import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
 import { PopupEditEmployee, PopupAddEmployee, PopupInfoText } from '../popups'
-import { login, logout } from '../redux/actions/userActions'
+import { login } from '../redux/actions/userActions'
 
 const Employees = ({
   className=''
@@ -120,10 +120,8 @@ const Employees = ({
       .then(res => res.data)
       .then(res => setData(res))
       .catch(error => {
-        if (error.response.status === 401) {
+        if (error.response.status === 401) 
           dispatch(login({...user, status: 'logouting'}))
-          
-        }
       })
   }
 
@@ -131,6 +129,8 @@ const Employees = ({
   /* UseEffects */
 
   useEffect(() => {
+    if (user.status !== 'logined' && user.status !== 'logining') 
+      return
     const config = {
       url: 'employee/get/',
       method: 'get',
@@ -143,10 +143,8 @@ const Employees = ({
       .then(res => setData(res))
       .catch(error => {
         if (!error.response) return
-        if (error.response.status === 401) {
+        if (error.response.status === 401) 
           dispatch(login({...user, status: 'logouting'}))
-          
-        }
       })
   }, [user, dispatch])
   

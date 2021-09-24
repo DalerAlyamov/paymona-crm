@@ -8,7 +8,7 @@ import { AddCircle, ArrowHadSmallBottom, CheckBox, CheckBoxOutlineBlank } from '
 import { AnimatedInput, DropDownInput, FooterPanelInPopup, TopPanelInPopup } from '../molecules'
 import { Wrap } from '../organisms'
 import { closePopup } from '../redux/actions/popupActions'
-import { login, logout } from '../redux/actions/userActions'
+import { login } from '../redux/actions/userActions'
 import styles from '../scss/popups/PopupEditClient.module.scss'
 
 const PopupEditClient = ({

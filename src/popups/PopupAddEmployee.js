@@ -8,7 +8,7 @@ import { AnimatedInput, DropDownInput, FooterPanelInPopup, TopPanelInPopup } fro
 import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
 import { closePopup } from '../redux/actions/popupActions'
-import { login, logout } from '../redux/actions/userActions'
+import { login } from '../redux/actions/userActions'
 
 const PopupAddEmployee = ({
   className='',

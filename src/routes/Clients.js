@@ -5,7 +5,7 @@ import styles from '../scss/routes/Clients.module.scss'
 import { Table, Topbar } from '../organisms'
 import { Button } from '../atoms'
 import { TableContainer } from '../molecules'
-import { login, logout } from '../redux/actions/userActions'
+import { login } from '../redux/actions/userActions'
 import { openPopup } from '../redux/actions/popupActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { PopupAddClient, PopupEditClient } from '../popups'
@@ -95,6 +95,8 @@ const Clients = ({
   /* UseEffects */
 
   useEffect(() => {
+    if (user.status !== 'logined' && user.status !== 'logining') 
+      return
     const config = {
       url: 'client/get/',
       method: 'get',

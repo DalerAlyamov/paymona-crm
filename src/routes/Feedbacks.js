@@ -5,7 +5,7 @@ import { Table, Topbar } from '../organisms'
 import { TableContainer } from '../molecules'
 import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
-import { login, logout } from '../redux/actions/userActions'
+import { login } from '../redux/actions/userActions'
 import { openPopup } from '../redux/actions/popupActions'
 
 const Feedbacks = ({
@@ -87,6 +87,8 @@ const Feedbacks = ({
   /* Functions */
 
   const handleReloadData = () => {
+    if (user.status !== 'logined' && user.status !== 'logining') 
+      return
     const config = {
       url: 'feedbacks/get/',
       method: 'get',
