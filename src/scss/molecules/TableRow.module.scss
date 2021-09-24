@@ -9,3 +9,36 @@
 .honest {
   background: $primary-bg-2;
 }
+
+.wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $primary-bg-2;
+  .root {
+    width: 100%;
+    flex-grow: 1;
+    padding-right: 0;
+    cursor: pointer;
+    transition: 100ms linear;
+    &:hover {
+      filter: brightness(95%);
+    }
+    &:active {
+      filter: brightness(90%);
+    }
+  }
+}
+
+.menu_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  align-self: baseline;
+  padding-top: 16px;
+  padding-right: 24px;
+  padding-bottom: 16px;
+  background: $primary-bg-2;
+}

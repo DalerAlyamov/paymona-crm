@@ -135,6 +135,7 @@ const Clients = ({
 
         <TableContainer
           hasFilter
+          rowClickable
           hasRowMenu={user.type === 'superuser'}
           data={data}
           template={template}

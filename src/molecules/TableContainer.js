@@ -114,15 +114,15 @@ const TableContainer = ({
         <div
           key={row.id} 
           className={classNames(
-            styles.rowButton, 
-            rowClickable && styles.rowButton__clickable
+            styles.rowButton
           )}
-          onClick={() => onRowClick(row.id)}
         >
           <TableRow 
             hasMenu={hasRowMenu}
             id={row.id} 
+            clickable={rowClickable}
             honest={index%2===0}
+            onClick={() => onRowClick(row.id)}
             template={template}
             menu={
               <Menu 

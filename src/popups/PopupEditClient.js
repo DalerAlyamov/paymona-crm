@@ -139,7 +139,6 @@ const PopupEditClient = ({
         setIP__inputValue(res.ip_address)
         setProducts__selected(res.products)
         setAvatar(res.logo)
-        console.log(res.logo)
       })
       .catch(error => {
         if (!error.response) return

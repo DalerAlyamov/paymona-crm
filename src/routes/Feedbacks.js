@@ -83,7 +83,7 @@ const Feedbacks = ({
 
   const [data, setData] = useState()
 
-  
+
   /* Functions */
 
   const handleReloadData = () => {
@@ -106,7 +106,7 @@ const Feedbacks = ({
         }
       })
   }
-  
+
 
   /* Render */
 
@@ -114,12 +114,10 @@ const Feedbacks = ({
     <div className={classNames(className, styles.root)}>
 
       <Topbar
-        titleList={[
-          {
-            text: 'Отзывы',
-            link: '/feedbacks'
-          }
-        ]} 
+        titleList={[{
+          text: 'Отзывы',
+          link: '/feedbacks'
+        }]} 
       />
 
       <Table className={styles.table}>

@@ -10,28 +10,52 @@ const TableRow = ({
   hasMenu=false,
   template=['1fr'],
   menu=<></>,
-  children=''
+  children='',
+  clickable=false
 }) => {
 
-  const gridTemplate = hasMenu ? [...template, '48px'] : template
+  const gridTemplate = hasMenu && !clickable ? [...template, '48px'] : template
 
-  return (
-    <div 
-      className={classNames(
-        className, 
-        styles.root,
-        honest && styles.honest
-      )}
-      style={{ gridTemplateColumns: gridTemplate.join(' ') }}
-    >
-      {children}
-      {hasMenu &&
-        <TableRowMenu id={id}>
-          {menu}
-        </TableRowMenu>
-      }
-    </div>
-  )
+  if (!clickable)
+    return (
+      <div 
+        className={classNames(
+          className, 
+          styles.root,
+          honest && styles.honest
+        )}
+        style={{ gridTemplateColumns: gridTemplate.join(' ') }}
+      >
+        {children}
+        {hasMenu &&
+          <TableRowMenu id={id}>
+            {menu}
+          </TableRowMenu>
+        }
+      </div>
+    )
+  else 
+    return (
+      <div className={styles.wrap}>
+        <div 
+          className={classNames(
+            className, 
+            styles.root,
+            honest && styles.honest
+          )}
+          style={{ gridTemplateColumns: gridTemplate.join(' ') }}
+        >
+          {children}
+        </div>
+        {hasMenu &&
+          <div className={styles.menu_wrap}>
+            <TableRowMenu id={id}>
+              {menu}
+            </TableRowMenu>
+          </div>
+        }
+      </div>
+    )
 }
 
 export default TableRow
