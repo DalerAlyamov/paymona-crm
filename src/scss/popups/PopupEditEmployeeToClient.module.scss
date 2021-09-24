@@ -1,0 +1,78 @@
+@import '../root.scss';
+
+.root{
+  width: 400px;
+}
+
+.content {
+  padding: 24px;
+}
+
+.dropdown_menu_item {
+  @include header-5;
+  position: relative;
+  border: 1px dashed transparent;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  text-align: left;
+  &:focus {
+    border: 1px dashed $light-1;
+  }
+}
+
+.dropdown_menu_item__active {
+  color: $primary-1;
+  .dropdown_menu_item__checkbox {
+    color: $primary-1;
+  }  
+}
+
+.dropdown_menu_item__checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  height: 100%;
+  color: $light-1;
+}
+
+.inputFile {
+  display: none;
+}
+
+.img_wrap {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+
+.plus_icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background: $light-5;
+  padding: 1px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  color: $primary-1;
+  justify-content: center;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: $light-1;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+}

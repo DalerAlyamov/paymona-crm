@@ -8,7 +8,7 @@ import { dynamicSort } from '../functions'
 import { Replay } from '../icons'
 import { TableHeaders, TableRow, TableTools } from '../molecules'
 import { Table, Topbar, Wrap } from '../organisms'
-import { PopupAddEmployeeToClient } from '../popups'
+import { PopupAddEmployeeToClient, PopupEditEmployeeToClient } from '../popups'
 import { openPopup } from '../redux/actions/popupActions'
 import { login } from '../redux/actions/userActions'
 import styles from '../scss/routes/Client.module.scss'
@@ -285,7 +285,7 @@ const Client = ({
               template={template}
               menu={
                 <Menu 
-                  onEditRow={() => dispatch(openPopup('редактировать'+row.id))} 
+                  onEditRow={() => dispatch(openPopup(<PopupEditEmployeeToClient id={row.id} clientId={id} />))} 
                   onDeleteRow={() => dispatch(openPopup('удалить'+row.id))} 
                 />
               }
