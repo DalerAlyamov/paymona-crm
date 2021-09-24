@@ -11,7 +11,8 @@ const TableRow = ({
   template=['1fr'],
   menu=<></>,
   children='',
-  clickable=false
+  clickable=false,
+  onClick=()=>{}
 }) => {
 
   const gridTemplate = hasMenu && !clickable ? [...template, '48px'] : template
@@ -40,15 +41,15 @@ const TableRow = ({
         <div 
           className={classNames(
             className, 
-            styles.root,
-            honest && styles.honest
+            styles.root
           )}
+          onClick={onClick}
           style={{ gridTemplateColumns: gridTemplate.join(' ') }}
         >
           {children}
         </div>
         {hasMenu &&
-          <div className={styles.menu_wrap}>
+          <div className={classNames(styles.menu_wrap)}>
             <TableRowMenu id={id}>
               {menu}
             </TableRowMenu>

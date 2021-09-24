@@ -9,6 +9,7 @@ import { login } from '../redux/actions/userActions'
 import { openPopup } from '../redux/actions/popupActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { PopupAddClient, PopupEditClient } from '../popups'
+import { useHistory } from 'react-router'
 
 const Clients = ({
   className
@@ -43,6 +44,11 @@ const Clients = ({
 
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
+  
+
+  /* React Router Dom */
+
+  const history = useHistory()
 
   
   /* States */
@@ -84,10 +90,9 @@ const Clients = ({
       .then(res => res.data)
       .then(res => setData(res))
       .catch(error => {
-        if (error.response.status === 401) {
+        if (!error) return
+        if (error.response.status === 401) 
           dispatch(login({...user, status: 'logouting'}))
-          
-        }
       })
   }
 
@@ -143,6 +148,7 @@ const Clients = ({
           searchPropsDependence={['name', 'domain_name']}
           initialSortList={sortList}
           initialFilterList={filterList}
+          onRowClick={row_id => history.replace('client/'+row_id)}
           onReload={() => handleReloadData()}
           toolsChildren={
             <Button

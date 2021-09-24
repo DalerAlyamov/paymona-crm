@@ -4,7 +4,7 @@ import App from './App'
 import store from './redux/reducers' 
 import { Provider } from 'react-redux'
 import './scss/global.scss'
-import { MemoryRouter  } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 
 ReactDOM.render(
   <MemoryRouter initialEntries={['/employees']}>

@@ -6,10 +6,6 @@
   background: $light-5;
 }
 
-.honest {
-  background: $primary-bg-2;
-}
-
 .wrap {
   width: 100%;
   display: flex;
@@ -40,5 +36,9 @@
   padding-top: 16px;
   padding-right: 24px;
   padding-bottom: 16px;
+  background: $light-5;
+}
+
+.honest {
   background: $primary-bg-2;
 }

@@ -12,7 +12,7 @@ const Topbar = ({
 }) => {
   return (
     <div className={classNames(className, styles.root)}>
-      <Wrap flex alignCenter>
+      <Wrap flex alignCenter gap={10}>
         {titleList.map((item, index) =>
           <React.Fragment key={index}>
             <button 
