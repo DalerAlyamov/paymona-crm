@@ -98,11 +98,9 @@ const Feedbacks = ({
       .then(res => res.data)
       .then(res => setData(res))
       .catch(error => {
-        if(error.response.status === 401) {
+        if (error.response.status === 401) {
           dispatch(login({...user, status: 'logouting'}))
-          setTimeout(() => {
-            dispatch(logout())
-          }, 1200)
+          
         }
       })
   }

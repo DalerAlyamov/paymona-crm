@@ -65,11 +65,9 @@ const Clients = ({
       .then(res => res.data)
       .then(data => setData(data))
       .catch(error => {
-        if(error.response.status === 401) {
+        if (error.response.status === 401) {
           dispatch(login({...user, status: 'logouting'}))
-          setTimeout(() => {
-            dispatch(logout())
-          }, 1200)
+          
         }
       })
   }
@@ -86,11 +84,9 @@ const Clients = ({
       .then(res => res.data)
       .then(res => setData(res))
       .catch(error => {
-        if(error.response.status === 401) {
+        if (error.response.status === 401) {
           dispatch(login({...user, status: 'logouting'}))
-          setTimeout(() => {
-            dispatch(logout())
-          }, 1200)
+          
         }
       })
   }
@@ -111,11 +107,9 @@ const Clients = ({
       .then(res => setData(res))
       .catch(error => {
         if (!error.response) return
-        if(error.response.status === 401) {
+        if (error.response.status === 401) {
           dispatch(login({...user, status: 'logouting'}))
-          setTimeout(() => {
-            dispatch(logout())
-          }, 1200)
+          
         }
       })
   }, [user, dispatch])
@@ -156,7 +150,7 @@ const Clients = ({
             </Button>
           }
           rowPropsTemplate={['name', 'domain_name', 'count_of_products']}
-          onEditRow={row_id => dispatch(openPopup(<PopupEditClient id={row_id} />))}
+          onEditRow={row_id => dispatch(openPopup(<PopupEditClient id={row_id} setData={setData} />))}
           onDeleteRow={row_id => handleDeleteClient(row_id)}
         />
 

@@ -58,7 +58,7 @@ const LoginPanel = ({
       url: 'login/',
       method: 'post',
       data: JSON.stringify({
-        email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com',
+        email: email__inputValue.trim().replaceAll('@paymona.com', '')+'@paymona.com',
         password: password__inputValue
       })
     } 

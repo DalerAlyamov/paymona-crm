@@ -22,13 +22,8 @@ const LoginPage = ({
 
     const timerFunc = () => {
       timer = window.setTimeout(() => {
-        if (user.status === 'logined') {
+        if (user.status === 'logined') 
           dispatch(login({ ...user, status: 'logouting' }))
-          window.setTimeout(() => {
-            if (user.status === 'logouting')
-              dispatch(logout())
-          }, 1200)
-        }
       }, logout_timer)
     }
 
@@ -60,6 +55,14 @@ const LoginPage = ({
 
     return () => window.removeEventListener('beforeunload', handleWindowBeforeunload)
   }, [user, dispatch])
+
+  useEffect(() => {
+    if (status === 'logouting')
+      setTimeout(() => {
+        if (user.status === 'logouting')
+          dispatch(logout())
+      }, 1200)
+  }, [status, dispatch, user])
 
   useEffect(() => {
     if (user.status === 'logouting')

@@ -32,9 +32,6 @@ const TopbarUserPanelMenu = ({
         onClick={() => {
           onClose()
           dispatch(login({...user, status: 'logouting'}))
-          setTimeout(() => {
-            dispatch(logout())
-          }, 1200)
         }}
       >
         Выход

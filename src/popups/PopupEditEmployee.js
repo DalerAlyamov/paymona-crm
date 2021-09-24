@@ -117,12 +117,9 @@ const PopupEditEmployee = ({
       .catch(error => {
         
         if (!error) return
-
-        if(error.response.status === 401) {
+        if (error.response.status === 401) {
           dispatch(login({...user, status: 'logouting'}))
-          setTimeout(() => {
-            dispatch(logout())
-          }, 1200)
+          
         }
       })
   }
@@ -149,11 +146,9 @@ const PopupEditEmployee = ({
       })
       .catch(error => {
         if (!error.response) return
-        if(error.response.status === 401) {
+        if (error.response.status === 401) {
           dispatch(login({...user, status: 'logouting'}))
-          setTimeout(() => {
-            dispatch(logout())
-          }, 1200)
+          
         }
       })
   }, [id, dispatch, user])

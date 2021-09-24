@@ -99,12 +99,8 @@ const PopupAddClient = ({
       })
       .catch(error => {
         if (!error) return
-        if (error.response.status === 401) {
+        if (error.response.status === 401) 
           dispatch(login({...user, status: 'logouting'}))
-          setTimeout(() => {
-            dispatch(logout())
-          }, 1200)
-        }
       })
   }
 

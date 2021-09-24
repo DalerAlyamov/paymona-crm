@@ -101,11 +101,9 @@ const Employees = ({
       .then(res => res.data)
       .then(data => setData(data))
       .catch(error => {
-        if(error.response.status === 401) {
+        if (error.response.status === 401) {
           dispatch(login({...user, status: 'logouting'}))
-          setTimeout(() => {
-            dispatch(logout())
-          }, 1200)
+          
         }
       })
   }
@@ -122,11 +120,9 @@ const Employees = ({
       .then(res => res.data)
       .then(res => setData(res))
       .catch(error => {
-        if(error.response.status === 401) {
+        if (error.response.status === 401) {
           dispatch(login({...user, status: 'logouting'}))
-          setTimeout(() => {
-            dispatch(logout())
-          }, 1200)
+          
         }
       })
   }
@@ -147,11 +143,9 @@ const Employees = ({
       .then(res => setData(res))
       .catch(error => {
         if (!error.response) return
-        if(error.response.status === 401) {
+        if (error.response.status === 401) {
           dispatch(login({...user, status: 'logouting'}))
-          setTimeout(() => {
-            dispatch(logout())
-          }, 1200)
+          
         }
       })
   }, [user, dispatch])

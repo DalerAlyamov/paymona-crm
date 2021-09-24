@@ -108,13 +108,9 @@ const PopupAddEmployee = ({
       })
       .catch(error => {
         const errors = []
-
-        if(error.response.status === 401) {
+        
+        if (error.response.status === 401) 
           dispatch(login({...user, status: 'logouting'}))
-          setTimeout(() => {
-            dispatch(logout())
-          }, 1200)
-        }
         
         if (error.response.data.message === 'Email already exists')
           errors.push({type: 'email', text: 'Пользователь с такой электронной почтой уже существует'}) 
