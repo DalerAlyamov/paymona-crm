@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/atoms/TableFilter.module.scss'
 import { Button } from '.'
-import { ArrowHadSmallTop, ArrowTop, CheckBox, CheckBoxOutlineBlank, Filter } from '../icons'
+import { ArrowHadSmallBottom, ArrowTop, CheckBox, CheckBoxOutlineBlank, Filter } from '../icons'
 
 const TableFilter = ({
   className='',
@@ -23,6 +23,11 @@ const TableFilter = ({
     window.addEventListener('click', handleWindowClick)
     return () => window.removeEventListener('click', handleWindowClick)
   }, [])
+  
+  useEffect(() => {
+    if (!filterList.length || openedFilterText) return
+    setOpenFilterText(filterList[0].text)
+  }, [filterList, openedFilterText])
 
   return (
     <div className={classNames(className, styles.root)}>
@@ -79,11 +84,11 @@ const TableFilter = ({
                       styles.filter_item, 
                       openedFilterText === col.text && styles['filter_item--active']
                     )} 
-                    onClick={() => setOpenFilterText(prev => prev === col.text ? null : col.text)}
+                    onClick={() => setOpenFilterText(col.text)}
                   >
                     {col.text}
                     <div className={styles.filter_item__arrow}>
-                      <ArrowHadSmallTop size={16} />
+                      <ArrowHadSmallBottom size={16} />
                     </div>
                   </button>
                   {openedFilterText === col.text && col.list.map(filter_tag => 
