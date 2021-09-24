@@ -6,7 +6,7 @@ import { Wrap } from '../organisms'
 import { useSelector } from 'react-redux'
 import { Exit } from '../icons'
 import { useDispatch } from 'react-redux'
-import { login } from '../redux/actions/userActions'
+import { logouting } from '../redux/actions/userActions'
 
 const TopbarUserPanelMenu = ({
   className='',
@@ -31,7 +31,7 @@ const TopbarUserPanelMenu = ({
         beforeIcon={<Exit size={16} />}
         onClick={() => {
           onClose()
-          dispatch(login({...user, status: 'logouting'}))
+          dispatch(logouting())
         }}
       >
         Выход

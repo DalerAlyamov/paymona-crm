@@ -5,7 +5,7 @@ import { Table, Topbar } from '../organisms'
 import { TableContainer } from '../molecules'
 import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
-import { login } from '../redux/actions/userActions'
+import { logouting } from '../redux/actions/userActions'
 import { openPopup } from '../redux/actions/popupActions'
 
 const Feedbacks = ({
@@ -100,10 +100,9 @@ const Feedbacks = ({
       .then(res => res.data)
       .then(res => setData(res))
       .catch(error => {
-        if (error.response.status === 401) {
-          dispatch(login({...user, status: 'logouting'}))
-          
-        }
+        if (!error || !error.response) return
+        if (error.response.status === 401) 
+          dispatch(logouting())
       })
   }
 

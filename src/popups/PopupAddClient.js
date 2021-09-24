@@ -8,7 +8,7 @@ import { AddCircle, ArrowHadSmallBottom, CheckBox, CheckBoxOutlineBlank } from '
 import { AnimatedInput, DropDownInput, FooterPanelInPopup, TopPanelInPopup } from '../molecules'
 import { Wrap } from '../organisms'
 import { closePopup } from '../redux/actions/popupActions'
-import { login } from '../redux/actions/userActions'
+import { logouting } from '../redux/actions/userActions'
 import styles from '../scss/popups/PopupAddClient.module.scss'
 
 const PopupAddClient = ({
@@ -98,9 +98,9 @@ const PopupAddClient = ({
         dispatch(closePopup())
       })
       .catch(error => {
-        if (!error) return
+        if (!error || !error.response) return
         if (error.response.status === 401) 
-          dispatch(login({...user, status: 'logouting'}))
+          dispatch(logouting())
       })
   }
 
@@ -252,7 +252,7 @@ const Menu = ({
   products__selected=()=>{}
 }) => {
 
-  const productsList = ['Офисы', 'Опросы']
+  const productsList = ['Офисы', 'Опросы', 'Аналитика', 'Машинное обучение']
 
   return (
     <>

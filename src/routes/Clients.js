@@ -5,7 +5,7 @@ import styles from '../scss/routes/Clients.module.scss'
 import { Table, Topbar } from '../organisms'
 import { Button } from '../atoms'
 import { TableContainer } from '../molecules'
-import { login } from '../redux/actions/userActions'
+import { logouting } from '../redux/actions/userActions'
 import { openPopup } from '../redux/actions/popupActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { PopupAddClient, PopupEditClient } from '../popups'
@@ -71,10 +71,9 @@ const Clients = ({
       .then(res => res.data)
       .then(data => setData(data))
       .catch(error => {
-        if (error.response.status === 401) {
-          dispatch(login({...user, status: 'logouting'}))
-          
-        }
+        if (!error || !error.response) return
+        if (error.response.status === 401) 
+          dispatch(logouting())
       })
   }
 
@@ -90,9 +89,9 @@ const Clients = ({
       .then(res => res.data)
       .then(res => setData(res))
       .catch(error => {
-        if (!error) return
+        if (!error || !error.response) return
         if (error.response.status === 401) 
-          dispatch(login({...user, status: 'logouting'}))
+          dispatch(logouting())
       })
   }
 
@@ -113,11 +112,9 @@ const Clients = ({
       .then(res => res.data)
       .then(res => setData(res))
       .catch(error => {
-        if (!error.response) return
-        if (error.response.status === 401) {
-          dispatch(login({...user, status: 'logouting'}))
-          
-        }
+        if (!error || !error.response) return
+        if (error.response.status === 401) 
+          dispatch(logouting())
       })
   }, [user, dispatch])
 
@@ -148,7 +145,7 @@ const Clients = ({
           searchPropsDependence={['name', 'domain_name']}
           initialSortList={sortList}
           initialFilterList={filterList}
-          onRowClick={row_id => history.replace('client/'+row_id)}
+          onRowClick={row_id => history.replace('clients/'+row_id)}
           onReload={() => handleReloadData()}
           toolsChildren={
             <Button

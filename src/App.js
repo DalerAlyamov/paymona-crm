@@ -19,8 +19,8 @@ const App = () => {
           <Route path='/employees' component={Employees} />
           <Route path='/services' component={Services} />
           <Route path='/feedbacks' component={Feedbacks} />
-          <Route path='/client/:id' component={Client} />
-          <Route path='/clients' component={Clients} />
+          <Route path='/clients/:id' component={Client} />
+          <Route exact path='/clients' component={Clients} />
         </div>
       }
     </>

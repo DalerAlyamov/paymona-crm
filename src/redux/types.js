@@ -14,6 +14,8 @@ export const TEST_TYPE = 'TEST_TYPE'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
+export const LOGINING = 'LOGINING'
+export const LOGOUTING = 'LOGOUTING'
 
 /*=====  End of User  ======*/
 

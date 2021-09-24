@@ -5,7 +5,7 @@ import { LoginTitle, Button } from '../atoms'
 import { AnimatedInput } from '../molecules'
 import { Wrap } from '../organisms'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../redux/actions/userActions'
+import { login, logining, logout } from '../redux/actions/userActions'
 import API from '../API/API'
 
 const LoginPanel = ({
@@ -79,11 +79,11 @@ const LoginPanel = ({
         if (res['one-time']) {
           setPage('change_password')
           setEmailChecking(false)
-          dispatch(login({...user, status: 'logouted'}))
+          dispatch(logout())
           setPassword__inputValue('')
         }
         else {
-          dispatch(login({...user, status: 'logining'}))
+          dispatch(logining())
           setTimeout(() => {
             dispatch(login({...user, status: 'logined'}))
             setEmailChecking(false)
@@ -93,7 +93,7 @@ const LoginPanel = ({
         }
       })
       .catch(error => {
-        if (!error.response) return
+        if (!error || !error.response) return
         if(error.response.status === 404)
           setTimeout(() => {
             setError('Неправильная почта или пароль')
@@ -121,6 +121,7 @@ const LoginPanel = ({
         setEmailChecking(false)
       })
       .catch(error => {
+        if (!error || !error.response) return
         if(error.response.status === 404)
           setTimeout(() => {
             setError('Пользователь не найден')
@@ -148,6 +149,7 @@ const LoginPanel = ({
         setEmailChecking(false)
       })
       .catch(error => {
+        if (!error || !error.response) return
         if(error.response.status === 404)
           setTimeout(() => {
             setError('Введенный код недействителен')
@@ -200,6 +202,7 @@ const LoginPanel = ({
         setEmailChecking(false)
       })
       .catch(error => {
+        if (!error || !error.response) return
         if(error.response.status === 404)
           setTimeout(() => {
             setEmailChecking(false)

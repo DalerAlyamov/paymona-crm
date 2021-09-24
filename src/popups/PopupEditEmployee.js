@@ -8,7 +8,7 @@ import { AnimatedInput, DropDownInput, FooterPanelInPopup, TopPanelInPopup } fro
 import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
 import { closePopup } from '../redux/actions/popupActions'
-import { login } from '../redux/actions/userActions'
+import { logouting } from '../redux/actions/userActions'
 
 const PopupEditEmployee = ({
   className='',
@@ -115,10 +115,9 @@ const PopupEditEmployee = ({
         dispatch(closePopup())
       })
       .catch(error => {
-        
-        if (!error) return
+        if (!error || !error.response) return
         if (error.response.status === 401) {
-          dispatch(login({...user, status: 'logouting'}))
+          dispatch(logouting())
           
         }
       })
@@ -145,9 +144,9 @@ const PopupEditEmployee = ({
         setUserType__selected(res.type)
       })
       .catch(error => {
-        if (!error.response) return
+        if (!error || !error.response) return
         if (error.response.status === 401) {
-          dispatch(login({...user, status: 'logouting'}))
+          dispatch(logouting())
           
         }
       })

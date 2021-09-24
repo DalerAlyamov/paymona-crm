@@ -13,7 +13,6 @@ const TableFilter = ({
 }) => {
 
   const [open, setOpen] = useState(false)
-  const [openedFilterText, setOpenFilterText] = useState(null)
 
   useEffect(() => {
     const handleWindowClick = e => {
@@ -23,11 +22,6 @@ const TableFilter = ({
     window.addEventListener('click', handleWindowClick)
     return () => window.removeEventListener('click', handleWindowClick)
   }, [])
-  
-  useEffect(() => {
-    if (!filterList.length || openedFilterText) return
-    setOpenFilterText(filterList[0].text)
-  }, [filterList, openedFilterText])
 
   return (
     <div className={classNames(className, styles.root)}>
@@ -76,37 +70,13 @@ const TableFilter = ({
                 Фильтр
               </span>
 
-              {filterList.map(col => 
-                <React.Fragment key={col.text}>
-                  <button 
-                    key={col.text}
-                    className={classNames(
-                      styles.filter_item, 
-                      openedFilterText === col.text && styles['filter_item--active']
-                    )} 
-                    onClick={() => setOpenFilterText(col.text)}
-                  >
-                    {col.text}
-                    <div className={styles.filter_item__arrow}>
-                      <ArrowHadSmallBottom size={16} />
-                    </div>
-                  </button>
-                  {openedFilterText === col.text && col.list.map(filter_tag => 
-                    <button 
-                      key={filter_tag.text}
-                      className={classNames(
-                        styles.filter_tag, 
-                        filter_tag.active && styles['filter_tag--active']
-                      )} 
-                      onClick={() => onSetFilter(filter_tag.text)}
-                    >
-                      {filter_tag.text}
-                      <div className={styles.filter_tag__checkbox}>
-                        {filter_tag.active ? <CheckBox size={16} /> : <CheckBoxOutlineBlank size={16} />}
-                      </div>
-                    </button>
-                  )}
-                </React.Fragment>  
+              {filterList.map((col, index) => 
+                <TableFilterItem
+                  isFirst={index === 0}
+                  key={col.text} 
+                  col={col}
+                  onSetFilter={text => onSetFilter(text)}
+                />
               )}
             </>
           }
@@ -115,6 +85,48 @@ const TableFilter = ({
       }
 
     </div>
+  )
+}
+
+const TableFilterItem = ({
+  isFirst=false,
+  onSetFilter,
+  col
+}) => {
+
+  const [open, setOpen] = useState(isFirst)
+
+  return (
+    <>
+      <button 
+        key={col.text}
+        className={classNames(
+          styles.filter_item, 
+          open === col.text && styles['filter_item--active']
+        )} 
+        onClick={() => setOpen(!open)}
+      >
+        {col.text}
+        <div className={styles.filter_item__arrow}>
+          <ArrowHadSmallBottom size={16} />
+        </div>
+      </button>
+      {open && col.list.map(filter_tag => 
+        <button 
+          key={filter_tag.text}
+          className={classNames(
+            styles.filter_tag, 
+            filter_tag.active && styles['filter_tag--active']
+          )} 
+          onClick={() => onSetFilter(filter_tag.text)}
+        >
+          {filter_tag.text}
+          <div className={styles.filter_tag__checkbox}>
+            {filter_tag.active ? <CheckBox size={16} /> : <CheckBoxOutlineBlank size={16} />}
+          </div>
+        </button>
+      )}
+    </>  
   )
 }
 

@@ -1,8 +1,9 @@
 import classNames from 'classnames'
+import styles from '../scss/routes/Client.module.scss'
+import API from '../API/API'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
-import API from '../API/API'
 import { Button, TableColumn } from '../atoms'
 import { dynamicSort } from '../functions'
 import { Replay } from '../icons'
@@ -10,8 +11,7 @@ import { TableHeaders, TableRow, TableTools } from '../molecules'
 import { Table, Topbar, Wrap } from '../organisms'
 import { PopupAddEmployeeToClient, PopupEditEmployeeToClient } from '../popups'
 import { openPopup } from '../redux/actions/popupActions'
-import { login } from '../redux/actions/userActions'
-import styles from '../scss/routes/Client.module.scss'
+import { logouting } from '../redux/actions/userActions'
 
 const Client = ({
   className
@@ -125,9 +125,9 @@ const Client = ({
       .then(res => res.data)
       .then(data => setData(data))
       .catch(error => {
-        if (!error.response) return
-        if (error.response.status === 401) 
-          dispatch(login({...user, status: 'logouting'}))
+        if (!error || !error.response) return
+        if (error.response.status === 401)
+          dispatch(logouting())
       })
 
     const tableConfig = {
@@ -139,8 +139,9 @@ const Client = ({
       .then(res => res.data)
       .then(data => setTableData(data))
       .catch(error => {
+        if (!error || !error.response) return
         if (error.response.status === 401) 
-          dispatch(login({...user, status: 'logouting'}))
+          dispatch(logouting())
       })
   }, [id, dispatch, user])
 
@@ -201,11 +202,30 @@ const Client = ({
 
     API(dataConfig)
       .then(res => res.data)
-      .then(data => setData(data))
+      .then(_data => setTableData(_data))
       .catch(error => {
-        if (!error.response) return
+        if (!error || !error.response) return
         if (error.response.status === 401) 
-          dispatch(login({...user, status: 'logouting'}))
+          dispatch(logouting())
+      })
+  }
+
+  const handleDeleteClientEmployee = employee_id => {
+
+    const config = {
+      url: 'client/employee/'+id+'/delete/'+employee_id,
+      method: 'delete',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      }
+    }
+    API(config)
+      .then(res => res.data)
+      .then(_data => setTableData(_data))
+      .catch(error => {
+        if (!error || !error.response) return
+        if (error.response.status === 401) 
+          dispatch(logouting())
       })
   }
 
@@ -229,7 +249,7 @@ const Client = ({
           },
           {
             text: 'Подробная информация',
-            link: '/client/'+id
+            link: '/clients/'+id
           }
         ]}
       />
@@ -285,8 +305,14 @@ const Client = ({
               template={template}
               menu={
                 <Menu 
-                  onEditRow={() => dispatch(openPopup(<PopupEditEmployeeToClient id={row.id} clientId={id} />))} 
-                  onDeleteRow={() => dispatch(openPopup('удалить'+row.id))} 
+                  onEditRow={() => dispatch(openPopup(
+                    <PopupEditEmployeeToClient 
+                      id={row.id} 
+                      clientId={id} 
+                      setData={_data => setTableData(_data)} 
+                    />
+                  ))} 
+                  onDeleteRow={() => handleDeleteClientEmployee(row.id)} 
                 />
               }
             >

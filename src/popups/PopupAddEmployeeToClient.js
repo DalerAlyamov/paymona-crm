@@ -3,11 +3,10 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
 import { ErrorText } from '../atoms'
-import { ArrowHadSmallBottom, CheckBox, CheckBoxOutlineBlank } from '../icons'
-import { AnimatedInput, DropDownInput, FooterPanelInPopup, TopPanelInPopup } from '../molecules'
+import { AnimatedInput, FooterPanelInPopup, TopPanelInPopup } from '../molecules'
 import { Wrap } from '../organisms'
 import { closePopup } from '../redux/actions/popupActions'
-import { login } from '../redux/actions/userActions'
+import { logouting } from '../redux/actions/userActions'
 import styles from '../scss/popups/PopupAddEmployeeToClient.module.scss'
 
 const PopupAddEmployeeToClient = ({
@@ -39,10 +38,6 @@ const PopupAddEmployeeToClient = ({
   const [email__inputValue, setEmail__inputValue] = useState('') 
   const [email__inputFocusing, setEmail__inputFocusing] = useState(false)
 
-  // selected products
-  const [products__selected, setProducts__selected] = useState([])
-  const [products__initialFocusing, setProducts__initialFocusing] = useState(false)
-
 
   /* Functions */
 
@@ -57,9 +52,6 @@ const PopupAddEmployeeToClient = ({
 
     if (email__inputValue.trim() === '') 
       errors.push({type: 'ip', text: 'Введит почту пользователя'}) 
-
-    if (!products__selected.length) 
-      errors.push({type: 'products', text: 'Выберите хотябы один продукт для клиента'})
 
     setValidation_errors(errors)
 
@@ -80,8 +72,7 @@ const PopupAddEmployeeToClient = ({
       data: JSON.stringify({
         name: name__inputValue.trim(),
         surname: surname__inputValue.trim(),
-        email: email__inputValue.trim(),
-        products: products__selected
+        email: email__inputValue.trim()
       })
     }
 
@@ -94,7 +85,7 @@ const PopupAddEmployeeToClient = ({
       .catch(error => {
         if (!error || !error.response) return
         if (error.response.status === 401) 
-          dispatch(login({...user, status: 'logouting'}))
+          dispatch(logouting())
       })
   }
 
@@ -159,50 +150,10 @@ const PopupAddEmployeeToClient = ({
             setValue={setEmail__inputValue}
             initialFocusing={email__inputFocusing}
             error={validation_errors.find(error => error.type === 'email')}
-            onKeyPress={e => {
-              if (e.code === 'Enter')
-                setProducts__initialFocusing(true)
-            }}
           />
           {validation_errors.find(error => error.type === 'email') &&
             <ErrorText>
               {validation_errors.find(error => error.type === 'email').text}
-            </ErrorText>
-          }
-        </Wrap>
-
-        {/********************* Products *********************/}
-        <Wrap flex column gap={4}>
-          <DropDownInput
-            id='1'
-            autoWidth
-            arrow={<ArrowHadSmallBottom />}
-            closeWhenClickMenu={false}
-            text={
-              <>
-                {products__selected.length ? 
-                `(${products__selected.join(', ')})` : 
-                `Выберите продукт`}
-              </>
-            }
-            initialOpening={products__initialFocusing}
-            error={validation_errors.find(error => error.type === 'products') && !products__selected.length}
-            onClose={() => setProducts__initialFocusing(false)}
-            active={products__selected.length}
-          >
-            <Menu 
-              onClick={type => {
-                if (products__selected.includes(type))
-                  setProducts__selected(products__selected.filter(product => product !== type))
-                else
-                  setProducts__selected([...products__selected, type]
-              )}}
-              products__selected={products__selected} 
-            />
-          </DropDownInput>
-          {validation_errors.find(error => error.type === 'products') && !products__selected.length &&
-            <ErrorText>
-              {validation_errors.find(error => error.type === 'products').text}
             </ErrorText>
           }
         </Wrap>
@@ -216,36 +167,6 @@ const PopupAddEmployeeToClient = ({
       />    
       
     </div>
-  )
-}
-
-const Menu = ({
-  onClick=()=>{},
-  products__selected=()=>{}
-}) => {
-
-  const productsList = ['Офисы', 'Опросы', 'Аналитика']
-
-  return (
-    <>
-      {productsList.map(product => 
-        <button 
-          key={product}
-          className={classNames(
-            styles.dropdown_menu_item, 
-            products__selected.includes(product) && styles.dropdown_menu_item__active
-          )} 
-          onClick={() => onClick(product)}
-        >
-          <div className={styles.dropdown_menu_item__checkbox}>
-            {products__selected.includes(product) ?
-              <CheckBox size={20} /> : <CheckBoxOutlineBlank size={20} />
-            }
-          </div>
-          {product}
-        </button>
-      )}
-    </>
   )
 }
 

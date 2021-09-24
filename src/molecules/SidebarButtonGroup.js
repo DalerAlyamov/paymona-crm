@@ -36,7 +36,7 @@ const SidebarButtonGroup = ({
       <Link to='/clients'>
         <SidebarButton 
           beforeIcon={<PeopleOutline />} 
-          active={location.pathname === '/clients'}
+          active={location.pathname.indexOf('/clients') !== -1}
         >
           {!removeText && 'Клиенты'}
         </SidebarButton>

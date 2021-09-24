@@ -4,7 +4,7 @@ import styles from '../scss/organisms/LoginPage.module.scss'
 import { LoginLeftSide } from '../atoms'
 import { LoginRightSide } from '../molecules'
 import { useDispatch, useSelector } from 'react-redux'
-import { login, logout } from '../redux/actions/userActions'
+import { logout, logouting } from '../redux/actions/userActions'
 
 const LoginPage = ({
   className=''
@@ -23,7 +23,7 @@ const LoginPage = ({
     const timerFunc = () => {
       timer = window.setTimeout(() => {
         if (user.status === 'logined') 
-          dispatch(login({ ...user, status: 'logouting' }))
+          dispatch(logouting())
       }, logout_timer)
     }
 

@@ -8,7 +8,7 @@ import { AnimatedInput, DropDownInput, FooterPanelInPopup, TopPanelInPopup } fro
 import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
 import { closePopup } from '../redux/actions/popupActions'
-import { login } from '../redux/actions/userActions'
+import { logouting } from '../redux/actions/userActions'
 
 const PopupAddEmployee = ({
   className='',
@@ -110,7 +110,7 @@ const PopupAddEmployee = ({
         const errors = []
         
         if (error.response.status === 401) 
-          dispatch(login({...user, status: 'logouting'}))
+          dispatch(logouting())
         
         if (error.response.data.message === 'Email already exists')
           errors.push({type: 'email', text: 'Пользователь с такой электронной почтой уже существует'}) 
