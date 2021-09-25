@@ -5,7 +5,7 @@ import { LoginTitle, Button } from '../atoms'
 import { AnimatedInput } from '../molecules'
 import { Wrap } from '../organisms'
 import { useDispatch, useSelector } from 'react-redux'
-import { login, logining, logout } from '../redux/actions/userActions'
+import { login, logining } from '../redux/actions/userActions'
 import API from '../API/API'
 
 const LoginPanel = ({
