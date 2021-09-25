@@ -3,7 +3,7 @@ import { LOGIN, LOGINING, LOGOUT, LOGOUTING } from '../types'
 const userReducer = (state = {status: 'logouted'}, action) => {
   switch(action.type) {
     case LOGINING: 
-      return {...state, status: 'logining'}
+      return {...action.user, status: 'logining'}
     case LOGIN: 
       return action.data.user
     case LOGOUTING: 

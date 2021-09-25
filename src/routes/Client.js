@@ -190,17 +190,13 @@ const Client = ({
 
     const config = {
       method: 'get',
+      url: 'client/employee/'+id+'/get_list',
       headers: {
         'Authorization': 'Bearer ' + user.token
       }
     }
-    
-    const dataConfig = {
-      ...config,
-      url: 'client/get_for_edit/'+id
-    }
 
-    API(dataConfig)
+    API(config)
       .then(res => res.data)
       .then(_data => setTableData(_data))
       .catch(error => {

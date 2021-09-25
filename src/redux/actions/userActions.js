@@ -12,9 +12,10 @@ export const login = user_info => {
   }
 }
 
-export const logining = () => {
+export const logining = user => {
   return {
-    type: LOGINING
+    type: LOGINING,
+    user
   }
 }
 

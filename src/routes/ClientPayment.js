@@ -9,7 +9,6 @@ import { dynamicSort } from '../functions'
 import { Replay } from '../icons'
 import { TableHeaders, TableRow, TableTools } from '../molecules'
 import { Table, Topbar, Wrap } from '../organisms'
-import { PopupAddEmployeeToClient, PopupEditEmployeeToClient } from '../popups'
 import { openPopup } from '../redux/actions/popupActions'
 import { logouting } from '../redux/actions/userActions'
 
@@ -20,9 +19,8 @@ const ClientPayment = ({
   
   /* Variables */
 
-  const template = useMemo(() => ['1fr', '1fr', '1fr', '1fr'], [])
-  const headers = useMemo(() => ['Имя', 'Фамилия', 'Тип', 'Электронная почта'], [])
-  const searchPropsDependence = useMemo(() => ['name', 'surname', 'email'], [])
+  const template = useMemo(() => ['1fr', '1fr', '1fr'], [])
+  const headers = useMemo(() => ['Подписка', 'Сумма оплаты', 'Дата оплаты'], [])
   
 
   /* Redux Hooks */
@@ -41,55 +39,35 @@ const ClientPayment = ({
   const [data, setData] = useState([])
   const [editedTableData, setEditedTableData] = useState([])
   const [tableData, setTableData] = useState([])
-  const [searchValue, setSearchValue] = useState('')
 
   const [sortList, setSortList] = useState([
     {
-      id: 'name',
-      text: 'По имени',
+      id: 'product',
+      text: 'По подписке',
       active: true
     },
     {
-      id: 'surname',
-      text: 'По фамилии',
+      id: 'amount',
+      text: 'По сумма оплаты',
       active: false
     },
     {
-      id: 'type',
-      text: 'По типу',
-      active: false
-    },
-    {
-      id: 'email',
-      text: 'По почте',
+      id: 'date',
+      text: 'По дата оплаты',
       active: false
     }
   ])
   const [filterList, setFilterList] = useState([
     {
-      id: 'type',
-      text: 'По типу',
+      id: 'product',
+      text: 'По подписке',
       list: [
-        {
-          text: 'user',
-          active: true
-        },
-        {
-          text: 'superuser',
-          active: true
-        }
-      ]
-    },
-    {
-      id: 'products',
-      text: 'По продукту',
-      list: [
-        {
-          text: 'Опросы',
-          active: true
-        },
         {
           text: 'Офисы',
+          active: true
+        },
+        {
+          text: 'Опросы',
           active: true
         },
         {
@@ -132,7 +110,7 @@ const ClientPayment = ({
 
     const tableConfig = {
       ...config,
-      url: 'client/employee/'+id+'/get_list'
+      url: 'client/payment/'+id+'/get'
     }
 
     API(tableConfig)
@@ -149,39 +127,19 @@ const ClientPayment = ({
 
     if (!tableData.length) return
 
-    let searchedData = tableData.filter(row => {
-      let access = false
-      searchPropsDependence.forEach(searchProp => {
-        if (row[searchProp].toLowerCase().indexOf(searchValue.trim().toLowerCase()) !== -1)
-          access = true
-      })
-      return access
-    })
-
-    if (searchValue.trim() === '')
-      searchedData = tableData.concat()
-
-    let filteredData = searchedData.filter(row => {
-
-      let ok = false
-
-      ok = filterList.find(filter => 
+    let filteredData = tableData.filter(row => 
+      filterList.find(filter => 
         filter.list.find(item => 
           item.text === row[filter.id] && item.active
         )
       )
-
-      if (ok)
-        ok = filterList.find(filter => filter.id === 'products').list.find(product => product.active && row.products.includes(product.text))
-
-      return ok
-    })
+    )
 
     let sortedData = filteredData.sort(dynamicSort(sortList.find(prop => prop.active).id))
 
     setEditedTableData(sortedData)
 
-  }, [tableData, searchValue, sortList, filterList, searchPropsDependence])
+  }, [tableData, sortList, filterList])
 
 
   /* Functions */
@@ -197,7 +155,7 @@ const ClientPayment = ({
     
     const dataConfig = {
       ...config,
-      url: 'client/get_for_edit/'+id
+      url: 'client/payment/'+id+'/get'
     }
 
     API(dataConfig)
@@ -248,7 +206,7 @@ const ClientPayment = ({
             link: '/clients'
           },
           {
-            text: 'Подробная информация',
+            text: 'История оплат',
             link: '/clients/'+id
           }
         ]}
@@ -256,19 +214,18 @@ const ClientPayment = ({
 
       <Table className={styles.table}>
         <TableTools 
+          hasSearch={false}
           hasFilter
           sortList={sortList}
           filterList={filterList}
-          searchValue={searchValue}
           setSortList={setSortList}
           setFilterList={setFilterList}
-          setSearchValue={setSearchValue}
         >
           <Button
             type='outlined' 
-            onClick={() => dispatch(openPopup(<PopupAddEmployeeToClient id={id} setData={setTableData} />))}
+            onClick={() => dispatch(openPopup('Добавить оплату'+id))}
           >
-            Добавить пользователя
+            Добавить оплату
           </Button>
         </TableTools>
 
@@ -300,23 +257,11 @@ const ClientPayment = ({
             <TableRow
               hasMenu={user.status === 'superuser'}
               id={row.id} 
-              clickable={false}
               honest={index%2===0}
               template={template}
-              menu={
-                <Menu 
-                  onEditRow={() => dispatch(openPopup(
-                    <PopupEditEmployeeToClient 
-                      id={row.id} 
-                      clientId={id} 
-                      setData={_data => setTableData(_data)} 
-                    />
-                  ))} 
-                  onDeleteRow={() => handleDeleteClientEmployee(row.id)} 
-                />
-              }
+              menu={<Menu onDeleteRow={() => handleDeleteClientEmployee(row.id)} />}
             >
-              {['name', 'surname', 'type', 'email'].map((prop, index) => 
+              {['product', 'amount', 'date'].map((prop, index) => 
                 <TableColumn key={index}>
                   {row[prop]}
                 </TableColumn>  
@@ -331,14 +276,11 @@ const ClientPayment = ({
 }
 
 const Menu = ({
-  onEditRow, onDeleteRow
+  onDeleteRow
 }) => {
 
   return (
     <>
-      <button onClick={() => onEditRow()}>
-        Редактировать
-      </button>
       <button onClick={() => onDeleteRow()}>
         Удалить
       </button>

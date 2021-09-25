@@ -5,6 +5,7 @@ import { TableFilter, TableSearch } from '../atoms'
 import { Wrap } from '../organisms'
 
 const TableTools = ({
+  hasSearch=true,
   className='',
   hasFilter=false,
   children='',
@@ -52,12 +53,13 @@ const TableTools = ({
 
   return (
     <div className={classNames(className, styles.root)}>
-      
-      <TableSearch 
-        value={searchValue}
-        setValue={setSearchValue}
-        onKeyPress={onSearchKeyPress}
-      />
+      {hasSearch &&
+        <TableSearch 
+          value={searchValue}
+          setValue={setSearchValue}
+          onKeyPress={onSearchKeyPress}
+        />
+      }
 
       <Wrap flex alignCenter justifyEnd>
         {hasFilter && 

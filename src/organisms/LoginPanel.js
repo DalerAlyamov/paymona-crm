@@ -83,7 +83,7 @@ const LoginPanel = ({
           setPassword__inputValue('')
         }
         else {
-          dispatch(logining())
+          dispatch(logining(user))
           setTimeout(() => {
             dispatch(login({...user, status: 'logined'}))
             setEmailChecking(false)

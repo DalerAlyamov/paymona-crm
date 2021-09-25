@@ -15,6 +15,7 @@ const TableContainer = ({
   hasFilter=false,
   hasRowMenu=false,
   rowClickable=false,
+  showMoreText='',
   initialSortList=[],
   initialFilterList=[],
   toolsChildren=<></>,
@@ -22,6 +23,7 @@ const TableContainer = ({
   onEditRow=()=>{},
   onDeleteRow=()=>{},
   onRowClick=()=>{},
+  onShowMore=()=>{},
   onReload=()=>{}
 }) => {
 
@@ -126,8 +128,10 @@ const TableContainer = ({
             template={template}
             menu={
               <Menu 
+                showMoreText={showMoreText}
                 onEditRow={() => onEditRow(row.id)} 
                 onDeleteRow={() => onDeleteRow(row.id)} 
+                onShowMore={() => onShowMore(row.id)} 
               />
             }
           >
@@ -144,11 +148,16 @@ const TableContainer = ({
 }
 
 const Menu = ({
-  onEditRow, onDeleteRow
+  showMoreText, onEditRow, onDeleteRow, onShowMore
 }) => {
 
   return (
     <>
+      {showMoreText !== '' && 
+        <button onClick={() => onShowMore()}>
+          {showMoreText}
+        </button>
+      }
       <button onClick={() => onEditRow()}>
         Редактировать
       </button>
