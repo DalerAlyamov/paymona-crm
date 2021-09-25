@@ -109,7 +109,7 @@ const PopupAddEmployee = ({
       .catch(error => {
         const errors = []
         
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
         
         if (error.response.data.message === 'Email already exists')

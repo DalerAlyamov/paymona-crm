@@ -6,8 +6,10 @@ import { TableHeaders, TableRow } from '../molecules'
 import { TableColumn } from '../atoms'
 
 const Service = ({
+  id=0,
   className='',
   title='',
+  setData=()=>{},
   headers=[],
   clientList=[],
   initialOpenState=false
@@ -23,7 +25,7 @@ const Service = ({
   return (
     <div className={classNames(className, styles.root, open && styles.open)}>
       
-      <ServiceLabel open={open} onClick={() => setOpen(!open)}>
+      <ServiceLabel setData={setData} id={id} open={open} onClick={() => setOpen(!open)}>
         {title}
       </ServiceLabel>
 
@@ -37,7 +39,13 @@ const Service = ({
             )}
           </TableHeaders>
 
-          {clientList.map((row, index) => 
+          {!clientList.length &&
+            <div className={styles.noneClient}>
+              Клиенты пока не подключены...
+            </div>
+          }
+
+          {clientList.length !==0 && clientList.map((row, index) => 
             <TableRow 
               honest={index % 2 === 0}
               template={template} 
@@ -48,10 +56,10 @@ const Service = ({
                 {row.name}
               </TableColumn>  
               <TableColumn>
-                {row.count}
+                {row.count_of_employees}
               </TableColumn>  
               <TableColumn>
-                {row.сonnection_date}
+                {row.start}
               </TableColumn>  
             </TableRow>
           )}

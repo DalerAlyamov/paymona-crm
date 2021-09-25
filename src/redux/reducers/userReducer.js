@@ -7,9 +7,12 @@ const userReducer = (state = {status: 'logouted'}, action) => {
     case LOGIN: 
       return action.data.user
     case LOGOUTING: 
-      return {...state, status: 'logouting'}
+      if (state.status !== 'logouted' || state.status !== 'logouting')
+        return {...state, status: 'logouting'}
+      else
+        return state
     case LOGOUT: 
-      return {status: 'logouted'}
+      return { status: 'logouted' }
     default: 
       return state
   }

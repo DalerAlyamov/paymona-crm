@@ -62,24 +62,7 @@ const ClientPayment = ({
     {
       id: 'product',
       text: 'По подписке',
-      list: [
-        {
-          text: 'Офисы',
-          active: true
-        },
-        {
-          text: 'Опросы',
-          active: true
-        },
-        {
-          text: 'Аналитика',
-          active: true
-        },
-        {
-          text: 'Машинное обучение',
-          active: true
-        }
-      ]
+      list: []
     }
   ])
 
@@ -119,7 +102,36 @@ const ClientPayment = ({
       .then(data => setTableData(data))
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
+          dispatch(logouting())
+      })
+
+    API({
+      url: 'service/getlist',
+      method: 'get',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      },
+    })
+      .then(res => res.data)
+      .then(data => setFilterList(prev => {
+        const next = prev.concat()
+
+        next.forEach(filter => {
+          if (filter.id === 'product')
+            filter.list = data.map(f => {
+              return {
+                active: true,
+                text: f
+              }
+            })
+        })
+
+        return next
+      }))
+      .catch(error => {
+        if (!error || !error.response) return
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
   }, [id, dispatch, user])
@@ -164,7 +176,7 @@ const ClientPayment = ({
       .then(_data => setTableData(_data))
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
   }
@@ -183,7 +195,7 @@ const ClientPayment = ({
       .then(_data => setTableData(_data))
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
   }

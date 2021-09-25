@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
 import { ErrorText } from '../atoms'
@@ -99,7 +99,7 @@ const PopupAddClient = ({
       })
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
   }
@@ -252,7 +252,27 @@ const Menu = ({
   products__selected=()=>{}
 }) => {
 
-  const productsList = ['Офисы', 'Опросы', 'Аналитика', 'Машинное обучение']
+  const [productsList, setProductsList] = useState([])
+  const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    API({
+      url: 'service/getlist',
+      method: 'get',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      },
+    })
+      .then(res => res.data)
+      .then(data => setProductsList(data))
+      .catch(error => {
+        if (!error || !error.response) return
+        if (error.response.status === 401 && user.status !== 'logouting') 
+          dispatch(logouting())
+      })
+  }, [user, dispatch])
 
   return (
     <>

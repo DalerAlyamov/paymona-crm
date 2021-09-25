@@ -102,7 +102,7 @@ const Employees = ({
       .then(data => setData(data))
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
   }
@@ -120,7 +120,7 @@ const Employees = ({
       .then(res => setData(res))
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
   }
@@ -143,7 +143,7 @@ const Employees = ({
       .then(res => setData(res))
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
   }, [user, dispatch])
@@ -172,7 +172,7 @@ const Employees = ({
           template={template}
           headers={['Имя', 'Фамилия', 'Должность', 'Отдел', 'Тип']}
           initialSortList={sortList}
-          searchPropsDependence={['name', 'surname']}
+          searchPropsDependence={['name', 'surname', 'position', 'department']}
           initialFilterList={filterList}
           onReload={() => handleReloadData()}
           toolsChildren={

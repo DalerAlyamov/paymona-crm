@@ -51,7 +51,7 @@ const ClientHeaderInfo = ({
         <Wrap className={styles.products} flex wrap gap={16}>
           
           {products.map(product => 
-            <div className={styles.product}>
+            <div className={styles.product} key={product}>
               {product}
             </div>  
           )}

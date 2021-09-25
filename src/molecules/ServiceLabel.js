@@ -4,8 +4,11 @@ import styles from '../scss/molecules/ServiceLabel.module.scss'
 import { ArrowHadSmallBottom, Edit } from '../icons'
 import { useDispatch } from 'react-redux'
 import { openPopup } from '../redux/actions/popupActions'
+import { PopupEditProduct } from '../popups'
 
 const ServiceLabel = ({
+  id=0,
+  setData=()=>{},
   className='',
   children='',
   open=false,
@@ -13,16 +16,11 @@ const ServiceLabel = ({
 }) => {
 
   const dispatch = useDispatch()
-  const handleEditService = () => {
-
-  }
 
   return (
     <div className={classNames(className, styles.root)}>
 
-      <button onClick={() => {
-         dispatch(openPopup('изменить услугу'))
-         handleEditService()}} className={styles.edit_btn}>
+      <button onClick={() => {dispatch(openPopup(<PopupEditProduct setData={setData} id={id} />))}} className={styles.edit_btn}>
         Наименование  
         <div className={styles.edit_icon}>
           <Edit size={18} />

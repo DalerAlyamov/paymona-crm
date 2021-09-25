@@ -83,24 +83,7 @@ const Client = ({
     {
       id: 'products',
       text: 'По продукту',
-      list: [
-        {
-          text: 'Опросы',
-          active: true
-        },
-        {
-          text: 'Офисы',
-          active: true
-        },
-        {
-          text: 'Аналитика',
-          active: true
-        },
-        {
-          text: 'Машинное обучение',
-          active: true
-        }
-      ]
+      list: []
     }
   ])
 
@@ -126,7 +109,7 @@ const Client = ({
       .then(data => setData(data))
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401)
+        if (error.response.status === 401 && user.status !== 'logouting')
           dispatch(logouting())
       })
 
@@ -135,14 +118,45 @@ const Client = ({
       url: 'client/employee/'+id+'/get_list'
     }
 
+    console.log(tableConfig)
+
     API(tableConfig)
       .then(res => res.data)
       .then(data => setTableData(data))
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
+
+    API({
+      url: 'service/getlist',
+      method: 'get',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      },
+    })
+      .then(res => res.data)
+      .then(data => setFilterList(prev => {
+        const next = prev.concat()
+
+        next.forEach(filter => {
+          if (filter.id === 'product')
+            filter.list = data.map(f => {
+              return {
+                active: true,
+                text: f
+              }
+            })
+        })
+
+        return next
+      }))
+      .catch(error => {
+        if (!error || !error.response) return
+        if (error.response.status === 401 && user.status !== 'logouting') 
+          dispatch(logouting())
+      })  
   }, [id, dispatch, user])
 
   useEffect(() => {
@@ -186,25 +200,49 @@ const Client = ({
 
   /* Functions */
 
-  const handleReloadTableData = () => {
+  const handleReloadData = () => {
 
     const config = {
       method: 'get',
-      url: 'client/employee/'+id+'/get_list',
       headers: {
         'Authorization': 'Bearer ' + user.token
       }
     }
+    
+    const dataConfig = {
+      ...config,
+      url: 'client/get_for_edit/'+id
+    }
 
-    API(config)
+    API(dataConfig)
       .then(res => res.data)
-      .then(_data => setTableData(_data))
+      .then(data => {
+        setData(data)
+      })
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401)
+          dispatch(logouting())
+      })
+
+    const tableConfig = {
+      ...config,
+      url: 'client/employee/'+id+'/get_list'
+    }
+
+    API(tableConfig)
+      .then(res => res.data)
+      .then(data => setTableData(data))
+      .catch(error => {
+        if (!error || !error.response) return
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
   }
+
+  useEffect(() => {
+    console.log(data)
+  }, [data])
 
   const handleDeleteClientEmployee = employee_id => {
 
@@ -220,7 +258,7 @@ const Client = ({
       .then(_data => setTableData(_data))
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
   }
@@ -251,12 +289,11 @@ const Client = ({
       />
 
       <Table className={styles.table}>
-
         <ClientHeaderInfo 
           logo={data.logo}
           title={data.name}
           domain={data.domain_name}
-          product={data.products}
+          products={data.products}
         />
 
         <TableTools 
@@ -282,7 +319,7 @@ const Client = ({
             type='text'
             className={styles.reload_btn}
             beforeIcon={<Replay />} 
-            onClick={() => handleReloadTableData()}
+            onClick={() => handleReloadData()}
           />
         </Wrap>
 

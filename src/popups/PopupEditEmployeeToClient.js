@@ -61,7 +61,7 @@ const PopupEditEmployeeToClient = ({
       })
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
 
@@ -122,7 +122,7 @@ const PopupEditEmployeeToClient = ({
       })
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
   }

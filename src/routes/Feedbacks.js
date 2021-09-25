@@ -30,7 +30,18 @@ const Feedbacks = ({
       active: false
     }
   ]
-  const filterList = [
+  
+
+  /* Redux Hooks */
+
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+
+  
+  /* States */
+
+  const [data, setData] = useState([])
+  const [filterList, setFilterList] = useState([
     {
       id: 'status',
       text: 'По статусу',
@@ -52,37 +63,9 @@ const Feedbacks = ({
     {
       id: 'product',
       text: 'По продукту',
-      list: [
-        {
-          text: 'Опросы',
-          active: true
-        },
-        {
-          text: 'Офисы',
-          active: true
-        },
-        {
-          text: 'Аналитика',
-          active: true
-        },
-        {
-          text: 'Машинное обучение',
-          active: true
-        }
-      ]
+      list: []
     }
-  ]
-  
-
-  /* Redux Hooks */
-
-  const dispatch = useDispatch()
-  const user = useSelector(state => state.user)
-
-  
-  /* States */
-
-  const [data, setData] = useState([])
+  ])
 
 
   /* Functions */
@@ -102,7 +85,7 @@ const Feedbacks = ({
       .then(res => setData(res))
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
   }
@@ -125,7 +108,35 @@ const Feedbacks = ({
       .then(res => setData(res))
       .catch(error => {
         if (!error || !error.response) return
-        if (error.response.status === 401) 
+        if (error.response.status === 401 && user.status !== 'logouting') 
+          dispatch(logouting())
+      })
+    API({
+      url: 'service/getlist',
+      method: 'get',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      },
+    })
+      .then(res => res.data)
+      .then(data => setFilterList(prev => {
+        const next = prev.concat()
+
+        next.forEach(filter => {
+          if (filter.id === 'product')
+            filter.list = data.map(f => {
+              return {
+                active: true,
+                text: f
+              }
+            })
+        })
+
+        return next
+      }))
+      .catch(error => {
+        if (!error || !error.response) return
+        if (error.response.status === 401 && user.status !== 'logouting') 
           dispatch(logouting())
       })
   }, [user, dispatch])

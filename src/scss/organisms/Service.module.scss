@@ -8,3 +8,14 @@
   padding-bottom: 42px;
   border-bottom: 1px solid $light-3;
 }
+
+.noneClient {
+  @include header-3;
+  color: $light-1;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: $light-4;
+}

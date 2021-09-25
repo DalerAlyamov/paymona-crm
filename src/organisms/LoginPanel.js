@@ -66,7 +66,7 @@ const LoginPanel = ({
     API(config)
       .then(res => res.data)
       .then(res => {
-        const user = {
+        const _user = {
           email: email__inputValue.replaceAll('@paymona.com', '')+'@paymona.com',
           password: password__inputValue,
           token: res.access_token,
@@ -79,13 +79,13 @@ const LoginPanel = ({
         if (res['one-time']) {
           setPage('change_password')
           setEmailChecking(false)
-          dispatch(logout())
+          dispatch(login({..._user, status: 'logouted'}))
           setPassword__inputValue('')
         }
         else {
-          dispatch(logining(user))
+          dispatch(logining(_user))
           setTimeout(() => {
-            dispatch(login({...user, status: 'logined'}))
+            dispatch(login({..._user, status: 'logined'}))
             setEmailChecking(false)
             setEmail__inputValue('')
             setPassword__inputValue('')
@@ -174,7 +174,8 @@ const LoginPanel = ({
 
     let config = {
       method: 'post',
-      data: JSON.stringify(data)
+      data: JSON.stringify(data),
+      url: 'login/new_password/'
     } 
 
     if (code__inputValue) {
@@ -228,10 +229,6 @@ const LoginPanel = ({
   useEffect(() => {
     if (page === 'get_code') 
       setResendCodeTimeout(45)
-
-    return () => {
-      setPage('login')
-    }
   }, [page])
 
 

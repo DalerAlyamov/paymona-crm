@@ -40,8 +40,13 @@ const Popup = ({
   useEffect(() => {
     if (!panelRef.current) return 
     setTimeout(() => {
+      if (!panelRef.current) return
       setCoverHeight(Math.max(panelRef.current.offsetHeight + 200 * 2, window.innerHeight))
     }, 100)
+    setTimeout(() => {
+      if (!panelRef.current) return
+      setCoverHeight(Math.max(panelRef.current.offsetHeight + 200 * 2, window.innerHeight))
+    }, 700)
   }, [panelRef, open, popup])
 
   if (open)

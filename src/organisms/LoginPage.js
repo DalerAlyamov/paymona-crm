@@ -58,11 +58,11 @@ const LoginPage = ({
 
   useEffect(() => {
     let timer
-    if (user.status === 'logouting') 
-      timer = setTimeout(() => {
-        if (user.status === 'logouting') 
-          dispatch(logout())
+    if (user.status === 'logouting')  {
+      timer = setTimeout(() => { 
+        dispatch(logout())
       }, 1200)
+    }
     return () => clearTimeout(timer)
   }, [dispatch, user])
 

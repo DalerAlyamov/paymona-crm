@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/routes/Services.module.scss'
 import { Service, Table, Topbar, Wrap } from '../organisms'
 import { Button } from '../atoms'
 import { openPopup } from '../redux/actions/popupActions'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { TableTools } from '../molecules'
+import API from '../API/API'
+import { PopupAddProduct } from '../popups'
 
 const Services = ({
   className
@@ -15,6 +17,28 @@ const Services = ({
   /* Redux Hooks */
 
   const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+  
+
+  /* States */
+
+  const [data, setData] = useState([])
+  
+
+  /* Effects */
+
+  useEffect(() => {
+    const config = {
+      url: 'service/get',
+      method: 'get',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      },
+    }
+    API(config)
+      .then(res => res.data)
+      .then(data => setData(data))
+  }, [user])
 
   
   /* States */
@@ -39,56 +63,23 @@ const Services = ({
           searchValue={searchValue}
           setSearchValue={setSearchValue}
         >
-          <Button type='outlined' onClick={() => dispatch(openPopup('добавить услугу'))}>
+          <Button type='outlined' onClick={() => dispatch(openPopup(<PopupAddProduct setData={setData} />))}>
             Добавить услугу
           </Button>
         </TableTools>
 
         <Wrap flex column gap={42}>
-          <Service 
-            initialOpenState={true}
-            title='Paymona Polls'
-            headers={['Клиент', 'Кол-во сотрудников', 'Дата подключения']} 
-            clientList={[
-              {
-                name: 'Tcell',
-                count: '12',
-                сonnection_date: '19/01/2021'
-              },
-              {
-                name: 'Megaphon',
-                count: '54',
-                сonnection_date: '24/05/2021'
-              },
-              {
-                name: 'RTSU',
-                count: '7',
-                сonnection_date: '31/02/2021'
-              }
-            ]} 
-          />
-          <Service 
-            initialOpenState={true}
-            title='Paymona Offices'
-            headers={['Клиент', 'Кол-во сотрудников', 'Дата подключения']} 
-            clientList={[
-              {
-                name: 'Tcell',
-                count: '12',
-                сonnection_date: '19/01/2021'
-              },
-              {
-                name: 'Megaphon',
-                count: '54',
-                сonnection_date: '24/05/2021'
-              },
-              {
-                name: 'RTSU',
-                count: '7',
-                сonnection_date: '31/02/2021'
-              }
-            ]} 
-          />
+          {data.map(service => 
+            <Service 
+              setData={setData}
+              key={service.id}
+              id={service.id}
+              initialOpenState={true}
+              title={service.name}
+              headers={['Клиент', 'Кол-во сотрудников', 'Дата подключения']} 
+              clientList={service.client} 
+            />
+          )}
         </Wrap>
 
       </Table>
