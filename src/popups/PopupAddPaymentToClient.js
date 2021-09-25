@@ -129,7 +129,6 @@ const PopupAddPaymentToClient = ({
                         _payment.errorText = ''
                       }
                     })
-                    console.log(next)
                     return next
                   })}
                   products__selected={payment.product}

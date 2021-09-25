@@ -118,8 +118,6 @@ const Client = ({
       url: 'client/employee/'+id+'/get_list'
     }
 
-    console.log(tableConfig)
-
     API(tableConfig)
       .then(res => res.data)
       .then(data => setTableData(data))
@@ -141,7 +139,7 @@ const Client = ({
         const next = prev.concat()
 
         next.forEach(filter => {
-          if (filter.id === 'product')
+          if (filter.id === 'products')
             filter.list = data.map(f => {
               return {
                 active: true,
@@ -177,18 +175,20 @@ const Client = ({
 
     let filteredData = searchedData.filter(row => {
 
-      let ok = false
-
-      ok = filterList.find(filter => 
-        filter.list.find(item => 
-          item.text === row[filter.id] && item.active
-        )
+      let ok1 = filterList.find(filter => 
+        filter.list.find(item => {
+          return item.text === row[filter.id] && item.active
+        })
       )
 
-      if (ok)
-        ok = filterList.find(filter => filter.id === 'products').list.find(product => product.active && row.products.includes(product.text))
+      let ok2 = filterList
+        .find(filter => filter.id === 'products')
+        .list
+        .find(product => {
+          return product.active && row.products.includes(product.text)
+        })
 
-      return ok
+      return ok1 || ok2
     })
 
     let sortedData = filteredData.sort(dynamicSort(sortList.find(prop => prop.active).id))
@@ -239,10 +239,6 @@ const Client = ({
           dispatch(logouting())
       })
   }
-
-  useEffect(() => {
-    console.log(data)
-  }, [data])
 
   const handleDeleteClientEmployee = employee_id => {
 
