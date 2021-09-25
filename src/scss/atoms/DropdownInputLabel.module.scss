@@ -37,3 +37,8 @@
   justify-content: center;
   transition: 100ms linear;
 }
+
+.defaultStatus {
+  color: $dark-2 !important;
+  border: 1px solid $light-1 !important;
+}

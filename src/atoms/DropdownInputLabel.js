@@ -7,6 +7,7 @@ const DropdownInputLabel = ({
   className='',
   active=false,
   error=false,
+  defaultStatus=false,
   children='',
   onClick=()=>{}
 }) => {
@@ -19,7 +20,8 @@ const DropdownInputLabel = ({
         styles.root,
         active && styles.active, 
         arrow !== null && styles.hasArrow, 
-        error && styles.error 
+        error && styles.error,
+        defaultStatus && styles.defaultStatus
       )}
     >
       {children}

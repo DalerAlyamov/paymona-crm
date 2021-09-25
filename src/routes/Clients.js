@@ -156,6 +156,8 @@ const Clients = ({
             </Button>
           }
           rowPropsTemplate={['name', 'domain_name', 'count_of_products']}
+          hasShowMore
+          onShowMore={row_id => history.replace('clients/payment/'+row_id)}
           onEditRow={row_id => dispatch(openPopup(<PopupEditClient id={row_id} setData={setData} />))}
           onDeleteRow={row_id => handleDeleteClient(row_id)}
         />

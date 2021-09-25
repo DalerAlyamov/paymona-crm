@@ -14,6 +14,7 @@ const DropdownInput = ({
   autoWidth=false,
   initialOpening=false,
   active=false,
+  defaultStatus=false,
   error=false,
   closeWhenClickMenu=true,
   onClick=() => {},
@@ -51,6 +52,7 @@ const DropdownInput = ({
 
       <DropdownInputLabel 
         arrow={arrow}
+        defaultStatus={defaultStatus}
         onClick={() => {
           if (open)
             onClose()

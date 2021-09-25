@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import API from '../API/API'
 import { logouting } from '../redux/actions/userActions'
 import { openPopup } from '../redux/actions/popupActions'
+import { PopupShowFeedback } from '../popups'
 
 const Feedbacks = ({
   className
@@ -128,10 +129,6 @@ const Feedbacks = ({
           dispatch(logouting())
       })
   }, [user, dispatch])
-
-  useEffect(() => {
-    console.log(data)
-  }, [data])
   
 
   /* Render */
@@ -153,10 +150,10 @@ const Feedbacks = ({
           rowClickable
           data={data}
           template={template}
-          onRowClick={row_id => dispatch(openPopup(row_id))}
+          onRowClick={row_id => dispatch(openPopup(<PopupShowFeedback id={row_id} setParentData={setData} />, 600, 500))}
           headers={['Отправитель', 'Заголовок', 'Статус', 'Продукт', 'Дата отправки']}
-          initialSortList={sortList}
           searchPropsDependence={['client', 'title']}
+          initialSortList={sortList}
           initialFilterList={filterList}
           onReload={() => handleReloadData()}
           rowPropsTemplate={['client', 'title', 'status', 'product', 'created_at']}

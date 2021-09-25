@@ -15,10 +15,12 @@ const Wrap = ({
   alignEnd=false,
   column=false,
   grow=0,
-  gap=0
+  gap=0,
+  onClick=()=>{}
 }) => {
   return (
     <div 
+      onClick={onClick}
       style={{ gap: gap+'px', flexGrow: grow }}
       className={classNames(
         className, 
