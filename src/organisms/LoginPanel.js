@@ -216,14 +216,22 @@ const LoginPanel = ({
   useEffect(() => {
     if (resendCodeTimeout <= 0) 
       return
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setResendCodeTimeout(prev => prev-1 < 0 ? 0 : prev-1)
     }, 1000)
+    return () => {
+      clearTimeout(timer)
+      setResendCodeTimeout(0)
+    }
   }, [resendCodeTimeout])
 
   useEffect(() => {
     if (page === 'get_code') 
       setResendCodeTimeout(45)
+
+    return () => {
+      setPage('login')
+    }
   }, [page])
 
 

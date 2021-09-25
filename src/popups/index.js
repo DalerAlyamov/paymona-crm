@@ -6,6 +6,7 @@ import PopupEditClient from './PopupEditClient'
 import PopupAddEmployeeToClient from './PopupAddEmployeeToClient'
 import PopupEditEmployeeToClient from './PopupEditEmployeeToClient'
 import PopupShowFeedback from './PopupShowFeedback'
+import PopupAddPaymentToClient from './PopupAddPaymentToClient'
 
 export {
   PopupAddEmployee,
@@ -15,5 +16,6 @@ export {
   PopupEditClient,
   PopupAddEmployeeToClient,
   PopupEditEmployeeToClient,
-  PopupShowFeedback
+  PopupShowFeedback,
+  PopupAddPaymentToClient
 }

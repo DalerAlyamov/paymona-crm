@@ -63,6 +63,7 @@ const DropdownInput = ({
         }} 
         error={error}
         active={open || active}
+        open={open}
       >
         {text}
       </DropdownInputLabel>

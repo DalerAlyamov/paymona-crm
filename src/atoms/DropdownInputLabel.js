@@ -6,6 +6,7 @@ const DropdownInputLabel = ({
   arrow=null,
   className='',
   active=false,
+  open=false,
   error=false,
   defaultStatus=false,
   children='',
@@ -19,6 +20,7 @@ const DropdownInputLabel = ({
         className, 
         styles.root,
         active && styles.active, 
+        open && styles.open, 
         arrow !== null && styles.hasArrow, 
         error && styles.error,
         defaultStatus && styles.defaultStatus

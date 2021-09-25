@@ -21,6 +21,9 @@
 .active {
   border-color: $primary-1;
   color: $primary-1;
+}
+
+.open {
   .arrow {
     transform: rotateZ(-180deg);
   }

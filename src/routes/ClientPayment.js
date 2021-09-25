@@ -7,10 +7,11 @@ import { useParams } from 'react-router'
 import { Button, TableColumn } from '../atoms'
 import { dynamicSort } from '../functions'
 import { Replay } from '../icons'
-import { TableHeaders, TableRow, TableTools } from '../molecules'
+import { ClientHeaderInfo, TableHeaders, TableRow, TableTools } from '../molecules'
 import { Table, Topbar, Wrap } from '../organisms'
 import { openPopup } from '../redux/actions/popupActions'
 import { logouting } from '../redux/actions/userActions'
+import { PopupAddPaymentToClient } from '../popups'
 
 const ClientPayment = ({
   className
@@ -168,10 +169,10 @@ const ClientPayment = ({
       })
   }
 
-  const handleDeleteClientEmployee = employee_id => {
+  const handleDeleteClientPayment = payment_id => {
 
     const config = {
-      url: 'client/employee/'+id+'/delete/'+employee_id,
+      url: 'client/payment/'+id+'/delete/'+payment_id,
       method: 'delete',
       headers: {
         'Authorization': 'Bearer ' + user.token
@@ -213,6 +214,14 @@ const ClientPayment = ({
       />
 
       <Table className={styles.table}>
+
+        <ClientHeaderInfo 
+          logo={data.logo}
+          title={data.name}
+          domain={data.domain_name}
+          product={data.products}
+        />
+
         <TableTools 
           hasSearch={false}
           hasFilter
@@ -223,7 +232,7 @@ const ClientPayment = ({
         >
           <Button
             type='outlined' 
-            onClick={() => dispatch(openPopup('Добавить оплату'+id))}
+            onClick={() => dispatch(openPopup(<PopupAddPaymentToClient id={id} setData={setTableData} />))}
           >
             Добавить оплату
           </Button>
@@ -239,7 +248,7 @@ const ClientPayment = ({
           />
         </Wrap>
 
-        <TableHeaders template={template} hasMenu={user.status === 'superuser'}>
+        <TableHeaders template={template} hasMenu={user.type === 'superuser'}>
           {headers.map(col => 
             <TableColumn key={col}>
               {col}
@@ -255,11 +264,11 @@ const ClientPayment = ({
             )}
           >
             <TableRow
-              hasMenu={user.status === 'superuser'}
+              hasMenu={user.type === 'superuser'}
               id={row.id} 
               honest={index%2===0}
               template={template}
-              menu={<Menu onDeleteRow={() => handleDeleteClientEmployee(row.id)} />}
+              menu={<Menu onDeleteRow={() => handleDeleteClientPayment(row.id)} />}
             >
               {['product', 'amount', 'date'].map((prop, index) => 
                 <TableColumn key={index}>

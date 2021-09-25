@@ -7,7 +7,7 @@ import { useParams } from 'react-router'
 import { Button, TableColumn } from '../atoms'
 import { dynamicSort } from '../functions'
 import { Replay } from '../icons'
-import { TableHeaders, TableRow, TableTools } from '../molecules'
+import { ClientHeaderInfo, TableHeaders, TableRow, TableTools } from '../molecules'
 import { Table, Topbar, Wrap } from '../organisms'
 import { PopupAddEmployeeToClient, PopupEditEmployeeToClient } from '../popups'
 import { openPopup } from '../redux/actions/popupActions'
@@ -251,6 +251,14 @@ const Client = ({
       />
 
       <Table className={styles.table}>
+
+        <ClientHeaderInfo 
+          logo={data.logo}
+          title={data.name}
+          domain={data.domain_name}
+          product={data.products}
+        />
+
         <TableTools 
           hasFilter
           sortList={sortList}

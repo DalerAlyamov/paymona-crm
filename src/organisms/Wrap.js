@@ -14,14 +14,24 @@ const Wrap = ({
   alignCenter=false,
   alignEnd=false,
   column=false,
+  wrap=false,
+  nowrap=false,
   grow=0,
   gap=0,
   onClick=()=>{}
 }) => {
+
+  let style = {
+    gap: gap+'px'
+  }
+
+  if (grow !== 0)
+    style.flexGrow = grow
+
   return (
     <div 
       onClick={onClick}
-      style={{ gap: gap+'px', flexGrow: grow }}
+      style={style}
       className={classNames(
         className, 
         styles.root,
@@ -33,6 +43,8 @@ const Wrap = ({
         alignCenter && styles.alignCenter,
         alignEnd && styles.alignEnd,
         column && styles.column,
+        wrap && styles.wrap,
+        nowrap && styles.nowrap,
         autoWidth && styles.autoWidth
       )}
     >

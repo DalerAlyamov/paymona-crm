@@ -12,6 +12,8 @@ import DropDownInput from './DropDownInput'
 import TableContainer from './TableContainer'
 import FooterPanelInPopup from './FooterPanelInPopup'
 import TopPanelInPopup from './TopPanelInPopup'
+import ClientHeaderInfo from './ClientHeaderInfo'
+
 export {
   AnimatedInput,
   LoginRightSide,
@@ -26,5 +28,6 @@ export {
   DropDownInput,
   TableContainer,
   FooterPanelInPopup,
-  TopPanelInPopup
+  TopPanelInPopup,
+  ClientHeaderInfo
 }
