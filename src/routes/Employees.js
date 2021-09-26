@@ -23,27 +23,32 @@ const Employees = ({
     {
       id: 'name',
       text: 'По имени',
-      active: true
+      active: true,
+      reverse: false
     },
     {
       id: 'surname',
       text: 'По фамилии',
-      active: false
+      active: false,
+      reverse: false
     },
     {
       id: 'position',
       text: 'По должности',
-      active: false
+      active: false,
+      reverse: false
     },
     {
       id: 'departament',
       text: 'По отделу',
-      active: false
+      active: false,
+      reverse: false
     },
     {
       id: 'type',
       text: 'По типу',
-      active: false
+      active: false,
+      reverse: false
     }
   ]
   const filterList = [
@@ -107,24 +112,6 @@ const Employees = ({
       })
   }
 
-  const handleReloadData = () => {
-    const config = {
-      url: 'employee/get/',
-      method: 'get',
-      headers: {
-        'Authorization': 'Bearer ' + user.token
-      }
-    }
-    API(config)
-      .then(res => res.data)
-      .then(res => setData(res))
-      .catch(error => {
-        if (!error || !error.response) return
-        if (error.response.status === 401 && user.status !== 'logouting') 
-          dispatch(logouting())
-      })
-  }
-
 
   /* UseEffects */
 
@@ -174,18 +161,28 @@ const Employees = ({
           initialSortList={sortList}
           searchPropsDependence={['name', 'surname', 'position', 'department']}
           initialFilterList={filterList}
-          onReload={() => handleReloadData()}
           toolsChildren={
-            <Button
-              type='outlined' 
-              onClick={() => dispatch(openPopup(<PopupAddEmployee setData={setData} title='Добавить сотрудника'/>))}
-            >
-              Добавить сотрудника
-            </Button>
+            user.type === 'superuser' ?
+              <Button
+                type='outlined' 
+                onClick={() => dispatch(openPopup(<PopupAddEmployee setData={setData} title='Добавить сотрудника'/>))}
+              >
+                Добавить сотрудника
+              </Button>
+            : ''
           }
           rowPropsTemplate={['name', 'surname', 'position', 'department', 'type']}
           onEditRow={row_id => dispatch(openPopup(<PopupEditEmployee id={row_id} setData={setData} />))}
-          onDeleteRow={row_id => handleDeleteEmplyeee(row_id)}
+          onDeleteRow={row_id => 
+            dispatch(openPopup(
+              <PopupInfoText 
+                onBtn1Click={() => handleDeleteEmplyeee(row_id)} 
+                text='Вы уверены, что хотите удалить сотрудника?'
+                btn2Text='Отмена'
+                btn1Text='Уверен'
+              />
+            ))
+          }
         />
 
       </Table>

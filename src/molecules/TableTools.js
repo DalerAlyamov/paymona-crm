@@ -26,10 +26,18 @@ const TableTools = ({
       const next = prev.concat()
 
       next.forEach(col => {
-        if (col.text === text)
-          col.active = true
-        else
+        if (col.text === text) {
+          if (col.active) 
+            col.reverse = !col.reverse
+          else {
+            col.reverse = false
+            col.active = true
+          }
+        }
+        else {
           col.active = false
+          col.reverse = false
+        }
       })
 
       return next

@@ -72,9 +72,10 @@
 
 .sort_item--active {
   color: $primary-1;
+}
 
+.sort_item--reverse {
   .sort_item__arrow {
-    color: $primary-1;
     transform: rotateZ(180deg);
   }
 }
@@ -84,7 +85,7 @@
   justify-content: center;
   align-items: center;
   transition: 100ms linear;
-  color: $light-1;
+  color: $primary-1;
 }
 
 /* Filter styles */

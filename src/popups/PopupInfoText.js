@@ -7,7 +7,10 @@ import { closePopup } from '../redux/actions/popupActions'
 
 const PopupInfoText = ({
   className='',
-  text=''
+  text='',
+  btn1Text='Хорошо',
+  btn2Text='',
+  onBtn1Click=()=>{}
 }) => {
 
   const dispatch = useDispatch()
@@ -18,8 +21,12 @@ const PopupInfoText = ({
         {text}
       </div>
       <FooterPanelInPopup 
-        btn1='Хорошо'
-        onClick={() => dispatch(closePopup())}
+        btn1={btn1Text}
+        btn2={btn2Text}
+        onClick={() => {
+          onBtn1Click()
+          dispatch(closePopup())
+        }}
       />
     </>
   )

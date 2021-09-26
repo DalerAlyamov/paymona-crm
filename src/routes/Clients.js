@@ -8,7 +8,7 @@ import { TableContainer } from '../molecules'
 import { logouting } from '../redux/actions/userActions'
 import { openPopup } from '../redux/actions/popupActions'
 import { useDispatch, useSelector } from 'react-redux'
-import { PopupAddClient, PopupEditClient } from '../popups'
+import { PopupAddClient, PopupEditClient, PopupInfoText } from '../popups'
 import { useHistory } from 'react-router'
 
 const Clients = ({
@@ -146,20 +146,30 @@ const Clients = ({
           initialSortList={sortList}
           initialFilterList={filterList}
           onRowClick={row_id => history.replace('clients/'+row_id)}
-          onReload={() => handleReloadData()}
           toolsChildren={
-            <Button
-              type='outlined' 
-              onClick={() => dispatch(openPopup(<PopupAddClient setData={setData} />))}
-            >
-              Добавить клиента
-            </Button>
+            user.type === 'superuser' ?
+              <Button
+                type='outlined' 
+                onClick={() => dispatch(openPopup(<PopupAddClient setData={setData} />))}
+              >
+                Добавить клиента
+              </Button>
+            : ''
           }
           rowPropsTemplate={['name', 'domain_name', 'count_of_products']}
           showMoreText='История оплат'
           onShowMore={row_id => history.replace('clients/payment/'+row_id)}
           onEditRow={row_id => dispatch(openPopup(<PopupEditClient id={row_id} setData={setData} />))}
-          onDeleteRow={row_id => handleDeleteClient(row_id)}
+          onDeleteRow={row_id => 
+            dispatch(openPopup(
+              <PopupInfoText
+                onBtn1Click={() => handleDeleteClient(row_id)} 
+                text='Вы уверены, что хотите удалить клиента?'
+                btn2Text='Отмена'
+                btn1Text='Уверен'
+              />
+            ))
+          }
         />
 
       </Table>

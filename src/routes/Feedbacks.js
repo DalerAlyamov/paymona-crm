@@ -166,7 +166,6 @@ const Feedbacks = ({
           searchPropsDependence={['client', 'title']}
           initialSortList={sortList}
           initialFilterList={filterList}
-          onReload={() => handleReloadData()}
           rowPropsTemplate={['client', 'title', 'status', 'product', 'created_at']}
         />
 

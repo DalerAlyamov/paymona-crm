@@ -63,9 +63,11 @@ const Services = ({
           searchValue={searchValue}
           setSearchValue={setSearchValue}
         >
-          <Button type='outlined' onClick={() => dispatch(openPopup(<PopupAddProduct setData={setData} />))}>
-            Добавить услугу
-          </Button>
+          {user.type === 'superuser' ? 
+            <Button type='outlined' onClick={() => dispatch(openPopup(<PopupAddProduct setData={setData} />))}>
+              Добавить услугу
+            </Button>
+          : ''}
         </TableTools>
 
         <Wrap flex column gap={42}>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/atoms/TableFilter.module.scss'
 import { Button } from '.'
-import { ArrowHadSmallBottom, ArrowTop, CheckBox, CheckBoxOutlineBlank, Filter } from '../icons'
+import { ArrowBottom, ArrowHadSmallBottom, CheckBox, CheckBoxOutlineBlank, Filter } from '../icons'
 
 const TableFilter = ({
   className='',
@@ -48,15 +48,18 @@ const TableFilter = ({
                 <button 
                   key={col.text}
                   className={classNames(
-                    styles.sort_item, 
-                    col.active && styles['sort_item--active']
+                    styles.sort_item,
+                    col.active && styles['sort_item--active'],
+                    col.reverse && styles['sort_item--reverse'],
                   )} 
                   onClick={() => onSort(col.text)}
                 >
                   {col.text}
-                  <div className={styles.sort_item__arrow}>
-                    <ArrowTop size={16} />
-                  </div>
+                  {col.active &&
+                    <div className={styles.sort_item__arrow}>
+                      <ArrowBottom size={16} />
+                    </div>
+                  }
                 </button>
               )}
             </>

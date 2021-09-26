@@ -9,7 +9,7 @@ import { dynamicSort } from '../functions'
 import { Replay } from '../icons'
 import { ClientHeaderInfo, TableHeaders, TableRow, TableTools } from '../molecules'
 import { Table, Topbar, Wrap } from '../organisms'
-import { PopupAddEmployeeToClient, PopupEditEmployeeToClient } from '../popups'
+import { PopupAddEmployeeToClient, PopupEditEmployeeToClient, PopupInfoText } from '../popups'
 import { openPopup } from '../redux/actions/popupActions'
 import { logouting } from '../redux/actions/userActions'
 
@@ -193,52 +193,15 @@ const Client = ({
 
     let sortedData = filteredData.sort(dynamicSort(sortList.find(prop => prop.active).id))
 
+
+    if (sortList.find(prop => prop.active).reverse)
+      return setEditedTableData(sortedData.reverse())
     setEditedTableData(sortedData)
 
   }, [tableData, searchValue, sortList, filterList, searchPropsDependence])
 
 
   /* Functions */
-
-  const handleReloadData = () => {
-
-    const config = {
-      method: 'get',
-      headers: {
-        'Authorization': 'Bearer ' + user.token
-      }
-    }
-    
-    const dataConfig = {
-      ...config,
-      url: 'client/get_for_edit/'+id
-    }
-
-    API(dataConfig)
-      .then(res => res.data)
-      .then(data => {
-        setData(data)
-      })
-      .catch(error => {
-        if (!error || !error.response) return
-        if (error.response.status === 401)
-          dispatch(logouting())
-      })
-
-    const tableConfig = {
-      ...config,
-      url: 'client/employee/'+id+'/get_list'
-    }
-
-    API(tableConfig)
-      .then(res => res.data)
-      .then(data => setTableData(data))
-      .catch(error => {
-        if (!error || !error.response) return
-        if (error.response.status === 401 && user.status !== 'logouting') 
-          dispatch(logouting())
-      })
-  }
 
   const handleDeleteClientEmployee = employee_id => {
 
@@ -301,23 +264,15 @@ const Client = ({
           setFilterList={setFilterList}
           setSearchValue={setSearchValue}
         >
-          <Button
-            type='outlined' 
-            onClick={() => dispatch(openPopup(<PopupAddEmployeeToClient id={id} setData={setTableData} />))}
-          >
-            Добавить пользователя
-          </Button>
+          {user.type === 'superuser' ? 
+            <Button
+              type='outlined' 
+              onClick={() => dispatch(openPopup(<PopupAddEmployeeToClient id={id} setData={setTableData} />))}
+            >
+              Добавить пользователя
+            </Button>
+          : ''}
         </TableTools>
-
-        <Wrap>
-          <Button 
-            circle
-            type='text'
-            className={styles.reload_btn}
-            beforeIcon={<Replay />} 
-            onClick={() => handleReloadData()}
-          />
-        </Wrap>
 
         <TableHeaders template={template} hasMenu={user.status === 'superuser'}>
           {headers.map(col => 
@@ -349,7 +304,16 @@ const Client = ({
                       setData={_data => setTableData(_data)} 
                     />
                   ))} 
-                  onDeleteRow={() => handleDeleteClientEmployee(row.id)} 
+                  onDeleteRow={() => 
+                    dispatch(openPopup(
+                      <PopupInfoText 
+                        onBtn1Click={() => handleDeleteClientEmployee(row.id)} 
+                        text='Вы уверены, что хотите удалить пользователя?'
+                        btn2Text='Отмена'
+                        btn1Text='Уверен'
+                      />
+                    ))
+                  } 
                 />
               }
             >

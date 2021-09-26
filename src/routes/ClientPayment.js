@@ -11,7 +11,7 @@ import { ClientHeaderInfo, TableHeaders, TableRow, TableTools } from '../molecul
 import { Table, Topbar, Wrap } from '../organisms'
 import { openPopup } from '../redux/actions/popupActions'
 import { logouting } from '../redux/actions/userActions'
-import { PopupAddPaymentToClient } from '../popups'
+import { PopupAddPaymentToClient, PopupInfoText } from '../popups'
 
 const ClientPayment = ({
   className
@@ -150,36 +150,15 @@ const ClientPayment = ({
 
     let sortedData = filteredData.sort(dynamicSort(sortList.find(prop => prop.active).id))
 
+
+    if (sortList.find(prop => prop.active).reverse)
+      return setEditedTableData(sortedData.reverse())
     setEditedTableData(sortedData)
 
   }, [tableData, sortList, filterList])
 
 
   /* Functions */
-
-  const handleReloadTableData = () => {
-
-    const config = {
-      method: 'get',
-      headers: {
-        'Authorization': 'Bearer ' + user.token
-      }
-    }
-    
-    const dataConfig = {
-      ...config,
-      url: 'client/payment/'+id+'/get'
-    }
-
-    API(dataConfig)
-      .then(res => res.data)
-      .then(_data => setTableData(_data))
-      .catch(error => {
-        if (!error || !error.response) return
-        if (error.response.status === 401 && user.status !== 'logouting') 
-          dispatch(logouting())
-      })
-  }
 
   const handleDeleteClientPayment = payment_id => {
 
@@ -242,23 +221,15 @@ const ClientPayment = ({
           setSortList={setSortList}
           setFilterList={setFilterList}
         >
-          <Button
-            type='outlined' 
-            onClick={() => dispatch(openPopup(<PopupAddPaymentToClient id={id} setData={setTableData} />))}
-          >
-            Добавить оплату
-          </Button>
+          {user.type === 'superuser' ? 
+            <Button
+              type='outlined' 
+              onClick={() => dispatch(openPopup(<PopupAddPaymentToClient id={id} setData={setTableData} />))}
+            >
+              Добавить оплату
+            </Button>
+          : ''}
         </TableTools>
-
-        <Wrap>
-          <Button 
-            circle
-            type='text'
-            className={styles.reload_btn}
-            beforeIcon={<Replay />} 
-            onClick={() => handleReloadTableData()}
-          />
-        </Wrap>
 
         <TableHeaders template={template} hasMenu={user.type === 'superuser'}>
           {headers.map(col => 
@@ -280,7 +251,16 @@ const ClientPayment = ({
               id={row.id} 
               honest={index%2===0}
               template={template}
-              menu={<Menu onDeleteRow={() => handleDeleteClientPayment(row.id)} />}
+              menu={<Menu onDeleteRow={() => 
+                dispatch(openPopup(
+                  <PopupInfoText 
+                    onBtn1Click={() => handleDeleteClientPayment(row.id)} 
+                    text='Вы уверены, что хотите удалить оплату?'
+                    btn2Text='Отмена'
+                    btn1Text='Уверен'
+                  />
+                ))
+              }/>}
             >
               {['product', 'amount', 'date'].map((prop, index) => 
                 <TableColumn key={index}>

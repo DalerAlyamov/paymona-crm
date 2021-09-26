@@ -3,8 +3,7 @@ import classNames from 'classnames'
 import styles from '../scss/molecules/TableContainer.module.scss'
 import { dynamicSort } from '../functions'
 import { TableHeaders, TableRow, TableTools } from '.'
-import { Button, TableColumn } from '../atoms'
-import { Replay } from '../icons'
+import { TableColumn } from '../atoms'
 
 const TableContainer = ({
   className='',
@@ -23,8 +22,7 @@ const TableContainer = ({
   onEditRow=()=>{},
   onDeleteRow=()=>{},
   onRowClick=()=>{},
-  onShowMore=()=>{},
-  onReload=()=>{}
+  onShowMore=()=>{}
 }) => {
 
 
@@ -74,6 +72,8 @@ const TableContainer = ({
     if (!sortList.length)
       sortedData = filteredData
 
+    if (sortList.find(prop => prop.active).reverse)
+      return setEditedData(sortedData.reverse())
     setEditedData(sortedData)
 
   }, [data, searchValue, sortList, filterList, searchPropsDependence])
@@ -84,7 +84,7 @@ const TableContainer = ({
   return (
     <div className={classNames(className, styles.root)}>
 
-      <TableTools 
+      <TableTools
         hasFilter={hasFilter}
         sortList={sortList}
         filterList={filterList}
@@ -95,14 +95,6 @@ const TableContainer = ({
       >
         {toolsChildren}
       </TableTools>
-
-      <Button 
-        circle
-        type='text'
-        className={styles.reload_btn}
-        beforeIcon={<Replay />} 
-        onClick={() => onReload()}
-      />
 
       <TableHeaders template={template} hasMenu={hasRowMenu}>
         {headers.map(col => 
