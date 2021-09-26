@@ -36,6 +36,16 @@
   justify-content: space-between;
 }
 
+.title {
+  input {
+    @include header-1;
+    color: $primary-1;
+    &:focus {
+      color: $dark-2;
+    }
+  }
+}
+
 .arrow {
   transition: 100ms linear;
   display: flex;

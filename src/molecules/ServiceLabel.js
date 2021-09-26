@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classNames from 'classnames'
 import styles from '../scss/molecules/ServiceLabel.module.scss'
-import { ArrowHadSmallBottom, Edit } from '../icons'
+import { ArrowHadSmallBottom } from '../icons'
+import { useSelector } from 'react-redux'
+import API from '../API/API'
 import { useDispatch } from 'react-redux'
-import { openPopup } from '../redux/actions/popupActions'
-import { PopupEditProduct } from '../popups'
+import { logouting } from '../redux/actions/userActions'
 
 const ServiceLabel = ({
   id=0,
@@ -15,21 +16,55 @@ const ServiceLabel = ({
   onClick=()=>{}
 }) => {
 
+  const [title, setTitle] = useState(children)
+  const user = useSelector(state => state.user)
   const dispatch = useDispatch()
+
+  const handleChangeTitle = () => {
+    const config = {
+      url: 'service/patch/'+id,
+      method: 'patch',
+      headers: {
+        'Authorization': 'Bearer ' + user.token
+      },
+      data: JSON.stringify([
+        {
+          patch: 'name',
+          to: title.trim()
+        }
+      ])
+    }
+
+    API(config)
+      .then(res => res.data)
+      .then(data => setData(data))
+      .catch(error => {
+        if (!error || !error.response) return
+        if (error.response.status === 401 && user.status !== 'logouting') 
+          dispatch(logouting())
+      })
+  }
 
   return (
     <div className={classNames(className, styles.root)}>
-
-      <button onClick={() => {dispatch(openPopup(<PopupEditProduct setData={setData} id={id} />))}} className={styles.edit_btn}>
-        Наименование  
-        <div className={styles.edit_icon}>
-          <Edit size={18} />
-        </div>
-      </button>
       
       <div className={styles.label} >
 
-        {children}
+        <div className={styles.title}>
+          <input 
+            type="text"
+            value={title}
+            onChange={e => setTitle(e.target.value)} 
+            onClick={e => {
+              e.target.select()
+            }}
+            onBlur={() => handleChangeTitle()}
+            onKeyPress={e => {
+              if (e.code === 'Enter')
+                e.target.blur()
+            }}
+          />
+        </div>
 
         <button
           onClick={onClick} 

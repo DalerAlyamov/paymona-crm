@@ -26,7 +26,7 @@ const LoginPanel = ({
   
   const [emailChecking, setEmailChecking] = useState(false)
 
-  const [resendCodeTimeout, setResendCodeTimeout] = useState(0)
+  const [resendCodeTimeout, setResendCodeTimeout] = useState(59)
 
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -197,7 +197,7 @@ const LoginPanel = ({
     API(config)
       .then(() => {
         setPage('login')
-        setResendCodeTimeout('')
+        setResendCodeTimeout(59)
         setNewPassword('')
         setConfirmPassword('')
         setEmailChecking(false)
@@ -217,13 +217,9 @@ const LoginPanel = ({
   useEffect(() => {
     if (resendCodeTimeout <= 0) 
       return
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       setResendCodeTimeout(prev => prev-1 < 0 ? 0 : prev-1)
     }, 1000)
-    return () => {
-      clearTimeout(timer)
-      setResendCodeTimeout(0)
-    }
   }, [resendCodeTimeout])
 
   useEffect(() => {
@@ -264,6 +260,8 @@ const LoginPanel = ({
             if (e.code === 'Enter')
               if (page === 'forget_password')
                 buttonNextRef.current.click()
+              else if (password__inputValue !== '')
+                buttonEmailRef.current.click()
               else
                 setPassword__inputFocusing(true)
           }}
@@ -313,7 +311,10 @@ const LoginPanel = ({
             initialFocusing={true}
             onKeyPress={e => {
               if (e.code === 'Enter')
-                setConfirmPassword__inputFocusing(true)
+                if (confirmPassword !== '')
+                  buttonChangePasswordRef.current.click()
+                else
+                  setConfirmPassword__inputFocusing(true)
             }}
             isPassword
           />
