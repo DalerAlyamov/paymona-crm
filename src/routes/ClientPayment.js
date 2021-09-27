@@ -6,9 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { Button, TableColumn } from '../atoms'
 import { dynamicSort } from '../functions'
-import { Replay } from '../icons'
 import { ClientHeaderInfo, TableHeaders, TableRow, TableTools } from '../molecules'
-import { Table, Topbar, Wrap } from '../organisms'
+import { Table, Topbar } from '../organisms'
 import { openPopup } from '../redux/actions/popupActions'
 import { logouting } from '../redux/actions/userActions'
 import { PopupAddPaymentToClient, PopupInfoText } from '../popups'
@@ -207,10 +206,12 @@ const ClientPayment = ({
       <Table className={styles.table}>
 
         <ClientHeaderInfo 
+          id={id}
           logo={data.logo}
           title={data.name}
           domain={data.domain_name}
           product={data.products}
+          setData={setData}
         />
 
         <TableTools 

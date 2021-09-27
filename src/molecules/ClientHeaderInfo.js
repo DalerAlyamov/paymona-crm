@@ -4,6 +4,7 @@ import { Wrap } from '../organisms'
 import styles from '../scss/molecules/ClientHeaderInfo.module.scss'
 
 const ClientHeaderInfo = ({
+  id=0,
   className='',
   logo='',
   title='',
